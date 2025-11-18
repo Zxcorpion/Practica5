@@ -1,0 +1,3 @@
+C:/Users/admin/Downloads/Practica5/cmake-build-debug/CMakeFiles/Practica5.dir
+C:/Users/admin/Downloads/Practica5/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/admin/Downloads/Practica5/cmake-build-debug/CMakeFiles/rebuild_cache.dir
