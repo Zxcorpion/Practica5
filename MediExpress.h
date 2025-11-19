@@ -21,7 +21,7 @@
  */
 class MediExpress {
 private:
-    std::map<int,PaMedicamento> medication;
+    std::multimap<int,PaMedicamento> medication;
     std::list<Laboratorio> labs;
     std::multimap<std::string,Farmacia> pharmacy;
 public:

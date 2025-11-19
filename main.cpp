@@ -45,9 +45,9 @@ int main() {
 
     for (int i = 0;i < farmas_Sevilla.size(); i++) {
         //Aqui sacamos los stock de cada PAmedicamento de cada farmacia
-        int stock_Magnesio = farmas_Sevilla[i]->stock_Buscado(id_Magnes);
-        int stock_Carbonat = farmas_Sevilla[i]->stock_Buscado(id_Carbonato);
-        int stock_Clorur = farmas_Sevilla[i]->stock_Buscado(id_Cloruro);
+        int stock_Magnesio = farmas_Sevilla[i]->buscaMedicamID(id_Magnes);
+        int stock_Carbonat = farmas_Sevilla[i]->buscaMedicamID(id_Carbonato);
+        int stock_Clorur = farmas_Sevilla[i]->buscaMedicamID(id_Cloruro);
 
         std::cout<<"==============================="<<std::endl;
         std::cout<<"Stock inicial de cada medicamento de la Farmacia "<<i+1<< ": "<<farmas_Sevilla[i]->get_nombre()<<std::endl;
@@ -56,9 +56,9 @@ int main() {
 
         for (int j = 0; j < 12; j++) {
             std::cout<<"Persona "<<j+1<<": "<<std::endl;
-            int stock_Magnesio = farmas_Sevilla[i]->stock_Buscado(id_Magnes);
-            int stock_Carbonat = farmas_Sevilla[i]->stock_Buscado(id_Carbonato);
-            int stock_Clorur = farmas_Sevilla[i]->stock_Buscado(id_Cloruro);
+            int stock_Magnesio = farmas_Sevilla[i]->buscaMedicamID(id_Magnes);
+            int stock_Carbonat = farmas_Sevilla[i]->buscaMedicamID(id_Carbonato);
+            int stock_Clorur = farmas_Sevilla[i]->buscaMedicamID(id_Cloruro);
             //Hacemos las 12 compras, empezando por oxido
             if (stock_Magnesio > 0) {
                 //hemos comprado sin problemas
@@ -89,7 +89,7 @@ int main() {
         }
         std::cout<<"==============================="<<std::endl;
         std::cout<<"Stock final de cada medicamento de la Farmacia "<<i+1<< ": "<<farmas_Sevilla[i]->get_nombre()<<std::endl;
-        std::cout<<"Oxido: "<<farmas_Sevilla[i]->stock_Buscado(id_Magnes)<<", Carbonato: "<<farmas_Sevilla[i]->stock_Buscado(id_Carbonato)<<", Cloruro: "<<farmas_Sevilla[i]->stock_Buscado(id_Cloruro)<<std::endl;
+        std::cout<<"Oxido: "<<farmas_Sevilla[i]->buscaMedicamID(id_Magnes)<<", Carbonato: "<<farmas_Sevilla[i]->buscaMedicamID(id_Carbonato)<<", Cloruro: "<<farmas_Sevilla[i]->buscaMedicamID(id_Cloruro)<<std::endl;
         std::cout<<"==============================="<<std::endl;
 
     }
@@ -139,7 +139,7 @@ int main() {
     int id_Virus_Gripe = 997, contadorsillo = 0;
     PaMedicamento *virus_gripe = medBatman.buscaCompuestoMed(id_Virus_Gripe); //Creamos el medicamento que queremos encontrar
     for (int i = 0; i < farmas_Madrid_Virus.size(); i++) {
-        if (farmas_Madrid_Virus[i]->stock_Buscado(id_Virus_Gripe) != 0) { //Esto significa que tiene stock de este PAmed
+        if (farmas_Madrid_Virus[i]->buscaMedicamID(id_Virus_Gripe) != 0) { //Esto significa que tiene stock de este PAmed
             farmas_Madrid_Virus[i]->comprarMedicam(id_Virus_Gripe, 20,virus_gripe);
             contadorsillo++;
         }
@@ -155,7 +155,7 @@ int main() {
     std::cout<<"======================================================================================================================"<<std::endl;
 
     for (int k = 0; k < farmas_Madrid.size(); k++) {
-        if (farmas_Madrid[k]->stock_Buscado(id_Virus_Gripe) == 30) {
+        if (farmas_Madrid[k]->buscaMedicamID(id_Virus_Gripe) == 30) {
             std::cout<<"Farmacia "<<k+1<<std::endl;
             mostrarFarmacia(*farmas_Madrid[k]);
         }
