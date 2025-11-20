@@ -1,0 +1,3 @@
+C:/Users/marco/OneDrive/Escritorio/UniversidadAño2/Estructura de Datos/Practica5-main/cmake-build-debug/CMakeFiles/Practica5.dir
+C:/Users/marco/OneDrive/Escritorio/UniversidadAño2/Estructura de Datos/Practica5-main/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/marco/OneDrive/Escritorio/UniversidadAño2/Estructura de Datos/Practica5-main/cmake-build-debug/CMakeFiles/rebuild_cache.dir
