@@ -23,8 +23,8 @@ private:
     std::vector<Entrada> tablaHash;
 
     bool es_Primo(unsigned primo);//dice si num es primo
-    int primo_Min(unsigned num);//primo menor al q paso
-    int primo_Max(unsigned num);//primo mayor al q paso
+    int primo_previo(unsigned num);//primo menor al q paso
+    int primo_sig(unsigned num);//primo mayor al q paso
     int hash(unsigned long clave, int intento);
     int hash2(unsigned long clave, int intento);
     int hash3(unsigned long clave, int intento);

@@ -11,7 +11,7 @@ bool TrashMedicam::es_Primo(unsigned primo) {
     return true;
 }
 //poner throw si pasan 0 o 1 pq no son primos
-int TrashMedicam::primo_Min(unsigned num) {
+int TrashMedicam::primo_previo(unsigned num) {
     int menor = num - 1;
     while (!es_Primo(menor)) {
         menor--;
@@ -20,7 +20,7 @@ int TrashMedicam::primo_Min(unsigned num) {
 }
 
 //poner throw si pasan 0 o 1 pq no son primos
-int TrashMedicam::primo_Max(unsigned num) {
+int TrashMedicam::primo_sig(unsigned num) {
     int mayor = num + 1;
     while (!es_Primo(mayor)) {
         mayor++;
@@ -51,11 +51,11 @@ int TrashMedicam::hash3(unsigned long clave, int intento) {
 }
 
 
-TrashMedicam::TrashMedicam(int maxElementos, float lambda): tamFisico(primo_Max(maxElementos/lambda)),
+TrashMedicam::TrashMedicam(int maxElementos, float lambda): tamFisico(primo_sig(maxElementos/lambda)),
 tablaHash(tamFisico, Entrada()), tamLogico(0),tope_Colisiones(0),
 max10(0), total_Colisiones(0),primo_jr(0),redisp(0)
 {
-    primo_jr = primo_Min(tamFisico);
+    primo_jr = primo_previo(tamFisico);
 }
 TrashMedicam::TrashMedicam(const TrashMedicam &orig):tamFisico(orig.tamFisico),
 tablaHash(orig.tablaHash), tamLogico(orig.tamLogico),tope_Colisiones(orig.total_Colisiones),
