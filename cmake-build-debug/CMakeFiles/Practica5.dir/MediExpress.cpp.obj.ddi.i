@@ -57230,7 +57230,6 @@ private:
     MediExpress* linkMedi;
     std::map<unsigned int, Stock> order;
     void pedidoMedicam(const int &id_num,const int &robin);
-    int buscaMedicamID(const int &id_num);
 
 public:
     Farmacia(std::string cif="-",std::string provincia="-",std::string localidad="-",
@@ -57260,7 +57259,7 @@ public:
     int comprarMedicam(const int &id_num,const int &robin, PaMedicamento *&paMed);
     void nuevoStock(PaMedicamento* batmelatonina,int &robin);
     bool eliminarStock(const int &id_num);
-    int stock_Buscado(const int &id_num);
+    int buscaMedicamID(const int &id_num);
 };
 # 17 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
 
@@ -57270,7 +57269,7 @@ public:
 
 class MediExpress {
 private:
-    std::map<int,PaMedicamento> medication;
+    std::multimap<int,PaMedicamento> medication;
     std::list<Laboratorio> labs;
     std::multimap<std::string,Farmacia> pharmacy;
 public:

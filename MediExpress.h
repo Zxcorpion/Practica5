@@ -14,6 +14,7 @@
 #include <vector>
 #include <list>
 #include "Farmacia.h"
+#include "TrashMedicam.h"
 
 
 /**
@@ -21,12 +22,14 @@
  */
 class MediExpress {
 private:
-    std::multimap<int,PaMedicamento> medication;
+    TrashMedicam idMedication;
+    std::multimap<std::string,PaMedicamento*> nombMedication;
     std::list<Laboratorio> labs;
     std::multimap<std::string,Farmacia> pharmacy;
+    std::vector<int> vMedi;
 public:
     MediExpress();
-    MediExpress(const std::string &medicamentos, const std::string &laboratorios, const std::string &farmacias);
+    MediExpress(const std::string &medicamentos, const std::string &laboratorios, const std::string &farmacias, unsigned long tam, float lambda);
     MediExpress(const MediExpress &orig);
     ~MediExpress();
 
@@ -48,6 +51,8 @@ public:
     Farmacia* buscaFarmacia(const std::string &cif_);
     bool eliminarMedicamento(const unsigned int &if_num);
     std::vector<Farmacia*> buscar_Farmacia_Provincia(const std::string &nombreProvin);
+
+    void mostrarEstado();
 };
 
 

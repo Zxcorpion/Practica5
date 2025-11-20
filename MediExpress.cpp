@@ -11,7 +11,7 @@
  * @post Se crea un objeto con los valores asignados por defecto
  */
 MediExpress::MediExpress():
-medication(),labs(),pharmacy() {
+idMedication(3310,0.7),labs(),pharmacy(), vMedi() {
 }
 
 /**
@@ -29,6 +29,8 @@ MediExpress::MediExpress(const std::string &medicamentos, const std::string &lab
     std::string id_number_string = "";
     std::string id_alpha="";
     std::string nombre="";
+
+    std::list<PaMedicamento> listaPAMeds;
 
 
     is.open(medicamentos); //carpeta de proyecto
@@ -57,7 +59,9 @@ MediExpress::MediExpress(const std::string &medicamentos, const std::string &lab
                 }
 
                 PaMedicamento medicamento(id_num,id_alpha,nombre);
-                medication.insert(std::pair<int,PaMedicamento>(id_num,medicamento));
+                idMedication.insertar(id_num,medicamento);
+                listaPAMeds.push_back(medicamento);
+                vMedi.push_back(id_num);
 
                 fila="";
                 columnas.clear();
@@ -77,6 +81,18 @@ MediExpress::MediExpress(const std::string &medicamentos, const std::string &lab
         std::cout << "Tiempo de lectura de meds: " << ((clock() - t_ini) / (float) CLOCKS_PER_SEC) << " segs." << std::endl;
     } else {
         std::cout << "Error de apertura en archivo" << std::endl;
+    }
+
+
+    //Asociacion
+    for (int i=0;i<vMedi.size();i++) {
+        PaMedicamento *aux = idMedication.buscar(vMedi[i]);
+        std::string aux_nom = aux->get_nombre();
+        std::stringstream ss; //Usamos para cortar el medicamento
+        std::string batNombre;
+        while (getline(ss, batNombre, ' ')) {
+            nombMedication.insert(std::pair<std::string,PaMedicamento*>(batNombre,aux));
+        }
     }
 
     //Leemos el segundo fichero
@@ -149,8 +165,10 @@ MediExpress::MediExpress(const std::string &medicamentos, const std::string &lab
 
     //Enlazamos cada laboratorio con 2 PAmedicamentos
     std::list<Laboratorio>::iterator itLaboratorio = labs.begin();
-    std::map<int,PaMedicamento>::iterator it_Medication = medication.begin();
-    while (itLaboratorio != labs.end() && it_Medication != medication.end()) {
+    PaMedicamento *paMed_asociar;
+    std::vector<int>::iterator batMedi = vMedi.begin();
+    while (itLaboratorio != labs.end() && batMedi != vMedi.end()) {
+        paMed_asociar = idMedication.buscar(*batMed);
         this->suministrarMed(&it_Medication->second,&(*itLaboratorio));
         it_Medication++;
         //Comprobamos si no hemos llegado al final
@@ -296,9 +314,9 @@ MediExpress::MediExpress(const std::string &medicamentos, const std::string &lab
 
 
     //Aniadimos todos los cifs a cada farmacia
-    std::map<int,PaMedicamento>::iterator it_asignar_LabsMedi = medication.begin();
-    if (it_asignar_LabsMedi != medication.end()) { //No ha llegado al final
-        std::map<int,PaMedicamento>::iterator ultimoMedi = medication.end();
+    std::vector<int>::iterator it_asignar_LabsMedi = vMedi.begin();
+    if (it_asignar_LabsMedi != vMedi.end()) { //No ha llegado al final
+        std::vector<int>::iterator ultimoMedi = vMedi.end();
         --ultimoMedi;
         for (int i=0; i < vectorCIFS.size(); i++) {
             Farmacia *farmacia_Insercion = this->buscaFarmacia(vectorCIFS[i]);
@@ -306,7 +324,7 @@ MediExpress::MediExpress(const std::string &medicamentos, const std::string &lab
             while (contador<100) {
                 suministrarFarmacia(farmacia_Insercion,it_asignar_LabsMedi->second.get_id_num(),10);
                 if (it_asignar_LabsMedi == ultimoMedi) { //Si he llegado al final de los medicamentos, reseteo el iterador para volver a asignar
-                    it_asignar_LabsMedi = medication.begin();
+                    it_asignar_LabsMedi = vMedi.begin();
                 }else{
                     it_asignar_LabsMedi++;
                 }
@@ -322,7 +340,7 @@ MediExpress::MediExpress(const std::string &medicamentos, const std::string &lab
  * @post Se crea un objeto de la clase MediExpress copiando el objeto pasado por cabecera
  */
 MediExpress::MediExpress(const MediExpress &orig):
-medication(orig.medication),labs(orig.labs), pharmacy(orig.pharmacy)
+idMedication(orig.idMedication),labs(orig.labs), pharmacy(orig.pharmacy),vMedi(orig.vMedi)
 {}
 /**
  * @brief Operador de igualacion
@@ -332,9 +350,10 @@ medication(orig.medication),labs(orig.labs), pharmacy(orig.pharmacy)
  */
 MediExpress &MediExpress::operator=(const MediExpress &orig) {
     if(this!=&orig) {
-        medication = orig.medication;
+        idMedication = orig.idMedication;
         labs = orig.labs;
         pharmacy = orig.pharmacy;
+        vMedi = orig.vMedi;
     }
     return *this;
 }

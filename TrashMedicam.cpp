@@ -1,9 +1,11 @@
 
 #include "TrashMedicam.h"
-#include "TrashMedicam.h"
 
 //poner throw si pasan 0 o 1 pq no son primos
 bool TrashMedicam::es_Primo(unsigned primo) {
+    if (primo == 0 || primo == 1) {
+        throw std::invalid_argument("0 y 1 no pueden ser primos");
+    }
     //Comprobamos si es primo
     if (primo % 2 == 0) {
         return false;
@@ -12,6 +14,9 @@ bool TrashMedicam::es_Primo(unsigned primo) {
 }
 //poner throw si pasan 0 o 1 pq no son primos
 int TrashMedicam::primo_previo(unsigned num) {
+    if (num == 0 || num == 1) {
+        throw std::invalid_argument("0 y 1 no pueden ser primos");
+    }
     int menor = num - 1;
     while (!es_Primo(menor)) {
         menor--;
@@ -21,6 +26,9 @@ int TrashMedicam::primo_previo(unsigned num) {
 
 //poner throw si pasan 0 o 1 pq no son primos
 int TrashMedicam::primo_sig(unsigned num) {
+    if (num == 0 || num == 1) {
+        throw std::invalid_argument("0 y 1 no pueden ser primos");
+    }
     int mayor = num + 1;
     while (!es_Primo(mayor)) {
         mayor++;
@@ -151,4 +159,3 @@ bool TrashMedicam::borrar(unsigned long clave) {
     //poner estadisticos
     return false;
 }
-

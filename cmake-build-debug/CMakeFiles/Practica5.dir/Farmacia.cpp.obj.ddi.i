@@ -51226,7 +51226,6 @@ private:
     MediExpress* linkMedi;
     std::map<unsigned int, Stock> order;
     void pedidoMedicam(const int &id_num,const int &robin);
-    int buscaMedicamID(const int &id_num);
 
 public:
     Farmacia(std::string cif="-",std::string provincia="-",std::string localidad="-",
@@ -51256,7 +51255,7 @@ public:
     int comprarMedicam(const int &id_num,const int &robin, PaMedicamento *&paMed);
     void nuevoStock(PaMedicamento* batmelatonina,int &robin);
     bool eliminarStock(const int &id_num);
-    int stock_Buscado(const int &id_num);
+    int buscaMedicamID(const int &id_num);
 };
 # 2 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/Farmacia.cpp" 2
 # 1 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 1
@@ -57271,7 +57270,7 @@ namespace std
 # 22 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h"
 class MediExpress {
 private:
-    std::map<int,PaMedicamento> medication;
+    std::multimap<int,PaMedicamento> medication;
     std::list<Laboratorio> labs;
     std::multimap<std::string,Farmacia> pharmacy;
 public:
@@ -57499,17 +57498,6 @@ int Farmacia::buscaMedicamID(const int &id_num) {
 
 
 
-int Farmacia::stock_Buscado(const int &id_num) {
-    int batSalvacion = buscaMedicamID(id_num);
-    return batSalvacion;
-}
-
-
-
-
-
-
-
 std::vector<PaMedicamento*> Farmacia::buscaMedicamNombre(const std::string &nombresito) {
     std::vector<PaMedicamento*> vectorcillo;
     std::map<unsigned int, Stock>::iterator it = order.begin();
@@ -57524,7 +57512,7 @@ std::vector<PaMedicamento*> Farmacia::buscaMedicamNombre(const std::string &nomb
     }
     return vectorcillo;
 }
-# 248 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/Farmacia.cpp"
+# 237 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/Farmacia.cpp"
 int Farmacia::comprarMedicam(const int &id_num,const int &robinunidades, PaMedicamento *&paMed) {
     int stock_PaMed = buscaMedicamID(id_num);
 
@@ -57576,7 +57564,7 @@ void Farmacia::nuevoStock(PaMedicamento *batmelatonina, int &robin) {
         order.insert(std::pair<unsigned int,Stock>(nuevorobin.get_id_pa_med(),nuevorobin));
     }
 }
-# 307 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/Farmacia.cpp"
+# 296 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/Farmacia.cpp"
 bool Farmacia::eliminarStock(const int &id_num) {
 
 
