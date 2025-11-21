@@ -8,26 +8,26 @@
 
 #include "PaMedicamento.h"
 
-//Libre = -, Disponible = ?, Ocupado = X
+//Libre = L, Disponible = D, Ocupado = O
 class TrashMedicam {
 private:
     class Entrada {
-    public:
+        public:
         unsigned long clave;
         char marca;
         PaMedicamento dato;
-        Entrada(): marca('-'), clave(0), dato(){}
+        Entrada(): marca('L'), clave(0), dato(){}
         ~Entrada(){}
     };
     unsigned long tamFisico, tamLogico,tope_Colisiones,max10,total_Colisiones,primo_jr,redisp;
     std::vector<Entrada> tablaHash;
 
-    bool es_Primo(unsigned primo);//dice si primo es primo
-    int primo_previo(unsigned num);//primo menor al que paso
-    int primo_sig(unsigned num);//primo mayor al que paso
-    int hash(unsigned long clave, int intento);
-    int hash2(unsigned long clave, int intento);
-    int hash3(unsigned long clave, int intento);
+    bool es_Primo(unsigned primo);//dice si num es primo
+    int primo_previo(unsigned num);//primo menor al q paso
+    int primo_sig(unsigned num);//primo mayor al q paso
+    int hash(unsigned long clave, unsigned intento);
+    int hash2(unsigned long clave, unsigned intento);
+    int hash3(unsigned long clave, unsigned intento);
 public:
     TrashMedicam(int maxElementos, float lambda=0.7);//quiero q la tabla este llena al 70%
     TrashMedicam(const TrashMedicam &orig);

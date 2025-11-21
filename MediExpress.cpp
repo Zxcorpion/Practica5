@@ -11,7 +11,7 @@
  * @post Se crea un objeto con los valores asignados por defecto
  */
 MediExpress::MediExpress():
-idMedication(3310,0.7),labs(),pharmacy(), vMedi() {
+medication(),labs(),pharmacy(),idMedication(1000),nombMedication(){
 }
 
 /**
@@ -20,7 +20,7 @@ idMedication(3310,0.7),labs(),pharmacy(), vMedi() {
  * @param laboratorios pasador por referencia
  * @post Se crea un objeto de la clase MediExpress con los valores pasados por cabecera, que son leidos de varios ficheros .csv
  */
-MediExpress::MediExpress(const std::string &medicamentos, const std::string &laboratorios, const std::string &farmacias) {
+MediExpress::MediExpress(const std::string &medicamentos, const std::string &laboratorios, const std::string &farmacias,int maxelementos, float lambda) {
     std::ifstream is;
     std::stringstream  columnas;
     std::string fila;
@@ -29,8 +29,6 @@ MediExpress::MediExpress(const std::string &medicamentos, const std::string &lab
     std::string id_number_string = "";
     std::string id_alpha="";
     std::string nombre="";
-
-    std::list<PaMedicamento> listaPAMeds;
 
 
     is.open(medicamentos); //carpeta de proyecto
@@ -59,9 +57,7 @@ MediExpress::MediExpress(const std::string &medicamentos, const std::string &lab
                 }
 
                 PaMedicamento medicamento(id_num,id_alpha,nombre);
-                idMedication.insertar(id_num,medicamento);
-                listaPAMeds.push_back(medicamento);
-                vMedi.push_back(id_num);
+                medication.insert(std::pair<int,PaMedicamento>(id_num,medicamento));
 
                 fila="";
                 columnas.clear();
@@ -81,18 +77,6 @@ MediExpress::MediExpress(const std::string &medicamentos, const std::string &lab
         std::cout << "Tiempo de lectura de meds: " << ((clock() - t_ini) / (float) CLOCKS_PER_SEC) << " segs." << std::endl;
     } else {
         std::cout << "Error de apertura en archivo" << std::endl;
-    }
-
-
-    //Asociacion
-    for (int i=0;i<vMedi.size();i++) {
-        PaMedicamento *aux = idMedication.buscar(vMedi[i]);
-        std::string aux_nom = aux->get_nombre();
-        std::stringstream ss; //Usamos para cortar el medicamento
-        std::string batNombre;
-        while (getline(ss, batNombre, ' ')) {
-            nombMedication.insert(std::pair<std::string,PaMedicamento*>(batNombre,aux));
-        }
     }
 
     //Leemos el segundo fichero
@@ -165,10 +149,8 @@ MediExpress::MediExpress(const std::string &medicamentos, const std::string &lab
 
     //Enlazamos cada laboratorio con 2 PAmedicamentos
     std::list<Laboratorio>::iterator itLaboratorio = labs.begin();
-    PaMedicamento *paMed_asociar;
-    std::vector<int>::iterator batMedi = vMedi.begin();
-    while (itLaboratorio != labs.end() && batMedi != vMedi.end()) {
-        paMed_asociar = idMedication.buscar(*batMed);
+    std::map<int,PaMedicamento>::iterator it_Medication = medication.begin();
+    while (itLaboratorio != labs.end() && it_Medication != medication.end()) {
         this->suministrarMed(&it_Medication->second,&(*itLaboratorio));
         it_Medication++;
         //Comprobamos si no hemos llegado al final
@@ -314,9 +296,9 @@ MediExpress::MediExpress(const std::string &medicamentos, const std::string &lab
 
 
     //Aniadimos todos los cifs a cada farmacia
-    std::vector<int>::iterator it_asignar_LabsMedi = vMedi.begin();
-    if (it_asignar_LabsMedi != vMedi.end()) { //No ha llegado al final
-        std::vector<int>::iterator ultimoMedi = vMedi.end();
+    std::map<int,PaMedicamento>::iterator it_asignar_LabsMedi = medication.begin();
+    if (it_asignar_LabsMedi != medication.end()) { //No ha llegado al final
+        std::map<int,PaMedicamento>::iterator ultimoMedi = medication.end();
         --ultimoMedi;
         for (int i=0; i < vectorCIFS.size(); i++) {
             Farmacia *farmacia_Insercion = this->buscaFarmacia(vectorCIFS[i]);
@@ -324,7 +306,7 @@ MediExpress::MediExpress(const std::string &medicamentos, const std::string &lab
             while (contador<100) {
                 suministrarFarmacia(farmacia_Insercion,it_asignar_LabsMedi->second.get_id_num(),10);
                 if (it_asignar_LabsMedi == ultimoMedi) { //Si he llegado al final de los medicamentos, reseteo el iterador para volver a asignar
-                    it_asignar_LabsMedi = vMedi.begin();
+                    it_asignar_LabsMedi = medication.begin();
                 }else{
                     it_asignar_LabsMedi++;
                 }
@@ -340,7 +322,7 @@ MediExpress::MediExpress(const std::string &medicamentos, const std::string &lab
  * @post Se crea un objeto de la clase MediExpress copiando el objeto pasado por cabecera
  */
 MediExpress::MediExpress(const MediExpress &orig):
-idMedication(orig.idMedication),labs(orig.labs), pharmacy(orig.pharmacy),vMedi(orig.vMedi)
+medication(orig.medication),labs(orig.labs), pharmacy(orig.pharmacy),idMedication(orig.idMedication)
 {}
 /**
  * @brief Operador de igualacion
@@ -350,10 +332,9 @@ idMedication(orig.idMedication),labs(orig.labs), pharmacy(orig.pharmacy),vMedi(o
  */
 MediExpress &MediExpress::operator=(const MediExpress &orig) {
     if(this!=&orig) {
-        idMedication = orig.idMedication;
+        medication = orig.medication;
         labs = orig.labs;
         pharmacy = orig.pharmacy;
-        vMedi = orig.vMedi;
     }
     return *this;
 }
@@ -434,11 +415,12 @@ std::vector<Laboratorio*> MediExpress::buscarLabCiudad(const std::string &nombre
  * @return vector con los medicamentos que contienen el nombre pasado por referencia
  * @post se crea un vector auxiliar y se inserta en el lo medicametnos convenientes
  */
+//Cambiado
 std::vector<PaMedicamento*> MediExpress::buscaCompuesto(const std::string &nombrePA) {
     std::vector<PaMedicamento*>auxiliar;
-    for(std::map<int,PaMedicamento>::iterator aux = medication.begin();aux != medication.end();aux++) {
-        if(aux->second.get_nombre().find(nombrePA) != std::string::npos) {
-            auxiliar.push_back(&(aux->second));
+    for(std::multimap<std::string,PaMedicamento*>::iterator aux = nombMedication.begin();aux != nombMedication.end();aux++) {
+        if(aux->second->get_nombre()== nombrePA) {
+            auxiliar.push_back(aux->second);
         }
     }
     return auxiliar;
@@ -493,10 +475,11 @@ void MediExpress::borrarLaboratorio(const std::string &nombreCiudad) {
  * @return PAmedicamento que se quiere buscar
  * @post El medicamento buscado es encontrado y devuelto, en caso de no encontrarse, se devuelve un puntero a null
  */
+//Cambiado
 PaMedicamento *MediExpress::buscaCompuestoMed(const int &ID_) {
-    for(std::map<int,PaMedicamento>::iterator it_Batman = medication.begin();it_Batman != medication.end();it_Batman++) {
-        if(it_Batman->second.get_id_num() == ID_) {
-            return &(it_Batman->second);
+    for(std::multimap<std::string,PaMedicamento*>::iterator it_Batman = nombMedication.begin();it_Batman != nombMedication.end();it_Batman++) {
+        if(it_Batman->second->get_id_num() == ID_) {
+            return it_Batman->second;
         }
     }
     return 0;
@@ -528,12 +511,13 @@ void MediExpress::suministrarFarmacia(Farmacia *farma, int id_num, int robin) {
  * @param cif_ cif de la Farmacia
  * @return puntero de la farmacia encontrada
  */
+//Para iterar un multimap a priori usamos otro multimap iterator
 Farmacia *MediExpress::buscaFarmacia(const std::string &cif_) {
     //Creamos un objeto de tipo farmacia para buscarlo
-    std::vector<Farmacia>::iterator batFarmacia = pharmacy.begin();
+    std::multimap<std::string,Farmacia>::iterator batFarmacia = pharmacy.begin();
     while(batFarmacia != pharmacy.end()) {
-        if (batFarmacia->get_cif() == cif_) {
-            return &(*batFarmacia);
+        if (batFarmacia->second.get_cif() == cif_) {
+            return &(batFarmacia->second);
         }
         batFarmacia++;
     }
@@ -562,12 +546,22 @@ std::list<Laboratorio*> MediExpress::buscarLabs(const std::string &nombrePA) {
  * @return Vector de Farmacias* de una provincia
  * @post Se crea un vector de Farmacias*, donde almacenamos aquellas farmacias pertenecientes a una provincia determinada
  */
+//Añadido
 std::vector<Farmacia*> MediExpress::buscar_Farmacia_Provincia(const std::string &nombreProvin) {
     std::vector<Farmacia*> farmacias_Nightwing;
-    for (int i=0;i<pharmacy.size();i++) {
-        if (pharmacy[i].get_provincia().find(nombreProvin) != std::string::npos) {
-            farmacias_Nightwing.push_back(&(pharmacy[i]));
+    //for (int i=0;i<pharmacy.size();i++) {
+      //  if (pharmacy[i].get_provincia().find(nombreProvin) != std::string::npos) {
+        //    farmacias_Nightwing.push_back(&(pharmacy[i]));
+        //}
+    //}
+    //return farmacias_Nightwing;
+    //Creamos un objeto de tipo farmacia para buscarlo
+    std::multimap<std::string,Farmacia>::iterator batFarmacia = pharmacy.begin();
+    while(batFarmacia != pharmacy.end()) {
+        if (batFarmacia->second.get_provincia() == nombreProvin) {
+            farmacias_Nightwing.push_back(&(batFarmacia->second));
         }
+        batFarmacia++;
     }
     return farmacias_Nightwing;
 }
@@ -579,14 +573,18 @@ std::vector<Farmacia*> MediExpress::buscar_Farmacia_Provincia(const std::string 
  * @return[false] Si no se ha borrado correctamente
  * @post El PAmedicamento y su stock quedan eliminados
  */
+//Añadido
 bool MediExpress::eliminarMedicamento(const unsigned int &if_num) {
     //Localizamos primero todos los medicamentos
     std::map<int,PaMedicamento>::iterator itTodd= medication.find(if_num);
 
     if (itTodd != medication.end()) {
         //Primero, debemos eliminar el stock de TODAS las farmacias
+        std::multimap<std::string, Farmacia>::iterator aux = pharmacy.begin();
         for (int i=0;i<pharmacy.size();i++) {
-            pharmacy[i].eliminarStock(if_num);
+            //pharmacy[i].eliminarStock(if_num);
+            aux->second.eliminarStock(if_num);//Accedemos con un iterador al multimap
+            aux++;
         }
 
         itTodd->second.servidoPor(0);//Desenlazamos el objeto ya que es relacion de asociacion para destruirlo

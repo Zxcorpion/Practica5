@@ -1,22 +1,22 @@
 
 #include "TrashMedicam.h"
+#include "TrashMedicam.h"
 
 //poner throw si pasan 0 o 1 pq no son primos
 bool TrashMedicam::es_Primo(unsigned primo) {
-    if (primo == 0 || primo == 1) {
-        throw std::invalid_argument("0 y 1 no pueden ser primos");
-    }
-    //Comprobamos si es primo
-    if (primo % 2 == 0) {
+    //Creamos una variable para ver si el resto de dividir entre dos es cero
+    unsigned aux_primo=primo % 2;
+    //Comprobamos
+    if (aux_primo == 0) {
         return false;
     }
     return true;
 }
-//poner throw si pasan 0 o 1 pq no son primos
+
 int TrashMedicam::primo_previo(unsigned num) {
-    if (num == 0 || num == 1) {
-        throw std::invalid_argument("0 y 1 no pueden ser primos");
-    }
+    //Comprobamos que no sea ni 0 ni 1 ya que no son primos y ademas que no sea 2 ya que antes que el 2 no hay ningun primo
+    if (num <= 0 ||num <= 1 || num <= 2)
+        throw std::invalid_argument("Error [TrashMedicam::primo_previo] numero invalido");
     int menor = num - 1;
     while (!es_Primo(menor)) {
         menor--;
@@ -24,25 +24,21 @@ int TrashMedicam::primo_previo(unsigned num) {
     return menor;
 }
 
-//poner throw si pasan 0 o 1 pq no son primos
 int TrashMedicam::primo_sig(unsigned num) {
-    if (num == 0 || num == 1) {
-        throw std::invalid_argument("0 y 1 no pueden ser primos");
-    }
     int mayor = num + 1;
     while (!es_Primo(mayor)) {
         mayor++;
     }
 }
 
-int TrashMedicam::hash(unsigned long clave, int intento) {
-    unsigned long pos=0;
-    pos = (clave + (intento*intento)) % tamFisico;
-    return pos;
+int TrashMedicam::hash(unsigned long clave, unsigned intento) {
+    unsigned long batiposicion=0;
+    batiposicion = (clave + intento*intento) % tamFisico;
+    return batiposicion;
 }
 
 
-int TrashMedicam::hash2(unsigned long clave, int intento) {
+int TrashMedicam::hash2(unsigned long clave, unsigned intento) {
     unsigned long h1=0,h2=0,h3=0;
     h1 = clave % tamFisico;
     h2 = 1 + (clave % primo_jr);
@@ -50,7 +46,7 @@ int TrashMedicam::hash2(unsigned long clave, int intento) {
     return h3;
 }
 
-int TrashMedicam::hash3(unsigned long clave, int intento) {
+int TrashMedicam::hash3(unsigned long clave, unsigned intento) {
     unsigned long h1=0,h2=0,h3=0;
     h1 = clave % tamFisico;
     h2 = primo_jr - (clave % primo_jr);
@@ -82,6 +78,7 @@ TrashMedicam &TrashMedicam::operator=(const TrashMedicam &orig) {
         total_Colisiones = orig.total_Colisiones;
         primo_jr = orig.primo_jr;
         redisp = orig.redisp;
+        tablaHash=orig.tablaHash;
     }
     return *this;
 }
@@ -115,9 +112,8 @@ bool TrashMedicam::insertar(unsigned long clave, PaMedicamento &pa) {
 
 PaMedicamento *TrashMedicam::buscar(unsigned long clave) {
     unsigned intento=0,y;
-    bool enc = false;
-
-    while (!enc) {
+    //Esta vez usamos el tamaño de la tabla para parar o no el while
+    while (intento < tablaHash.size()) {
         y = hash2(clave, intento);
         // y = hash(clave, intento);
         // y = hash3(clave, intento);
@@ -125,11 +121,7 @@ PaMedicamento *TrashMedicam::buscar(unsigned long clave) {
         if (tablaHash[y].marca == 'O' && tablaHash[y].clave == clave) {
             return (&tablaHash[y].dato);
         }else {
-            if (tablaHash[y].marca == 'L') {
-                return 0;
-            }else {
-                intento++;
-            }
+            intento++;
         }
     }
     //poner estadisticos
@@ -150,12 +142,17 @@ bool TrashMedicam::borrar(unsigned long clave) {
             fin = true;
         }else {
             if (tablaHash[y].marca == 'L') {
-                fin = false; //Para de buscar porque esta libre
+                return fin; //Para de buscar porque esta libre y ya no se va a encontrar
             }else {
+                if (intento == tablaHash.size()) { // Si llegamos al final y no lo encontramos, return false
+                    return false;
+                }
                 intento++;
             }
         }
     }
+    //Actualizamos el tamaño
+    tamLogico--;
     //poner estadisticos
-    return false;
+    return fin;
 }

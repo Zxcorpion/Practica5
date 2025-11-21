@@ -16,20 +16,19 @@
 #include "Farmacia.h"
 #include "TrashMedicam.h"
 
-
 /**
  * @brief Definicion de la clase MediExpress
  */
 class MediExpress {
 private:
-    TrashMedicam idMedication;
-    std::multimap<std::string,PaMedicamento*> nombMedication;
+    std::map<int,PaMedicamento> medication;
     std::list<Laboratorio> labs;
     std::multimap<std::string,Farmacia> pharmacy;
-    std::vector<int> vMedi;
+    TrashMedicam idMedication;
+    std::multimap<std::string,PaMedicamento*> nombMedication;
 public:
     MediExpress();
-    MediExpress(const std::string &medicamentos, const std::string &laboratorios, const std::string &farmacias, unsigned long tam, float lambda);
+    MediExpress(const std::string &medicamentos, const std::string &laboratorios, const std::string &farmacias,int maxelementos, float lambda);
     MediExpress(const MediExpress &orig);
     ~MediExpress();
 
@@ -51,8 +50,6 @@ public:
     Farmacia* buscaFarmacia(const std::string &cif_);
     bool eliminarMedicamento(const unsigned int &if_num);
     std::vector<Farmacia*> buscar_Farmacia_Provincia(const std::string &nombreProvin);
-
-    void mostrarEstado();
 };
 
 
