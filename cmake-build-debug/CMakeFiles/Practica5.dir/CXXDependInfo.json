@@ -43,10 +43,10 @@
 			"language" : "CXX",
 			"source" : "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/Stock.cpp"
 		},
-		"CMakeFiles/Practica5.dir/TrashMedicam.cpp.obj" : 
+		"CMakeFiles/Practica5.dir/ThashMedicam.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/TrashMedicam.cpp"
+			"source" : "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/ThashMedicam.cpp"
 		},
 		"CMakeFiles/Practica5.dir/main.cpp.obj" : 
 		{

@@ -1,6 +1,6 @@
-CMakeFiles\Practica5.dir\MediExpress.cpp.obj.ddi: \
- C:/Users/pablo/Downloads/Segundo\ Curso/Estructuras/Practicas/Practica5/MediExpress.cpp \
- C:/Users/pablo/Downloads/Segundo\ Curso/Estructuras/Practicas/Practica5/MediExpress.h \
+CMakeFiles\Practica5.dir\ThashMedicam.cpp.obj.ddi: \
+ C:/Users/pablo/Downloads/Segundo\ Curso/Estructuras/Practicas/Practica5/ThashMedicam.cpp \
+ C:/Users/pablo/Downloads/Segundo\ Curso/Estructuras/Practicas/Practica5/ThashMedicam.h \
  C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/iostream \
  C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/requires_hosted.h \
  C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
@@ -152,35 +152,11 @@ CMakeFiles\Practica5.dir\MediExpress.cpp.obj.ddi: \
  C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/ostream.tcc \
  C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/istream \
  C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/istream.tcc \
- C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/fstream \
- C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/codecvt.h \
- C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/x86_64-w64-mingw32/bits/basic_file.h \
- C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/x86_64-w64-mingw32/bits/c++io.h \
- C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/fstream.tcc \
- C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/sstream \
- C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/sstream.tcc \
- C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ctime \
- C:/Users/pablo/Downloads/Segundo\ Curso/Estructuras/Practicas/Practica5/PaMedicamento.h \
- C:/Users/pablo/Downloads/Segundo\ Curso/Estructuras/Practicas/Practica5/Laboratorio.h \
- C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/map \
- C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_tree.h \
- C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ext/aligned_buffer.h \
- C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/node_handle.h \
- C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_map.h \
- C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multimap.h \
- C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/erase_if.h \
  C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/vector \
  C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_uninitialized.h \
  C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_vector.h \
  C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_bvector.h \
  C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/vector.tcc \
- C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/list \
- C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_list.h \
- C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/allocated_ptr.h \
- C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/list.tcc \
- C:/Users/pablo/Downloads/Segundo\ Curso/Estructuras/Practicas/Practica5/Farmacia.h \
- C:/Users/pablo/Downloads/Segundo\ Curso/Estructuras/Practicas/Practica5/Stock.h \
- C:/Users/pablo/Downloads/Segundo\ Curso/Estructuras/Practicas/Practica5/ThashMedicam.h \
  C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/cmath \
  C:/Users/pablo/Downloads/Mingw/mingw64/x86_64-w64-mingw32/include/math.h \
  C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/specfun.h \
@@ -196,4 +172,6 @@ CMakeFiles\Practica5.dir\MediExpress.cpp.obj.ddi: \
  C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/modified_bessel_func.tcc \
  C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/poly_hermite.tcc \
  C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/poly_laguerre.tcc \
- C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/riemann_zeta.tcc
+ C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/riemann_zeta.tcc \
+ C:/Users/pablo/Downloads/Segundo\ Curso/Estructuras/Practicas/Practica5/PaMedicamento.h \
+ C:/Users/pablo/Downloads/Segundo\ Curso/Estructuras/Practicas/Practica5/Laboratorio.h

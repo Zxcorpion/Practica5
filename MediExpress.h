@@ -14,26 +14,26 @@
 #include <vector>
 #include <list>
 #include "Farmacia.h"
-#include "TrashMedicam.h"
+#include "ThashMedicam.h"
+
 
 /**
  * @brief Definicion de la clase MediExpress
  */
 class MediExpress {
 private:
-    std::map<int,PaMedicamento> medication;
+    ThashMedicam idMedication;
+    std::multimap<std::string,PaMedicamento*> nombMedication;
     std::list<Laboratorio> labs;
     std::multimap<std::string,Farmacia> pharmacy;
-    TrashMedicam idMedication;
-    std::multimap<std::string,PaMedicamento*> nombMedication;
+    std::vector<int> vMedi;
 public:
     MediExpress();
-    MediExpress(const std::string &medicamentos, const std::string &laboratorios, const std::string &farmacias,int maxelementos, float lambda);
+    MediExpress(const std::string &medicamentos, const std::string &laboratorios,
+    const std::string &farmacias, unsigned long tam, float lambda);
     MediExpress(const MediExpress &orig);
     ~MediExpress();
-
     MediExpress& operator=(const MediExpress &orig);
-
 
     void set_medication(const std::map<int,PaMedicamento> &medication);
     void set_labs(const std::list<Laboratorio> &labs);
@@ -48,8 +48,15 @@ public:
     PaMedicamento* buscaCompuestoMed(const int &ID_);
     void suministrarFarmacia(Farmacia *farma, int id_num, int robin);
     Farmacia* buscaFarmacia(const std::string &cif_);
-    bool eliminarMedicamento(const unsigned int &if_num);
+    bool eliminarMedicamento(const unsigned int &id_num);
     std::vector<Farmacia*> buscar_Farmacia_Provincia(const std::string &nombreProvin);
+
+    void mostrarEstado();
+    unsigned long tamTabla() const { return idMedication.getNumElem(); }
+    unsigned long get_promedio_colisiones() const;
+    unsigned long get_max10() const;
+    unsigned long get_total_colisiones() const;
+    float get_factor_carga() const;
 };
 
 

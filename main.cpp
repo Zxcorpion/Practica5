@@ -10,6 +10,7 @@
 #include "Laboratorio.h"
 #include "Farmacia.h"
 #include "Stock.h"
+#include "ThashMedicam.h"
 
 /**
  * @brief La funcion muestra por pantalla una farmacia con sus respectivos datos
@@ -32,7 +33,8 @@ void mostrarFarmacia(Farmacia &farma) {
  */
 int main() {
     //Prueba 1
-    MediExpress medBatman("../pa_medicamentos.csv","../lab2.csv","../farmacias.csv");
+    MediExpress medBatman("../pa_medicamentos.csv","../lab2.csv","../farmacias.csv",3310,0.65);
+    MediExpress medBatman2("../pa_medicamentos.csv","../lab2.csv","../farmacias.csv",3310,0.68);
     std::vector<Farmacia*> farmas_Sevilla = medBatman.buscar_Farmacia_Provincia("SEVILLA");
     std::cout<<"Farmacias encontradas situadas Sevilla: "<< farmas_Sevilla.size()<<std::endl;// esto lo tengo como comprobacion de cuantas de sevilla hay
     int id_Magnes = 3640, id_Carbonato = 3632, id_Cloruro = 3633;
@@ -109,56 +111,5 @@ int main() {
          mostrarFarmacia(*farmas_Madrid_Virus[l]);
      }
 
-    //Prueba 3
-    std::cout<<"\n";
-    std::cout<<"Procedemos a eliminar el cianuro"<<std::endl;
-
-    int id_Eliminar_Cianuro = 9355, id_Elimina_otro = 3244;
-    if (medBatman.eliminarMedicamento(id_Eliminar_Cianuro) == true) {
-        std::cout<<"El cianuro ha sido eliminado con exito"<<std::endl;
-    }else {
-        std::cout<<"El cianuro no ha sido eliminado con exito"<<std::endl;
-
-    }
-
-    std::cout<<"Procedemos a buscar el cianuro..."<<std::endl;
-    if (medBatman.buscaCompuestoMed(id_Eliminar_Cianuro) == 0) {
-        std::cout<<"No se ha encontrado el cianuro, se ha borrado"<<std::endl;
-    }else {
-        std::cout<<"Se ha encontrado el cianuro, no se ha borrado"<<std::endl;
-
-    }
-    if (medBatman.eliminarMedicamento(id_Elimina_otro) == true) {
-        std::cout<<"Otro ha sido eliminado con exito"<<std::endl;
-    }else {
-        std::cout<<"Otro no ha sido eliminado con exito"<<std::endl;
-
-    }
-
-    //Parejas
-    int id_Virus_Gripe = 997, contadorsillo = 0;
-    PaMedicamento *virus_gripe = medBatman.buscaCompuestoMed(id_Virus_Gripe); //Creamos el medicamento que queremos encontrar
-    for (int i = 0; i < farmas_Madrid_Virus.size(); i++) {
-        if (farmas_Madrid_Virus[i]->buscaMedicamID(id_Virus_Gripe) != 0) { //Esto significa que tiene stock de este PAmed
-            farmas_Madrid_Virus[i]->comprarMedicam(id_Virus_Gripe, 20,virus_gripe);
-            contadorsillo++;
-        }
-    }
-    /*
-    for (int i = 0; i< farmas_Madrid_Virus.size(); i++) {
-         std::cout<<"Stock de la farmacia "<<i+1<<": "<<farmas_Madrid_Virus[i]->stock_Buscado(id_Virus_Gripe)<<std::endl;
-    }
-    */
-    std::cout<<"\n";
-
-    std::cout<<"Hay "<<contadorsillo<<" farmacias cuyo stock de PAmedicamentos que contienen virus de gripe es 30, y sus datos son: "<<std::endl;
-    std::cout<<"======================================================================================================================"<<std::endl;
-
-    for (int k = 0; k < farmas_Madrid.size(); k++) {
-        if (farmas_Madrid[k]->buscaMedicamID(id_Virus_Gripe) == 30) {
-            std::cout<<"Farmacia "<<k+1<<std::endl;
-            mostrarFarmacia(*farmas_Madrid[k]);
-        }
-    }
     return 0;
 }
