@@ -477,12 +477,17 @@ void MediExpress::borrarLaboratorio(const std::string &nombreCiudad) {
  */
 //Cambiado
 PaMedicamento *MediExpress::buscaCompuestoMed(const int &ID_) {
-    for(std::multimap<std::string,PaMedicamento*>::iterator it_Batman = nombMedication.begin();it_Batman != nombMedication.end();it_Batman++) {
+    /*for(std::multimap<std::string,PaMedicamento*>::iterator it_Batman = nombMedication.begin();it_Batman != nombMedication.end();it_Batman++) {
         if(it_Batman->second->get_id_num() == ID_) {
             return it_Batman->second;
         }
     }
-    return 0;
+    return 0;*/
+    if(idMedication.buscar(ID_)!=0) {
+        return idMedication.buscar(ID_);
+    }else {
+        return 0;
+    }
 }
 
 /**
@@ -596,4 +601,5 @@ bool MediExpress::eliminarMedicamento(const unsigned int &if_num) {
 
     return true;
 }
+
 
