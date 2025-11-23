@@ -21,6 +21,7 @@ private:
     MediExpress* linkMedi;
     std::map<unsigned int, Stock> order;
     void pedidoMedicam(const int &id_num,const int &robin);
+    void pedidoMedicam(std:: string nombrelol, const int &robin);
 
 public:
     Farmacia(std::string cif="-",std::string provincia="-",std::string localidad="-",

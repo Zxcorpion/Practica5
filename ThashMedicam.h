@@ -38,6 +38,7 @@ public:
     unsigned long get_promedio_colisiones() const;
     unsigned long get_max10() const;
     unsigned long get_total_colisiones() const;
+    unsigned long get_carga() const;//Carga es que tan llena está la tabla
 
     bool insertar(unsigned long clave, PaMedicamento &pa);
     PaMedicamento* buscar(unsigned long clave);

@@ -98,6 +98,9 @@ unsigned long ThashMedicam::get_max10() const {
 unsigned long ThashMedicam::get_total_colisiones() const {
     return total_Colisiones;
 }
+unsigned long ThashMedicam::get_carga()const{
+    return tamLogico/tamFisico;
+}
 
 bool ThashMedicam::insertar(unsigned long clave, PaMedicamento &pa) {
     unsigned intento=0,y;
@@ -146,14 +149,14 @@ PaMedicamento *ThashMedicam::buscar(unsigned long clave) {
         }
     }
     //poner estadisticos
-    return 0;
+    //return 0;
 }
-
+//Dos o tres lineas cambiadas.La linea 166 hace el bucle infinito creo
 bool ThashMedicam::borrar(unsigned long clave) {
     unsigned intento=0,y;
     bool fin = false;
 
-    while (!fin) {
+    /*while (!fin) {
         y = hash2(clave, intento);
         // y = hash(clave, intento);
         // y = hash3(clave, intento);
@@ -170,6 +173,26 @@ bool ThashMedicam::borrar(unsigned long clave) {
         }
     }
     //poner estadisticos
-    return false;
+    return false;*/
+    while (!fin) {
+        y = hash2(clave, intento);
+        // y = hash(clave, intento);
+        // y = hash3(clave, intento);
+
+        if (tablaHash[y].marca == 'O' && tablaHash[y].clave == clave) {
+            tablaHash[y].marca = 'D';
+            fin = true;
+            tamLogico--;
+        }else {
+            if (tablaHash[y].marca == 'L') {
+                //fin = false; //Para de buscar porque esta libre
+                return fin; // Ya no hay mas que buscar y no se ha encontrado
+            }else {
+                intento++;
+            }
+        }
+    }
+    //poner estadisticos
+    return fin; //fin=true
 }
 ThashMedicam::~ThashMedicam() {}

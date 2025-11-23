@@ -502,7 +502,7 @@ std::vector<PaMedicamento*> MediExpress::getMedicamentoSinLab() {
  * @return PAmedicamento que se quiere buscar
  * @post El medicamento buscado es encontrado y devuelto, en caso de no encontrarse, se devuelve un puntero a null
  */
-//Cambiado
+//Cambiado. Aunque podriamos poner el codigo completo de buscar con la funcion hasah que queramos de las tres
 PaMedicamento *MediExpress::buscaCompuestoMed(const int &ID_) {
     /*for(std::multimap<std::string,PaMedicamento*>::iterator it_Batman = nombMedication.begin();it_Batman != nombMedication.end();it_Batman++) {
         if(it_Batman->second->get_id_num() == ID_) {
@@ -654,3 +654,8 @@ void MediExpress::mostrarEstado() {
     std::cout<<"Numero de veces qwue se superan las 10 colisiones: "<< get_max10()<<std::endl;
     std::cout<<"Factor de carga empleado: "<<std::endl;
 }
+
+unsigned long MediExpress::get_factor_carga() const {
+    return idMedication.get_carga();
+}
+

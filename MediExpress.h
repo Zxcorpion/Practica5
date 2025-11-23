@@ -56,7 +56,7 @@ public:
     unsigned long get_promedio_colisiones() const;
     unsigned long get_max10() const;
     unsigned long get_total_colisiones() const;
-    float get_factor_carga() const;
+    unsigned long get_factor_carga() const;
 };
 
 
