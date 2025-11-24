@@ -56,10 +56,10 @@ public:
     void mostrarEstado();
     void pruebaRend();
     unsigned long tamTabla() const { return idMedication.getNumElem(); }
-    unsigned long get_promedio_colisiones() const;
+    unsigned int get_promedio_colisiones() ;//const borrado
     unsigned long get_max10() const;
     unsigned long get_total_colisiones() const;
-    unsigned long get_factor_carga() const;
+    float get_factor_carga() const;
 };
 
 

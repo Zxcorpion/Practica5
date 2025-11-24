@@ -443,14 +443,18 @@ std::vector<Laboratorio*> MediExpress::buscarLabCiudad(const std::string &nombre
  * @return aux, vector con todos los medicamentos sin laboratorio asociado
  * @post se crea y se modifica un vector con medicamentos dentro del él
  */
+//CAMBIADO
 std::vector<PaMedicamento*> MediExpress::getMedicamentoSinLab() {
     std::vector<PaMedicamento*> vector_meds_SinLab;
     PaMedicamento *med_Sin_Lab;
     std::vector<int>::iterator it_busca_SinLab = vMedi.begin();
     for (int i = 0; i< vMedi.size(); i++) {
         med_Sin_Lab = idMedication.buscar(vMedi[i]);
-        if (med_Sin_Lab->getServe() == 0) {
-            vector_meds_SinLab.push_back(med_Sin_Lab);
+        if(med_Sin_Lab != 0) {
+            //Añadido
+            if (med_Sin_Lab->getServe() == 0) {
+                vector_meds_SinLab.push_back(med_Sin_Lab);
+            }
         }
     }
     return vector_meds_SinLab;
@@ -645,7 +649,7 @@ bool MediExpress::eliminarMedicamento(const unsigned int &id_num) {
     return true;
 }
 
-unsigned long MediExpress::get_promedio_colisiones() const {
+unsigned int MediExpress::get_promedio_colisiones() {
     return idMedication.get_promedio_colisiones();
 }
 
@@ -662,11 +666,11 @@ void MediExpress::mostrarEstado() {
     std::cout<<"Tamaño logico: "<< tamTabla()<<std::endl;
     std::cout<<"Colisiones totales: "<< get_total_colisiones()<<std::endl;
     std::cout<<"Promedio de colisiones: "<< get_promedio_colisiones()<<std::endl;
-    std::cout<<"Numero de veces qwue se superan las 10 colisiones: "<< get_max10()<<std::endl;
+    std::cout<<"Numero de veces que se superan las 10 colisiones: "<< get_max10()<<std::endl;
     std::cout<<"Factor de carga empleado: "<<get_factor_carga()<<std::endl;
 }
 
-
-unsigned long MediExpress::get_factor_carga() const {
+//AHORA ES FLOAT
+float MediExpress::get_factor_carga() const {
     return idMedication.get_carga();
 }

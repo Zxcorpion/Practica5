@@ -30,7 +30,7 @@ int ThashMedicam::primo_sig(unsigned num) {
         throw std::invalid_argument("0 y 1 no pueden ser primos");
     }
     int mayor = num + 1;
-    while (!es_Primo(mayor)) {
+    while (es_Primo(mayor) == false) {
         mayor++;
     }
     return mayor;
@@ -62,13 +62,13 @@ int ThashMedicam::hash3(unsigned long clave, int intento) {
 
 ThashMedicam::ThashMedicam(int maxElementos, float lambda): tamFisico(primo_sig(maxElementos/lambda)),
 tablaHash(tamFisico, Entrada()), tamLogico(0),promedio_Colisiones(0),
-max10(0), total_Colisiones(0),primo_jr(0),redisp(0)
+max10(0), total_Colisiones(0),primo_jr(0),maxcolisiones(0),redisp(0)
 {
     primo_jr = primo_previo(tamFisico);
 }
 ThashMedicam::ThashMedicam(const ThashMedicam &orig):tamFisico(orig.tamFisico),
 tablaHash(orig.tablaHash), tamLogico(orig.tamLogico),promedio_Colisiones(orig.total_Colisiones),
-max10(orig.max10), total_Colisiones(orig.total_Colisiones),primo_jr(orig.primo_jr),redisp(0)
+max10(orig.max10), total_Colisiones(orig.total_Colisiones),primo_jr(orig.primo_jr),maxcolisiones(orig.maxColisiones()),redisp(0)
 {
     primo_jr = orig.primo_jr;
 }
@@ -82,12 +82,14 @@ ThashMedicam &ThashMedicam::operator=(const ThashMedicam &orig) {
         max10 = orig.max10;
         total_Colisiones = orig.total_Colisiones;
         primo_jr = orig.primo_jr;
+        maxcolisiones=orig.maxcolisiones;
         redisp = orig.redisp;
     }
     return *this;
 }
-//CAMBIAR
-unsigned long ThashMedicam::get_promedio_colisiones() const {
+//CAMBIADO
+unsigned int ThashMedicam::get_promedio_colisiones() {
+    promedio_Colisiones=(total_Colisiones)/(tamLogico);
     return promedio_Colisiones;
 }
 
@@ -98,18 +100,21 @@ unsigned long ThashMedicam::get_max10() const {
 unsigned long ThashMedicam::get_total_colisiones() const {
     return total_Colisiones;
 }
-unsigned long ThashMedicam::get_carga()const{
-    return tamLogico/tamFisico;
+//CAMBIADO
+float ThashMedicam::get_carga()const{
+    float aux=static_cast<float>(tamLogico)/static_cast<float>(tamFisico);
+    return aux;
 }
 
 //Libre = -, Disponible = ?, Ocupado = X
+//CAMBIADO
 bool ThashMedicam::insertar(unsigned long clave, PaMedicamento &pa) {
     unsigned intento=0,y;
     bool enc = false;
 
     while (!enc) {
-        y = hash2(clave, intento);
-        // y = hash(clave, intento);
+        // y = hash2(clave, intento);
+         y = hash(clave, intento);
         // y = hash3(clave, intento);
 
         if (tablaHash[y].marca == '-' || tablaHash[y].marca == '?') {
@@ -119,15 +124,28 @@ bool ThashMedicam::insertar(unsigned long clave, PaMedicamento &pa) {
             tablaHash[y].clave = clave;
             enc = true;
         }else {
-            if (tablaHash[y].dato.get_id_num() == clave) {
+            if (tablaHash[y].dato.get_id_num() == clave) {//No se pueden meter repetidos
                 return false;
             }else {
+                total_Colisiones++;
                 intento++;
             }
         }
     }
+    if (intento > maxcolisiones) {
+        maxcolisiones = intento;
+    }
+    if ( intento >10) {
+        max10 = intento;
+    }
     //poner estadisticos
+    std::cout<<"La insercion del medicamento con id "<<clave<<" y nombre"<< pa.get_nombre()<<" conlleva:"<<std::endl;
+    std::cout<<"Numero de intentos: "<<intento+1<<std::endl;
+    std::cout<<"Numero de colisiones: "<<intento<<std::endl;
     return enc;
+}
+unsigned long ThashMedicam::maxColisiones() const {
+    return maxcolisiones;
 }
 
 //Libre = -, Disponible = ?, Ocupado = X

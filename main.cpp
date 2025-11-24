@@ -34,8 +34,10 @@ void mostrarFarmacia(Farmacia &farma) {
 int main() {
     //Prueba 1
     MediExpress medBatman("../pa_medicamentos.csv","../lab2.csv","../farmacias.csv",3310,0.65);
-    MediExpress medBatman2("../pa_medicamentos.csv","../lab2.csv","../farmacias.csv",3310,0.68);
-    std::vector<Farmacia*> farmas_Sevilla = medBatman.buscar_Farmacia_Provincia("SEVILLA");
+    medBatman.mostrarEstado();
+    //medBatman.mostrarEstado();
+   // MediExpress medBatman2("../pa_medicamentos.csv","../lab2.csv","../farmacias.csv",3310,0.68);
+   /* std::vector<Farmacia*> farmas_Sevilla = medBatman.buscar_Farmacia_Provincia("SEVILLA");
     std::cout<<"Farmacias encontradas situadas Sevilla: "<< farmas_Sevilla.size()<<std::endl;// esto lo tengo como comprobacion de cuantas de sevilla hay
     int id_Magnes = 3640, id_Carbonato = 3632, id_Cloruro = 3633;
     PaMedicamento *oxido = medBatman.buscaCompuestoMed(id_Magnes);
@@ -110,6 +112,7 @@ int main() {
     for (int l = 0; l < farmas_Madrid_Virus.size(); l++) {
          mostrarFarmacia(*farmas_Madrid_Virus[l]);
      }
+    */
 
     return 0;
 }
