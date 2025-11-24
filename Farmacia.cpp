@@ -186,12 +186,12 @@ void Farmacia::pedidoMedicam(const int &id_num,const int &robin) {
 }
 
 //AÑADIDO. Hay que ver si robin siempre va aser 10 unidades o no
-void Farmacia::pedidoMedicam(std::string nombrelol, const int &robin) {
-    std::vector<PaMedicamento*> auxiliar = linkMedi->buscaCompuesto(nombrelol);
-    for(int i=0; i < auxiliar.size(); i++) {
-        linkMedi->suministrarFarmacia(this,auxiliar[i]->get_id_num(),robin);
-    }
-}
+// void Farmacia::pedidoMedicam(std::string nombrelol, const int &robin) {
+//     std::vector<PaMedicamento*> auxiliar = linkMedi->buscaCompuesto(nombrelol);
+//     for(int i=0; i < auxiliar.size(); i++) {
+//         linkMedi->suministrarFarmacia(this,auxiliar[i]->get_id_num(),robin);
+//     }
+// }
 
 /**
  * @brief Metodo que devuelve el stock que tiene una farmacia sobre un PAmedicamento

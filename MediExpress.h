@@ -11,6 +11,7 @@
 #include "PaMedicamento.h"
 #include "Laboratorio.h"
 #include <map>
+#include <set>
 #include <vector>
 #include <list>
 #include "Farmacia.h"
@@ -27,6 +28,7 @@ private:
     std::list<Laboratorio> labs;
     std::multimap<std::string,Farmacia> pharmacy;
     std::vector<int> vMedi;
+    std::list<PaMedicamento> listaMeds;
 public:
     MediExpress();
     MediExpress(const std::string &medicamentos, const std::string &laboratorios,
@@ -52,6 +54,7 @@ public:
     std::vector<Farmacia*> buscar_Farmacia_Provincia(const std::string &nombreProvin);
 
     void mostrarEstado();
+    void pruebaRend();
     unsigned long tamTabla() const { return idMedication.getNumElem(); }
     unsigned long get_promedio_colisiones() const;
     unsigned long get_max10() const;

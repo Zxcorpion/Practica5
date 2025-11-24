@@ -1,18 +1,18 @@
 
 #include "ThashMedicam.h"
 
-//poner throw si pasan 0 o 1 pq no son primos
+
 bool ThashMedicam::es_Primo(unsigned primo) {
-    if (primo == 0 || primo == 1) {
-        throw std::invalid_argument("0 y 1 no pueden ser primos");
-    }
-    //Comprobamos si es primo
-    if (primo % 2 == 0) {
-        return false;
+    if (primo <= 1) return false;
+    if (primo == 2) return true;
+    if (primo % 2 == 0) return false;
+
+    for (int i=3; i*i <= primo; i++) {
+        if (primo % i == 0) return false;
     }
     return true;
 }
-//poner throw si pasan 0 o 1 pq no son primos
+
 int ThashMedicam::primo_previo(unsigned num) {
     if (num == 0 || num == 1) {
         throw std::invalid_argument("0 y 1 no pueden ser primos");
@@ -24,7 +24,7 @@ int ThashMedicam::primo_previo(unsigned num) {
     return menor;
 }
 
-//poner throw si pasan 0 o 1 pq no son primos
+
 int ThashMedicam::primo_sig(unsigned num) {
     if (num == 0 || num == 1) {
         throw std::invalid_argument("0 y 1 no pueden ser primos");
@@ -102,6 +102,7 @@ unsigned long ThashMedicam::get_carga()const{
     return tamLogico/tamFisico;
 }
 
+//Libre = -, Disponible = ?, Ocupado = X
 bool ThashMedicam::insertar(unsigned long clave, PaMedicamento &pa) {
     unsigned intento=0,y;
     bool enc = false;
@@ -111,10 +112,10 @@ bool ThashMedicam::insertar(unsigned long clave, PaMedicamento &pa) {
         // y = hash(clave, intento);
         // y = hash3(clave, intento);
 
-        if (tablaHash[y].marca == 'L' || tablaHash[y].marca == 'D') {
+        if (tablaHash[y].marca == '-' || tablaHash[y].marca == '?') {
             tamLogico++;
             tablaHash[y].dato = pa;
-            tablaHash[y].marca = 'O';
+            tablaHash[y].marca = 'X';
             tablaHash[y].clave = clave;
             enc = true;
         }else {
@@ -129,6 +130,7 @@ bool ThashMedicam::insertar(unsigned long clave, PaMedicamento &pa) {
     return enc;
 }
 
+//Libre = -, Disponible = ?, Ocupado = X
 PaMedicamento *ThashMedicam::buscar(unsigned long clave) {
     unsigned intento=0,y;
     bool enc = false;
@@ -138,10 +140,10 @@ PaMedicamento *ThashMedicam::buscar(unsigned long clave) {
         // y = hash(clave, intento);
         // y = hash3(clave, intento);
 
-        if (tablaHash[y].marca == 'O' && tablaHash[y].clave == clave) {
+        if (tablaHash[y].marca == 'X' && tablaHash[y].clave == clave) {
             return (&tablaHash[y].dato);
         }else {
-            if (tablaHash[y].marca == 'L') {
+            if (tablaHash[y].marca == '-') {
                 return 0;
             }else {
                 intento++;
@@ -149,9 +151,10 @@ PaMedicamento *ThashMedicam::buscar(unsigned long clave) {
         }
     }
     //poner estadisticos
-    //return 0;
+    return 0;
 }
 //Dos o tres lineas cambiadas.La linea 166 hace el bucle infinito creo
+//Libre = -, Disponible = ?, Ocupado = X
 bool ThashMedicam::borrar(unsigned long clave) {
     unsigned intento=0,y;
     bool fin = false;
@@ -179,12 +182,12 @@ bool ThashMedicam::borrar(unsigned long clave) {
         // y = hash(clave, intento);
         // y = hash3(clave, intento);
 
-        if (tablaHash[y].marca == 'O' && tablaHash[y].clave == clave) {
-            tablaHash[y].marca = 'D';
+        if (tablaHash[y].marca == 'X' && tablaHash[y].clave == clave) {
+            tablaHash[y].marca = '?';
             fin = true;
             tamLogico--;
         }else {
-            if (tablaHash[y].marca == 'L') {
+            if (tablaHash[y].marca == '-') {
                 //fin = false; //Para de buscar porque esta libre
                 return fin; // Ya no hay mas que buscar y no se ha encontrado
             }else {

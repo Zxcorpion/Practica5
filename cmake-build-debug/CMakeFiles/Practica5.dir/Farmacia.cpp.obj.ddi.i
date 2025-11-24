@@ -51226,6 +51226,7 @@ private:
     MediExpress* linkMedi;
     std::map<unsigned int, Stock> order;
     void pedidoMedicam(const int &id_num,const int &robin);
+    void pedidoMedicam(std:: string nombrelol, const int &robin);
 
 public:
     Farmacia(std::string cif="-",std::string provincia="-",std::string localidad="-",
@@ -55186,6 +55187,1218 @@ namespace std
 
 
 
+# 1 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/set" 1 3
+# 58 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/set" 3
+       
+# 59 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/set" 3
+
+
+
+
+# 1 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_set.h" 1 3
+# 64 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_set.h" 3
+namespace std
+{
+
+
+
+  template<typename _Key, typename _Compare, typename _Alloc>
+    class multiset;
+# 94 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_set.h" 3
+  template<typename _Key, typename _Compare = std::less<_Key>,
+    typename _Alloc = std::allocator<_Key> >
+    class set
+    {
+# 110 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_set.h" 3
+      static_assert(is_same<typename remove_cv<_Key>::type, _Key>::value,
+   "std::set must have a non-const, non-volatile value_type");
+
+      static_assert(is_same<typename _Alloc::value_type, _Key>::value,
+   "std::set must have the same value_type as its allocator");
+
+
+
+    public:
+
+
+
+      typedef _Key key_type;
+      typedef _Key value_type;
+      typedef _Compare key_compare;
+      typedef _Compare value_compare;
+      typedef _Alloc allocator_type;
+
+
+    private:
+      typedef typename __gnu_cxx::__alloc_traits<_Alloc>::template
+ rebind<_Key>::other _Key_alloc_type;
+
+      typedef _Rb_tree<key_type, value_type, _Identity<value_type>,
+         key_compare, _Key_alloc_type> _Rep_type;
+      _Rep_type _M_t;
+
+      typedef __gnu_cxx::__alloc_traits<_Key_alloc_type> _Alloc_traits;
+
+    public:
+
+
+      typedef typename _Alloc_traits::pointer pointer;
+      typedef typename _Alloc_traits::const_pointer const_pointer;
+      typedef typename _Alloc_traits::reference reference;
+      typedef typename _Alloc_traits::const_reference const_reference;
+
+
+
+      typedef typename _Rep_type::const_iterator iterator;
+      typedef typename _Rep_type::const_iterator const_iterator;
+      typedef typename _Rep_type::const_reverse_iterator reverse_iterator;
+      typedef typename _Rep_type::const_reverse_iterator const_reverse_iterator;
+      typedef typename _Rep_type::size_type size_type;
+      typedef typename _Rep_type::difference_type difference_type;
+
+
+
+      using node_type = typename _Rep_type::node_type;
+      using insert_return_type = typename _Rep_type::insert_return_type;
+# 169 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_set.h" 3
+      set() = default;
+
+
+
+
+
+
+
+      explicit
+      set(const _Compare& __comp,
+   const allocator_type& __a = allocator_type())
+      : _M_t(__comp, _Key_alloc_type(__a)) { }
+# 192 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_set.h" 3
+      template<typename _InputIterator>
+ set(_InputIterator __first, _InputIterator __last)
+ : _M_t()
+ { _M_t._M_insert_range_unique(__first, __last); }
+# 209 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_set.h" 3
+      template<typename _InputIterator>
+ set(_InputIterator __first, _InputIterator __last,
+     const _Compare& __comp,
+     const allocator_type& __a = allocator_type())
+ : _M_t(__comp, _Key_alloc_type(__a))
+ { _M_t._M_insert_range_unique(__first, __last); }
+# 225 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_set.h" 3
+      set(const set&) = default;
+
+
+
+
+
+
+
+      set(set&&) = default;
+# 245 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_set.h" 3
+      set(initializer_list<value_type> __l,
+   const _Compare& __comp = _Compare(),
+   const allocator_type& __a = allocator_type())
+      : _M_t(__comp, _Key_alloc_type(__a))
+      { _M_t._M_insert_range_unique(__l.begin(), __l.end()); }
+
+
+      explicit
+      set(const allocator_type& __a)
+      : _M_t(_Key_alloc_type(__a)) { }
+
+
+      set(const set& __x, const __type_identity_t<allocator_type>& __a)
+      : _M_t(__x._M_t, _Key_alloc_type(__a)) { }
+
+
+      set(set&& __x, const __type_identity_t<allocator_type>& __a)
+      noexcept(is_nothrow_copy_constructible<_Compare>::value
+        && _Alloc_traits::_S_always_equal())
+      : _M_t(std::move(__x._M_t), _Key_alloc_type(__a)) { }
+
+
+      set(initializer_list<value_type> __l, const allocator_type& __a)
+      : _M_t(_Key_alloc_type(__a))
+      { _M_t._M_insert_range_unique(__l.begin(), __l.end()); }
+
+
+      template<typename _InputIterator>
+ set(_InputIterator __first, _InputIterator __last,
+     const allocator_type& __a)
+ : _M_t(_Key_alloc_type(__a))
+ { _M_t._M_insert_range_unique(__first, __last); }
+
+
+
+
+
+
+      ~set() = default;
+# 299 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_set.h" 3
+      set&
+      operator=(const set&) = default;
+
+
+      set&
+      operator=(set&&) = default;
+# 317 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_set.h" 3
+      set&
+      operator=(initializer_list<value_type> __l)
+      {
+ _M_t._M_assign_unique(__l.begin(), __l.end());
+ return *this;
+      }
+
+
+
+
+
+      key_compare
+      key_comp() const
+      { return _M_t.key_comp(); }
+
+      value_compare
+      value_comp() const
+      { return _M_t.key_comp(); }
+
+      allocator_type
+      get_allocator() const noexcept
+      { return allocator_type(_M_t.get_allocator()); }
+
+
+
+
+
+
+      iterator
+      begin() const noexcept
+      { return _M_t.begin(); }
+
+
+
+
+
+
+      iterator
+      end() const noexcept
+      { return _M_t.end(); }
+
+
+
+
+
+
+      reverse_iterator
+      rbegin() const noexcept
+      { return _M_t.rbegin(); }
+
+
+
+
+
+
+      reverse_iterator
+      rend() const noexcept
+      { return _M_t.rend(); }
+
+
+
+
+
+
+
+      iterator
+      cbegin() const noexcept
+      { return _M_t.begin(); }
+
+
+
+
+
+
+      iterator
+      cend() const noexcept
+      { return _M_t.end(); }
+
+
+
+
+
+
+      reverse_iterator
+      crbegin() const noexcept
+      { return _M_t.rbegin(); }
+
+
+
+
+
+
+      reverse_iterator
+      crend() const noexcept
+      { return _M_t.rend(); }
+
+
+
+      [[__nodiscard__]] bool
+      empty() const noexcept
+      { return _M_t.empty(); }
+
+
+      size_type
+      size() const noexcept
+      { return _M_t.size(); }
+
+
+      size_type
+      max_size() const noexcept
+      { return _M_t.max_size(); }
+# 442 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_set.h" 3
+      void
+      swap(set& __x)
+      noexcept(__is_nothrow_swappable<_Compare>::value)
+      { _M_t.swap(__x._M_t); }
+# 462 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_set.h" 3
+      template<typename... _Args>
+ std::pair<iterator, bool>
+ emplace(_Args&&... __args)
+ { return _M_t._M_emplace_unique(std::forward<_Args>(__args)...); }
+# 488 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_set.h" 3
+      template<typename... _Args>
+ iterator
+ emplace_hint(const_iterator __pos, _Args&&... __args)
+ {
+   return _M_t._M_emplace_hint_unique(__pos,
+          std::forward<_Args>(__args)...);
+ }
+# 510 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_set.h" 3
+      std::pair<iterator, bool>
+      insert(const value_type& __x)
+      {
+ std::pair<typename _Rep_type::iterator, bool> __p =
+   _M_t._M_insert_unique(__x);
+ return std::pair<iterator, bool>(__p.first, __p.second);
+      }
+
+
+      std::pair<iterator, bool>
+      insert(value_type&& __x)
+      {
+ std::pair<typename _Rep_type::iterator, bool> __p =
+   _M_t._M_insert_unique(std::move(__x));
+ return std::pair<iterator, bool>(__p.first, __p.second);
+      }
+# 547 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_set.h" 3
+      iterator
+      insert(const_iterator __position, const value_type& __x)
+      { return _M_t._M_insert_unique_(__position, __x); }
+
+
+      iterator
+      insert(const_iterator __position, value_type&& __x)
+      { return _M_t._M_insert_unique_(__position, std::move(__x)); }
+# 566 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_set.h" 3
+      template<typename _InputIterator>
+ void
+ insert(_InputIterator __first, _InputIterator __last)
+ { _M_t._M_insert_range_unique(__first, __last); }
+# 579 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_set.h" 3
+      void
+      insert(initializer_list<value_type> __l)
+      { this->insert(__l.begin(), __l.end()); }
+
+
+
+
+      node_type
+      extract(const_iterator __pos)
+      {
+ do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(__pos != end()), false)) std::__glibcxx_assert_fail(); } while (false);
+ return _M_t.extract(__pos);
+      }
+
+
+      node_type
+      extract(const key_type& __x)
+      { return _M_t.extract(__x); }
+
+
+      insert_return_type
+      insert(node_type&& __nh)
+      { return _M_t._M_reinsert_node_unique(std::move(__nh)); }
+
+
+      iterator
+      insert(const_iterator __hint, node_type&& __nh)
+      { return _M_t._M_reinsert_node_hint_unique(__hint, std::move(__nh)); }
+
+      template<typename, typename>
+ friend struct std::_Rb_tree_merge_helper;
+
+      template<typename _Compare1>
+ void
+ merge(set<_Key, _Compare1, _Alloc>& __source)
+ {
+   using _Merge_helper = _Rb_tree_merge_helper<set, _Compare1>;
+   _M_t._M_merge_unique(_Merge_helper::_S_get_tree(__source));
+ }
+
+      template<typename _Compare1>
+ void
+ merge(set<_Key, _Compare1, _Alloc>&& __source)
+ { merge(__source); }
+
+      template<typename _Compare1>
+ void
+ merge(multiset<_Key, _Compare1, _Alloc>& __source)
+ {
+   using _Merge_helper = _Rb_tree_merge_helper<set, _Compare1>;
+   _M_t._M_merge_unique(_Merge_helper::_S_get_tree(__source));
+ }
+
+      template<typename _Compare1>
+ void
+ merge(multiset<_Key, _Compare1, _Alloc>&& __source)
+ { merge(__source); }
+# 654 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_set.h" 3
+      __attribute ((__abi_tag__ ("cxx11")))
+      iterator
+      erase(const_iterator __position)
+      { return _M_t.erase(__position); }
+# 685 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_set.h" 3
+      size_type
+      erase(const key_type& __x)
+      { return _M_t.erase(__x); }
+# 706 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_set.h" 3
+      __attribute ((__abi_tag__ ("cxx11")))
+      iterator
+      erase(const_iterator __first, const_iterator __last)
+      { return _M_t.erase(__first, __last); }
+# 734 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_set.h" 3
+      void
+      clear() noexcept
+      { _M_t.clear(); }
+# 749 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_set.h" 3
+      size_type
+      count(const key_type& __x) const
+      { return _M_t.find(__x) == _M_t.end() ? 0 : 1; }
+
+
+      template<typename _Kt>
+ auto
+ count(const _Kt& __x) const
+ -> decltype(_M_t._M_count_tr(__x))
+ { return _M_t._M_count_tr(__x); }
+# 769 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_set.h" 3
+      bool
+      contains(const key_type& __x) const
+      { return _M_t.find(__x) != _M_t.end(); }
+
+      template<typename _Kt>
+ auto
+ contains(const _Kt& __x) const
+ -> decltype(_M_t._M_find_tr(__x), void(), true)
+ { return _M_t._M_find_tr(__x) != _M_t.end(); }
+# 795 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_set.h" 3
+      iterator
+      find(const key_type& __x)
+      { return _M_t.find(__x); }
+
+      const_iterator
+      find(const key_type& __x) const
+      { return _M_t.find(__x); }
+
+
+      template<typename _Kt>
+ auto
+ find(const _Kt& __x)
+ -> decltype(iterator{_M_t._M_find_tr(__x)})
+ { return iterator{_M_t._M_find_tr(__x)}; }
+
+      template<typename _Kt>
+ auto
+ find(const _Kt& __x) const
+ -> decltype(const_iterator{_M_t._M_find_tr(__x)})
+ { return const_iterator{_M_t._M_find_tr(__x)}; }
+# 830 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_set.h" 3
+      iterator
+      lower_bound(const key_type& __x)
+      { return _M_t.lower_bound(__x); }
+
+      const_iterator
+      lower_bound(const key_type& __x) const
+      { return _M_t.lower_bound(__x); }
+
+
+      template<typename _Kt>
+ auto
+ lower_bound(const _Kt& __x)
+ -> decltype(iterator(_M_t._M_lower_bound_tr(__x)))
+ { return iterator(_M_t._M_lower_bound_tr(__x)); }
+
+      template<typename _Kt>
+ auto
+ lower_bound(const _Kt& __x) const
+ -> decltype(const_iterator(_M_t._M_lower_bound_tr(__x)))
+ { return const_iterator(_M_t._M_lower_bound_tr(__x)); }
+# 860 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_set.h" 3
+      iterator
+      upper_bound(const key_type& __x)
+      { return _M_t.upper_bound(__x); }
+
+      const_iterator
+      upper_bound(const key_type& __x) const
+      { return _M_t.upper_bound(__x); }
+
+
+      template<typename _Kt>
+ auto
+ upper_bound(const _Kt& __x)
+ -> decltype(iterator(_M_t._M_upper_bound_tr(__x)))
+ { return iterator(_M_t._M_upper_bound_tr(__x)); }
+
+      template<typename _Kt>
+ auto
+ upper_bound(const _Kt& __x) const
+ -> decltype(iterator(_M_t._M_upper_bound_tr(__x)))
+ { return const_iterator(_M_t._M_upper_bound_tr(__x)); }
+# 899 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_set.h" 3
+      std::pair<iterator, iterator>
+      equal_range(const key_type& __x)
+      { return _M_t.equal_range(__x); }
+
+      std::pair<const_iterator, const_iterator>
+      equal_range(const key_type& __x) const
+      { return _M_t.equal_range(__x); }
+
+
+      template<typename _Kt>
+ auto
+ equal_range(const _Kt& __x)
+ -> decltype(pair<iterator, iterator>(_M_t._M_equal_range_tr(__x)))
+ { return pair<iterator, iterator>(_M_t._M_equal_range_tr(__x)); }
+
+      template<typename _Kt>
+ auto
+ equal_range(const _Kt& __x) const
+ -> decltype(pair<iterator, iterator>(_M_t._M_equal_range_tr(__x)))
+ { return pair<iterator, iterator>(_M_t._M_equal_range_tr(__x)); }
+
+
+
+      template<typename _K1, typename _C1, typename _A1>
+ friend bool
+ operator==(const set<_K1, _C1, _A1>&, const set<_K1, _C1, _A1>&);
+
+
+      template<typename _K1, typename _C1, typename _A1>
+ friend __detail::__synth3way_t<_K1>
+ operator<=>(const set<_K1, _C1, _A1>&, const set<_K1, _C1, _A1>&);
+
+
+
+
+
+    };
+
+
+
+  template<typename _InputIterator,
+    typename _Compare =
+      less<typename iterator_traits<_InputIterator>::value_type>,
+    typename _Allocator =
+      allocator<typename iterator_traits<_InputIterator>::value_type>,
+    typename = _RequireInputIter<_InputIterator>,
+    typename = _RequireNotAllocator<_Compare>,
+    typename = _RequireAllocator<_Allocator>>
+    set(_InputIterator, _InputIterator,
+ _Compare = _Compare(), _Allocator = _Allocator())
+    -> set<typename iterator_traits<_InputIterator>::value_type,
+   _Compare, _Allocator>;
+
+  template<typename _Key, typename _Compare = less<_Key>,
+    typename _Allocator = allocator<_Key>,
+    typename = _RequireNotAllocator<_Compare>,
+    typename = _RequireAllocator<_Allocator>>
+    set(initializer_list<_Key>,
+ _Compare = _Compare(), _Allocator = _Allocator())
+    -> set<_Key, _Compare, _Allocator>;
+
+  template<typename _InputIterator, typename _Allocator,
+    typename = _RequireInputIter<_InputIterator>,
+    typename = _RequireAllocator<_Allocator>>
+    set(_InputIterator, _InputIterator, _Allocator)
+    -> set<typename iterator_traits<_InputIterator>::value_type,
+    less<typename iterator_traits<_InputIterator>::value_type>,
+    _Allocator>;
+
+  template<typename _Key, typename _Allocator,
+    typename = _RequireAllocator<_Allocator>>
+    set(initializer_list<_Key>, _Allocator)
+    -> set<_Key, less<_Key>, _Allocator>;
+# 985 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_set.h" 3
+  template<typename _Key, typename _Compare, typename _Alloc>
+    inline bool
+    operator==(const set<_Key, _Compare, _Alloc>& __x,
+        const set<_Key, _Compare, _Alloc>& __y)
+    { return __x._M_t == __y._M_t; }
+# 1006 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_set.h" 3
+  template<typename _Key, typename _Compare, typename _Alloc>
+    inline __detail::__synth3way_t<_Key>
+    operator<=>(const set<_Key, _Compare, _Alloc>& __x,
+  const set<_Key, _Compare, _Alloc>& __y)
+    { return __x._M_t <=> __y._M_t; }
+# 1059 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_set.h" 3
+  template<typename _Key, typename _Compare, typename _Alloc>
+    inline void
+    swap(set<_Key, _Compare, _Alloc>& __x, set<_Key, _Compare, _Alloc>& __y)
+    noexcept(noexcept(__x.swap(__y)))
+    { __x.swap(__y); }
+
+
+
+
+
+  template<typename _Val, typename _Cmp1, typename _Alloc, typename _Cmp2>
+    struct
+    _Rb_tree_merge_helper<std::set<_Val, _Cmp1, _Alloc>, _Cmp2>
+    {
+    private:
+      friend class std::set<_Val, _Cmp1, _Alloc>;
+
+      static auto&
+      _S_get_tree(std::set<_Val, _Cmp2, _Alloc>& __set)
+      { return __set._M_t; }
+
+      static auto&
+      _S_get_tree(std::multiset<_Val, _Cmp2, _Alloc>& __set)
+      { return __set._M_t; }
+    };
+
+
+
+}
+# 64 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/set" 2 3
+# 1 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multiset.h" 1 3
+# 64 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multiset.h" 3
+namespace std
+{
+
+
+
+  template<typename _Key, typename _Compare, typename _Alloc>
+    class set;
+# 95 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multiset.h" 3
+  template <typename _Key, typename _Compare = std::less<_Key>,
+     typename _Alloc = std::allocator<_Key> >
+    class multiset
+    {
+# 111 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multiset.h" 3
+      static_assert(is_same<typename remove_cv<_Key>::type, _Key>::value,
+   "std::multiset must have a non-const, non-volatile value_type");
+
+      static_assert(is_same<typename _Alloc::value_type, _Key>::value,
+   "std::multiset must have the same value_type as its allocator");
+
+
+
+    public:
+
+      typedef _Key key_type;
+      typedef _Key value_type;
+      typedef _Compare key_compare;
+      typedef _Compare value_compare;
+      typedef _Alloc allocator_type;
+
+    private:
+
+      typedef typename __gnu_cxx::__alloc_traits<_Alloc>::template
+ rebind<_Key>::other _Key_alloc_type;
+
+      typedef _Rb_tree<key_type, value_type, _Identity<value_type>,
+         key_compare, _Key_alloc_type> _Rep_type;
+
+      _Rep_type _M_t;
+
+      typedef __gnu_cxx::__alloc_traits<_Key_alloc_type> _Alloc_traits;
+
+    public:
+      typedef typename _Alloc_traits::pointer pointer;
+      typedef typename _Alloc_traits::const_pointer const_pointer;
+      typedef typename _Alloc_traits::reference reference;
+      typedef typename _Alloc_traits::const_reference const_reference;
+
+
+
+      typedef typename _Rep_type::const_iterator iterator;
+      typedef typename _Rep_type::const_iterator const_iterator;
+      typedef typename _Rep_type::const_reverse_iterator reverse_iterator;
+      typedef typename _Rep_type::const_reverse_iterator const_reverse_iterator;
+      typedef typename _Rep_type::size_type size_type;
+      typedef typename _Rep_type::difference_type difference_type;
+
+
+      using node_type = typename _Rep_type::node_type;
+# 165 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multiset.h" 3
+      multiset() = default;
+
+
+
+
+
+
+
+      explicit
+      multiset(const _Compare& __comp,
+        const allocator_type& __a = allocator_type())
+      : _M_t(__comp, _Key_alloc_type(__a)) { }
+# 187 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multiset.h" 3
+      template<typename _InputIterator>
+ multiset(_InputIterator __first, _InputIterator __last)
+ : _M_t()
+ { _M_t._M_insert_range_equal(__first, __last); }
+# 203 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multiset.h" 3
+      template<typename _InputIterator>
+ multiset(_InputIterator __first, _InputIterator __last,
+   const _Compare& __comp,
+   const allocator_type& __a = allocator_type())
+ : _M_t(__comp, _Key_alloc_type(__a))
+ { _M_t._M_insert_range_equal(__first, __last); }
+# 219 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multiset.h" 3
+      multiset(const multiset&) = default;
+# 228 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multiset.h" 3
+      multiset(multiset&&) = default;
+# 240 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multiset.h" 3
+      multiset(initializer_list<value_type> __l,
+        const _Compare& __comp = _Compare(),
+        const allocator_type& __a = allocator_type())
+      : _M_t(__comp, _Key_alloc_type(__a))
+      { _M_t._M_insert_range_equal(__l.begin(), __l.end()); }
+
+
+      explicit
+      multiset(const allocator_type& __a)
+      : _M_t(_Key_alloc_type(__a)) { }
+
+
+      multiset(const multiset& __m,
+        const __type_identity_t<allocator_type>& __a)
+      : _M_t(__m._M_t, _Key_alloc_type(__a)) { }
+
+
+      multiset(multiset&& __m, const __type_identity_t<allocator_type>& __a)
+      noexcept(is_nothrow_copy_constructible<_Compare>::value
+        && _Alloc_traits::_S_always_equal())
+      : _M_t(std::move(__m._M_t), _Key_alloc_type(__a)) { }
+
+
+      multiset(initializer_list<value_type> __l, const allocator_type& __a)
+      : _M_t(_Key_alloc_type(__a))
+      { _M_t._M_insert_range_equal(__l.begin(), __l.end()); }
+
+
+      template<typename _InputIterator>
+ multiset(_InputIterator __first, _InputIterator __last,
+   const allocator_type& __a)
+ : _M_t(_Key_alloc_type(__a))
+ { _M_t._M_insert_range_equal(__first, __last); }
+
+
+
+
+
+
+      ~multiset() = default;
+# 295 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multiset.h" 3
+      multiset&
+      operator=(const multiset&) = default;
+
+
+      multiset&
+      operator=(multiset&&) = default;
+# 313 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multiset.h" 3
+      multiset&
+      operator=(initializer_list<value_type> __l)
+      {
+ _M_t._M_assign_equal(__l.begin(), __l.end());
+ return *this;
+      }
+
+
+
+
+
+      key_compare
+      key_comp() const
+      { return _M_t.key_comp(); }
+
+      value_compare
+      value_comp() const
+      { return _M_t.key_comp(); }
+
+      allocator_type
+      get_allocator() const noexcept
+      { return allocator_type(_M_t.get_allocator()); }
+
+
+
+
+
+
+      iterator
+      begin() const noexcept
+      { return _M_t.begin(); }
+
+
+
+
+
+
+      iterator
+      end() const noexcept
+      { return _M_t.end(); }
+
+
+
+
+
+
+      reverse_iterator
+      rbegin() const noexcept
+      { return _M_t.rbegin(); }
+
+
+
+
+
+
+      reverse_iterator
+      rend() const noexcept
+      { return _M_t.rend(); }
+
+
+
+
+
+
+
+      iterator
+      cbegin() const noexcept
+      { return _M_t.begin(); }
+
+
+
+
+
+
+      iterator
+      cend() const noexcept
+      { return _M_t.end(); }
+
+
+
+
+
+
+      reverse_iterator
+      crbegin() const noexcept
+      { return _M_t.rbegin(); }
+
+
+
+
+
+
+      reverse_iterator
+      crend() const noexcept
+      { return _M_t.rend(); }
+
+
+
+      [[__nodiscard__]] bool
+      empty() const noexcept
+      { return _M_t.empty(); }
+
+
+      size_type
+      size() const noexcept
+      { return _M_t.size(); }
+
+
+      size_type
+      max_size() const noexcept
+      { return _M_t.max_size(); }
+# 438 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multiset.h" 3
+      void
+      swap(multiset& __x)
+      noexcept(__is_nothrow_swappable<_Compare>::value)
+      { _M_t.swap(__x._M_t); }
+# 457 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multiset.h" 3
+      template<typename... _Args>
+ iterator
+ emplace(_Args&&... __args)
+ { return _M_t._M_emplace_equal(std::forward<_Args>(__args)...); }
+# 483 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multiset.h" 3
+      template<typename... _Args>
+ iterator
+ emplace_hint(const_iterator __pos, _Args&&... __args)
+ {
+   return _M_t._M_emplace_hint_equal(__pos,
+         std::forward<_Args>(__args)...);
+ }
+# 503 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multiset.h" 3
+      iterator
+      insert(const value_type& __x)
+      { return _M_t._M_insert_equal(__x); }
+
+
+      iterator
+      insert(value_type&& __x)
+      { return _M_t._M_insert_equal(std::move(__x)); }
+# 533 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multiset.h" 3
+      iterator
+      insert(const_iterator __position, const value_type& __x)
+      { return _M_t._M_insert_equal_(__position, __x); }
+
+
+      iterator
+      insert(const_iterator __position, value_type&& __x)
+      { return _M_t._M_insert_equal_(__position, std::move(__x)); }
+# 551 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multiset.h" 3
+      template<typename _InputIterator>
+ void
+ insert(_InputIterator __first, _InputIterator __last)
+ { _M_t._M_insert_range_equal(__first, __last); }
+# 564 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multiset.h" 3
+      void
+      insert(initializer_list<value_type> __l)
+      { this->insert(__l.begin(), __l.end()); }
+
+
+
+
+      node_type
+      extract(const_iterator __pos)
+      {
+ do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(__pos != end()), false)) std::__glibcxx_assert_fail(); } while (false);
+ return _M_t.extract(__pos);
+      }
+
+
+      node_type
+      extract(const key_type& __x)
+      { return _M_t.extract(__x); }
+
+
+      iterator
+      insert(node_type&& __nh)
+      { return _M_t._M_reinsert_node_equal(std::move(__nh)); }
+
+
+      iterator
+      insert(const_iterator __hint, node_type&& __nh)
+      { return _M_t._M_reinsert_node_hint_equal(__hint, std::move(__nh)); }
+
+      template<typename, typename>
+ friend struct std::_Rb_tree_merge_helper;
+
+      template<typename _Compare1>
+ void
+ merge(multiset<_Key, _Compare1, _Alloc>& __source)
+ {
+   using _Merge_helper = _Rb_tree_merge_helper<multiset, _Compare1>;
+   _M_t._M_merge_equal(_Merge_helper::_S_get_tree(__source));
+ }
+
+      template<typename _Compare1>
+ void
+ merge(multiset<_Key, _Compare1, _Alloc>&& __source)
+ { merge(__source); }
+
+      template<typename _Compare1>
+ void
+ merge(set<_Key, _Compare1, _Alloc>& __source)
+ {
+   using _Merge_helper = _Rb_tree_merge_helper<multiset, _Compare1>;
+   _M_t._M_merge_equal(_Merge_helper::_S_get_tree(__source));
+ }
+
+      template<typename _Compare1>
+ void
+ merge(set<_Key, _Compare1, _Alloc>&& __source)
+ { merge(__source); }
+# 639 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multiset.h" 3
+      __attribute ((__abi_tag__ ("cxx11")))
+      iterator
+      erase(const_iterator __position)
+      { return _M_t.erase(__position); }
+# 670 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multiset.h" 3
+      size_type
+      erase(const key_type& __x)
+      { return _M_t.erase(__x); }
+# 691 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multiset.h" 3
+      __attribute ((__abi_tag__ ("cxx11")))
+      iterator
+      erase(const_iterator __first, const_iterator __last)
+      { return _M_t.erase(__first, __last); }
+# 719 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multiset.h" 3
+      void
+      clear() noexcept
+      { _M_t.clear(); }
+# 731 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multiset.h" 3
+      size_type
+      count(const key_type& __x) const
+      { return _M_t.count(__x); }
+
+
+      template<typename _Kt>
+ auto
+ count(const _Kt& __x) const -> decltype(_M_t._M_count_tr(__x))
+ { return _M_t._M_count_tr(__x); }
+# 750 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multiset.h" 3
+      bool
+      contains(const key_type& __x) const
+      { return _M_t.find(__x) != _M_t.end(); }
+
+      template<typename _Kt>
+ auto
+ contains(const _Kt& __x) const
+ -> decltype(_M_t._M_find_tr(__x), void(), true)
+ { return _M_t._M_find_tr(__x) != _M_t.end(); }
+# 776 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multiset.h" 3
+      iterator
+      find(const key_type& __x)
+      { return _M_t.find(__x); }
+
+      const_iterator
+      find(const key_type& __x) const
+      { return _M_t.find(__x); }
+
+
+      template<typename _Kt>
+ auto
+ find(const _Kt& __x)
+ -> decltype(iterator{_M_t._M_find_tr(__x)})
+ { return iterator{_M_t._M_find_tr(__x)}; }
+
+      template<typename _Kt>
+ auto
+ find(const _Kt& __x) const
+ -> decltype(const_iterator{_M_t._M_find_tr(__x)})
+ { return const_iterator{_M_t._M_find_tr(__x)}; }
+# 811 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multiset.h" 3
+      iterator
+      lower_bound(const key_type& __x)
+      { return _M_t.lower_bound(__x); }
+
+      const_iterator
+      lower_bound(const key_type& __x) const
+      { return _M_t.lower_bound(__x); }
+
+
+      template<typename _Kt>
+ auto
+ lower_bound(const _Kt& __x)
+ -> decltype(iterator(_M_t._M_lower_bound_tr(__x)))
+ { return iterator(_M_t._M_lower_bound_tr(__x)); }
+
+      template<typename _Kt>
+ auto
+ lower_bound(const _Kt& __x) const
+ -> decltype(iterator(_M_t._M_lower_bound_tr(__x)))
+ { return iterator(_M_t._M_lower_bound_tr(__x)); }
+# 841 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multiset.h" 3
+      iterator
+      upper_bound(const key_type& __x)
+      { return _M_t.upper_bound(__x); }
+
+      const_iterator
+      upper_bound(const key_type& __x) const
+      { return _M_t.upper_bound(__x); }
+
+
+      template<typename _Kt>
+ auto
+ upper_bound(const _Kt& __x)
+ -> decltype(iterator(_M_t._M_upper_bound_tr(__x)))
+ { return iterator(_M_t._M_upper_bound_tr(__x)); }
+
+      template<typename _Kt>
+ auto
+ upper_bound(const _Kt& __x) const
+ -> decltype(iterator(_M_t._M_upper_bound_tr(__x)))
+ { return iterator(_M_t._M_upper_bound_tr(__x)); }
+# 880 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multiset.h" 3
+      std::pair<iterator, iterator>
+      equal_range(const key_type& __x)
+      { return _M_t.equal_range(__x); }
+
+      std::pair<const_iterator, const_iterator>
+      equal_range(const key_type& __x) const
+      { return _M_t.equal_range(__x); }
+
+
+      template<typename _Kt>
+ auto
+ equal_range(const _Kt& __x)
+ -> decltype(pair<iterator, iterator>(_M_t._M_equal_range_tr(__x)))
+ { return pair<iterator, iterator>(_M_t._M_equal_range_tr(__x)); }
+
+      template<typename _Kt>
+ auto
+ equal_range(const _Kt& __x) const
+ -> decltype(pair<iterator, iterator>(_M_t._M_equal_range_tr(__x)))
+ { return pair<iterator, iterator>(_M_t._M_equal_range_tr(__x)); }
+
+
+
+      template<typename _K1, typename _C1, typename _A1>
+ friend bool
+ operator==(const multiset<_K1, _C1, _A1>&,
+     const multiset<_K1, _C1, _A1>&);
+
+
+      template<typename _K1, typename _C1, typename _A1>
+ friend __detail::__synth3way_t<_K1>
+ operator<=>(const multiset<_K1, _C1, _A1>&,
+      const multiset<_K1, _C1, _A1>&);
+
+
+
+
+
+
+    };
+
+
+
+  template<typename _InputIterator,
+    typename _Compare =
+      less<typename iterator_traits<_InputIterator>::value_type>,
+    typename _Allocator =
+      allocator<typename iterator_traits<_InputIterator>::value_type>,
+    typename = _RequireInputIter<_InputIterator>,
+    typename = _RequireNotAllocator<_Compare>,
+    typename = _RequireAllocator<_Allocator>>
+    multiset(_InputIterator, _InputIterator,
+      _Compare = _Compare(), _Allocator = _Allocator())
+    -> multiset<typename iterator_traits<_InputIterator>::value_type,
+  _Compare, _Allocator>;
+
+  template<typename _Key,
+    typename _Compare = less<_Key>,
+    typename _Allocator = allocator<_Key>,
+    typename = _RequireNotAllocator<_Compare>,
+    typename = _RequireAllocator<_Allocator>>
+    multiset(initializer_list<_Key>,
+      _Compare = _Compare(), _Allocator = _Allocator())
+    -> multiset<_Key, _Compare, _Allocator>;
+
+  template<typename _InputIterator, typename _Allocator,
+    typename = _RequireInputIter<_InputIterator>,
+    typename = _RequireAllocator<_Allocator>>
+    multiset(_InputIterator, _InputIterator, _Allocator)
+    -> multiset<typename iterator_traits<_InputIterator>::value_type,
+         less<typename iterator_traits<_InputIterator>::value_type>,
+         _Allocator>;
+
+  template<typename _Key, typename _Allocator,
+    typename = _RequireAllocator<_Allocator>>
+    multiset(initializer_list<_Key>, _Allocator)
+    -> multiset<_Key, less<_Key>, _Allocator>;
+# 971 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multiset.h" 3
+  template<typename _Key, typename _Compare, typename _Alloc>
+    inline bool
+    operator==(const multiset<_Key, _Compare, _Alloc>& __x,
+        const multiset<_Key, _Compare, _Alloc>& __y)
+    { return __x._M_t == __y._M_t; }
+# 992 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multiset.h" 3
+  template<typename _Key, typename _Compare, typename _Alloc>
+    inline __detail::__synth3way_t<_Key>
+    operator<=>(const multiset<_Key, _Compare, _Alloc>& __x,
+  const multiset<_Key, _Compare, _Alloc>& __y)
+    { return __x._M_t <=> __y._M_t; }
+# 1045 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multiset.h" 3
+  template<typename _Key, typename _Compare, typename _Alloc>
+    inline void
+    swap(multiset<_Key, _Compare, _Alloc>& __x,
+  multiset<_Key, _Compare, _Alloc>& __y)
+    noexcept(noexcept(__x.swap(__y)))
+    { __x.swap(__y); }
+
+
+
+
+
+  template<typename _Val, typename _Cmp1, typename _Alloc, typename _Cmp2>
+    struct
+    _Rb_tree_merge_helper<std::multiset<_Val, _Cmp1, _Alloc>,
+     _Cmp2>
+    {
+    private:
+      friend class std::multiset<_Val, _Cmp1, _Alloc>;
+
+      static auto&
+      _S_get_tree(std::set<_Val, _Cmp2, _Alloc>& __set)
+      { return __set._M_t; }
+
+      static auto&
+      _S_get_tree(std::multiset<_Val, _Cmp2, _Alloc>& __set)
+      { return __set._M_t; }
+    };
+
+
+
+}
+# 65 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/set" 2 3
+# 76 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/set" 3
+# 1 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/version.h" 1 3
+# 47 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/version.h" 3
+       
+# 48 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/version.h" 3
+# 77 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/set" 2 3
+
+
+
+namespace std
+{
+
+  namespace pmr
+  {
+    template<typename _Key, typename _Cmp = std::less<_Key>>
+      using set = std::set<_Key, _Cmp, polymorphic_allocator<_Key>>;
+    template<typename _Key, typename _Cmp = std::less<_Key>>
+      using multiset = std::multiset<_Key, _Cmp, polymorphic_allocator<_Key>>;
+  }
+
+}
+
+
+
+namespace std
+{
+
+  template<typename _Key, typename _Compare, typename _Alloc,
+    typename _Predicate>
+    inline typename set<_Key, _Compare, _Alloc>::size_type
+    erase_if(set<_Key, _Compare, _Alloc>& __cont, _Predicate __pred)
+    {
+      std::set<_Key, _Compare, _Alloc>& __ucont = __cont;
+      return __detail::__erase_nodes_if(__cont, __ucont, __pred);
+    }
+
+  template<typename _Key, typename _Compare, typename _Alloc,
+    typename _Predicate>
+    inline typename multiset<_Key, _Compare, _Alloc>::size_type
+    erase_if(multiset<_Key, _Compare, _Alloc>& __cont, _Predicate __pred)
+    {
+      std::multiset<_Key, _Compare, _Alloc>& __ucont = __cont;
+      return __detail::__erase_nodes_if(__cont, __ucont, __pred);
+    }
+
+}
+# 15 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
 
 # 1 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/list" 1 3
 # 58 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/list" 3
@@ -57259,7 +58472,7 @@ namespace std
     }
 
 }
-# 16 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
+# 17 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
 
 # 1 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/ThashMedicam.h" 1
 
@@ -65009,12 +66222,13 @@ public:
     unsigned long get_promedio_colisiones() const;
     unsigned long get_max10() const;
     unsigned long get_total_colisiones() const;
+    unsigned long get_carga() const;
 
     bool insertar(unsigned long clave, PaMedicamento &pa);
     PaMedicamento* buscar(unsigned long clave);
     bool borrar(unsigned long clave);
 };
-# 18 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
+# 19 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
 
 
 
@@ -65027,6 +66241,7 @@ private:
     std::list<Laboratorio> labs;
     std::multimap<std::string,Farmacia> pharmacy;
     std::vector<int> vMedi;
+    std::list<PaMedicamento> listaMeds;
 public:
     MediExpress();
     MediExpress(const std::string &medicamentos, const std::string &laboratorios,
@@ -65052,11 +66267,12 @@ public:
     std::vector<Farmacia*> buscar_Farmacia_Provincia(const std::string &nombreProvin);
 
     void mostrarEstado();
+    void pruebaRend();
     unsigned long tamTabla() const { return idMedication.getNumElem(); }
     unsigned long get_promedio_colisiones() const;
     unsigned long get_max10() const;
     unsigned long get_total_colisiones() const;
-    float get_factor_carga() const;
+    unsigned long get_factor_carga() const;
 };
 # 3 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/Farmacia.cpp" 2
 # 15 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/Farmacia.cpp"
@@ -65232,13 +66448,7 @@ bool Farmacia::operator>(const Farmacia &orig) const {
 void Farmacia::pedidoMedicam(const int &id_num,const int &robin) {
     linkMedi->suministrarFarmacia(this,id_num,robin);
 }
-
-
-
-
-
-
-
+# 202 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/Farmacia.cpp"
 int Farmacia::buscaMedicamID(const int &id_num) {
 
 
@@ -65272,7 +66482,7 @@ std::vector<PaMedicamento*> Farmacia::buscaMedicamNombre(const std::string &nomb
     }
     return vectorcillo;
 }
-# 237 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/Farmacia.cpp"
+# 245 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/Farmacia.cpp"
 int Farmacia::comprarMedicam(const int &id_num,const int &robinunidades, PaMedicamento *&paMed) {
     int stock_PaMed = buscaMedicamID(id_num);
 
@@ -65324,7 +66534,7 @@ void Farmacia::nuevoStock(PaMedicamento *batmelatonina, int &robin) {
         order.insert(std::pair<unsigned int,Stock>(nuevorobin.get_id_pa_med(),nuevorobin));
     }
 }
-# 296 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/Farmacia.cpp"
+# 304 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/Farmacia.cpp"
 bool Farmacia::eliminarStock(const int &id_num) {
 
 

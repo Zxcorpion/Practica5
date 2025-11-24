@@ -176,6 +176,9 @@ CMakeFiles\Practica5.dir\Farmacia.cpp.obj.ddi: \
  C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/sstream \
  C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/sstream.tcc \
  C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ctime \
+ C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/set \
+ C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_set.h \
+ C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multiset.h \
  C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/list \
  C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_list.h \
  C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/allocated_ptr.h \

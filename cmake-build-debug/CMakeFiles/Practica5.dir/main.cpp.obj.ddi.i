@@ -58369,6 +58369,7 @@ public:
 
 
 
+
 # 1 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/Farmacia.h" 1
 
 
@@ -58423,6 +58424,7 @@ private:
     MediExpress* linkMedi;
     std::map<unsigned int, Stock> order;
     void pedidoMedicam(const int &id_num,const int &robin);
+    void pedidoMedicam(std:: string nombrelol, const int &robin);
 
 public:
     Farmacia(std::string cif="-",std::string provincia="-",std::string localidad="-",
@@ -58454,7 +58456,7 @@ public:
     bool eliminarStock(const int &id_num);
     int buscaMedicamID(const int &id_num);
 };
-# 17 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
+# 18 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
 # 1 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/ThashMedicam.h" 1
 
 
@@ -66205,12 +66207,13 @@ public:
     unsigned long get_promedio_colisiones() const;
     unsigned long get_max10() const;
     unsigned long get_total_colisiones() const;
+    unsigned long get_carga() const;
 
     bool insertar(unsigned long clave, PaMedicamento &pa);
     PaMedicamento* buscar(unsigned long clave);
     bool borrar(unsigned long clave);
 };
-# 18 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
+# 19 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
 
 
 
@@ -66223,6 +66226,7 @@ private:
     std::list<Laboratorio> labs;
     std::multimap<std::string,Farmacia> pharmacy;
     std::vector<int> vMedi;
+    std::list<PaMedicamento> listaMeds;
 public:
     MediExpress();
     MediExpress(const std::string &medicamentos, const std::string &laboratorios,
@@ -66248,11 +66252,12 @@ public:
     std::vector<Farmacia*> buscar_Farmacia_Provincia(const std::string &nombreProvin);
 
     void mostrarEstado();
+    void pruebaRend();
     unsigned long tamTabla() const { return idMedication.getNumElem(); }
     unsigned long get_promedio_colisiones() const;
     unsigned long get_max10() const;
     unsigned long get_total_colisiones() const;
-    float get_factor_carga() const;
+    unsigned long get_factor_carga() const;
 };
 # 9 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/main.cpp" 2
 # 20 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/main.cpp"

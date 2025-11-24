@@ -54349,6 +54349,7 @@ public:
     unsigned long get_promedio_colisiones() const;
     unsigned long get_max10() const;
     unsigned long get_total_colisiones() const;
+    unsigned long get_carga() const;
 
     bool insertar(unsigned long clave, PaMedicamento &pa);
     PaMedicamento* buscar(unsigned long clave);
@@ -54358,12 +54359,12 @@ public:
 
 
 bool ThashMedicam::es_Primo(unsigned primo) {
-    if (primo == 0 || primo == 1) {
-        throw std::invalid_argument("0 y 1 no pueden ser primos");
-    }
+    if (primo <= 1) return false;
+    if (primo == 2) return true;
+    if (primo % 2 == 0) return false;
 
-    if (primo % 2 == 0) {
-        return false;
+    for (int i=3; i*i <= primo; i++) {
+        if (primo % i == 0) return false;
     }
     return true;
 }
@@ -54453,6 +54454,10 @@ unsigned long ThashMedicam::get_max10() const {
 unsigned long ThashMedicam::get_total_colisiones() const {
     return total_Colisiones;
 }
+unsigned long ThashMedicam::get_carga()const{
+    return tamLogico/tamFisico;
+}
+
 
 bool ThashMedicam::insertar(unsigned long clave, PaMedicamento &pa) {
     unsigned intento=0,y;
@@ -54463,10 +54468,10 @@ bool ThashMedicam::insertar(unsigned long clave, PaMedicamento &pa) {
 
 
 
-        if (tablaHash[y].marca == 'L' || tablaHash[y].marca == 'D') {
+        if (tablaHash[y].marca == '-' || tablaHash[y].marca == '?') {
             tamLogico++;
             tablaHash[y].dato = pa;
-            tablaHash[y].marca = 'O';
+            tablaHash[y].marca = 'X';
             tablaHash[y].clave = clave;
             enc = true;
         }else {
@@ -54481,6 +54486,7 @@ bool ThashMedicam::insertar(unsigned long clave, PaMedicamento &pa) {
     return enc;
 }
 
+
 PaMedicamento *ThashMedicam::buscar(unsigned long clave) {
     unsigned intento=0,y;
     bool enc = false;
@@ -54490,10 +54496,10 @@ PaMedicamento *ThashMedicam::buscar(unsigned long clave) {
 
 
 
-        if (tablaHash[y].marca == 'O' && tablaHash[y].clave == clave) {
+        if (tablaHash[y].marca == 'X' && tablaHash[y].clave == clave) {
             return (&tablaHash[y].dato);
         }else {
-            if (tablaHash[y].marca == 'L') {
+            if (tablaHash[y].marca == '-') {
                 return 0;
             }else {
                 intento++;
@@ -54504,27 +54510,30 @@ PaMedicamento *ThashMedicam::buscar(unsigned long clave) {
     return 0;
 }
 
+
 bool ThashMedicam::borrar(unsigned long clave) {
     unsigned intento=0,y;
     bool fin = false;
-
+# 180 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/ThashMedicam.cpp"
     while (!fin) {
         y = hash2(clave, intento);
 
 
 
-        if (tablaHash[y].marca == 'O' && tablaHash[y].clave == clave) {
-            tablaHash[y].marca = 'D';
+        if (tablaHash[y].marca == 'X' && tablaHash[y].clave == clave) {
+            tablaHash[y].marca = '?';
             fin = true;
+            tamLogico--;
         }else {
-            if (tablaHash[y].marca == 'L') {
-                fin = false;
+            if (tablaHash[y].marca == '-') {
+
+                return fin;
             }else {
                 intento++;
             }
         }
     }
 
-    return false;
+    return fin;
 }
 ThashMedicam::~ThashMedicam() {}
