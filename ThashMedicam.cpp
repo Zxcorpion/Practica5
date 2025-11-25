@@ -88,8 +88,8 @@ ThashMedicam &ThashMedicam::operator=(const ThashMedicam &orig) {
     return *this;
 }
 //CAMBIADO
-unsigned int ThashMedicam::get_promedio_colisiones() {
-    promedio_Colisiones=(total_Colisiones)/(tamLogico);
+ float ThashMedicam::get_promedio_colisiones() {
+    promedio_Colisiones=(float)total_Colisiones/(float)tamLogico;
     return promedio_Colisiones;
 }
 
@@ -113,14 +113,14 @@ bool ThashMedicam::insertar(unsigned long clave, PaMedicamento &pa) {
     bool enc = false;
 
     while (!enc) {
-        //y = hash(clave, intento);
-        // y = hash2(clave, intento);
-         y = hash3(clave, intento);
+        y = hash(clave, intento);
+        //y = hash2(clave, intento);
+         //y = hash3(clave, intento);
 
-        if (tablaHash[y].marca == '-' || tablaHash[y].marca == '?') {
+        if (tablaHash[y].estado == '-' || tablaHash[y].estado == '?') {
             tamLogico++;
             tablaHash[y].dato = pa;
-            tablaHash[y].marca = 'X';
+            tablaHash[y].estado = 'X';
             tablaHash[y].clave = clave;
             enc = true;
         }else {
@@ -161,10 +161,10 @@ PaMedicamento *ThashMedicam::buscar(unsigned long clave) {
         // y = hash(clave, intento);
         // y = hash3(clave, intento);
 
-        if (tablaHash[y].marca == 'X' && tablaHash[y].clave == clave) {
+        if (tablaHash[y].estado == 'X' && tablaHash[y].clave == clave) {
             return (&tablaHash[y].dato);
         }else {
-            if (tablaHash[y].marca == '-') {
+            if (tablaHash[y].estado == '-') {
                 return 0;
             }else {
                 intento++;
@@ -185,11 +185,11 @@ bool ThashMedicam::borrar(unsigned long clave) {
         // y = hash(clave, intento);
         // y = hash3(clave, intento);
 
-        if (tablaHash[y].marca == 'O' && tablaHash[y].clave == clave) {
-            tablaHash[y].marca = 'D';
+        if (tablaHash[y].estado == 'O' && tablaHash[y].clave == clave) {
+            tablaHash[y].estado = 'D';
             fin = true;
         }else {
-            if (tablaHash[y].marca == 'L') {
+            if (tablaHash[y].estado == 'L') {
                 fin = false; //Para de buscar porque esta libre
             }else {
                 intento++;
@@ -203,12 +203,12 @@ bool ThashMedicam::borrar(unsigned long clave) {
         // y = hash(clave, intento);
         // y = hash3(clave, intento);
 
-        if (tablaHash[y].marca == 'X' && tablaHash[y].clave == clave) {
-            tablaHash[y].marca = '?';
+        if (tablaHash[y].estado == 'X' && tablaHash[y].clave == clave) {
+            tablaHash[y].estado = '?';
             fin = true;
             tamLogico--;
         }else {
-            if (tablaHash[y].marca == '-') {
+            if (tablaHash[y].estado == '-') {
                 //fin = false; //Para de buscar porque esta libre
                 return fin; // Ya no hay mas que buscar y no se ha encontrado
             }else {

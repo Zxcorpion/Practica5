@@ -14,14 +14,14 @@ private:
     class Entrada {
     public:
         unsigned long clave;
-        char marca;
+        char estado;
         PaMedicamento dato;
-        Entrada(): marca('-'), clave(0), dato(){}
+        Entrada(): estado('-'), clave(0), dato(){}
         ~Entrada(){}
     };
     //maxcolisiones para el metodo añadido
     unsigned long tamFisico, tamLogico,max10,total_Colisiones,primo_jr,maxcolisiones,redisp;
-    unsigned int promedio_Colisiones;
+     float promedio_Colisiones;
     std::vector<Entrada> tablaHash;
 
     bool es_Primo(unsigned primo);//dice si primo es primo
@@ -37,7 +37,7 @@ public:
     ~ThashMedicam();
 
     unsigned long getNumElem() const { return tamLogico; }
-    unsigned int get_promedio_colisiones();//const borrado
+    float get_promedio_colisiones();//const borrado
     unsigned int get_max10() const;
     unsigned long get_total_colisiones() const;
     float get_carga() const;//Carga es que tan llena está la tabla

@@ -310,8 +310,17 @@ nombMedication(), listaMeds()
             contadorsillo++;
         }
     }
+    std::cout<<"Tiempo de busqueda de meds usando tabla hash: "<<((clock() - t_inicio) / (float) CLOCKS_PER_SEC)<<" segs"<<std::endl;
+
+   /* clock_t t_inicio2 = clock();
+    std::list<PaMedicamento>::iterator comparaBusqueda = listaMeds.begin();
+    while (comparaBusqueda != listaMeds.end()){
+        if (*comparaBusqueda->get_id_num() == )
+    }
     //hacer lo mismo con la lista
-        std::cout<<"Tiempo de busqueda de meds usando tabla hash: "<<((clock() - t_inicio) / (float) CLOCKS_PER_SEC)<<" segs"<<std::endl;
+
+        std::cout<<"Tiempo de busqueda de meds usando una lista: "<<((clock() - t_inicio) / (float) CLOCKS_PER_SEC)<<" segs"<<std::endl;
+        */
 }
 
 /**
@@ -657,7 +666,7 @@ bool MediExpress::eliminarMedicamento(const unsigned int &id_num) {
     return true;
 }
 
-unsigned int MediExpress::get_promedio_colisiones() {
+float MediExpress::get_promedio_colisiones() {
     return idMedication.get_promedio_colisiones();
 }
 

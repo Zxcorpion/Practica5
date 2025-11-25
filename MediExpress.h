@@ -56,9 +56,10 @@ public:
     void mostrarEstado();
     void pruebaRend();
     unsigned long tamTabla() const { return idMedication.getNumElem(); }
-    unsigned int get_promedio_colisiones() ;//const borrado
+    float get_promedio_colisiones() ;//const borrado
     unsigned long get_max10() const;
     unsigned long get_total_colisiones() const;
     float get_factor_carga() const;
+    int get_maxColisiones() const;
 };
 #endif //MEDIEXPRESS_H
