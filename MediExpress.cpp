@@ -1,6 +1,3 @@
-//
-// Created by marco on 10/11/2025.
-//
 
 #include "MediExpress.h"
 
@@ -208,7 +205,7 @@ nombMedication(), listaMeds()
     for (int i = 0; i < medSin.size(); i++) {
         medSin[i]->servidoPor(labsMadrid[i]);
     }
-    std::cout<<" Comprobamos que ya no hay PAmedicamentos sin laboratorio asignado"<<std::endl;
+    std::cout<<"Comprobamos que ya no hay PAmedicamentos sin laboratorio asignado"<<std::endl;
     int cont2=0;
     for (int i=0; i < medSin.size(); i++) {
         if (!medSin[i]->getServe()) {
@@ -216,7 +213,7 @@ nombMedication(), listaMeds()
         }
     }
     //Comprobacion de que no hay ninguno sin asignar ahora
-    std::cout<<cont2<<std::endl;
+    std::cout<<cont2<<" laboratorios sin lab asignado"<<std::endl;
 
 
     //Leemos el tercer archivo
@@ -279,7 +276,7 @@ nombMedication(), listaMeds()
 
         is.close();
 
-        std::cout << "Tiempo de lectura: " << ((clock() - t_ini) / (float) CLOCKS_PER_SEC) << " segs." << std::endl;
+        std::cout << "Tiempo de lectura de farmacias: " << ((clock() - t_ini) / (float) CLOCKS_PER_SEC) << " segs." << std::endl;
     } else {
         std::cout << "Error de apertura en archivo" << std::endl;
     }
@@ -304,6 +301,17 @@ nombMedication(), listaMeds()
             }
         }
     }
+
+    //Comparacion de tiempos tabla hash y lista
+    clock_t t_inicio = clock();
+    int contadorsillo=0;
+    for (int i=0;i<vMedi.size();i++) {
+        if (buscaCompuestoMed(vMedi[i]) != 0) {
+            contadorsillo++;
+        }
+    }
+    //hacer lo mismo con la lista
+        std::cout<<"Tiempo de busqueda de meds usando tabla hash: "<<((clock() - t_inicio) / (float) CLOCKS_PER_SEC)<<" segs"<<std::endl;
 }
 
 /**
@@ -499,7 +507,7 @@ PaMedicamento *MediExpress::buscaCompuestoMed(const int &ID_) {
         }
     }
     return 0;*/
-    if(idMedication.buscar(ID_)!=0) {
+    if(idMedication.buscar(ID_) != 0) {
         return idMedication.buscar(ID_);
     }else {
         return 0;

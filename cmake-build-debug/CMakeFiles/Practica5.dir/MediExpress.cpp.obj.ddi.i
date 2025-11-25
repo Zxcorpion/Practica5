@@ -4,9 +4,6 @@
 # 0 "<command-line>"
 # 1 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
 
-
-
-
 # 1 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 1
 
 
@@ -66206,7 +66203,9 @@ private:
         Entrada(): marca('-'), clave(0), dato(){}
         ~Entrada(){}
     };
-    unsigned long tamFisico, tamLogico,promedio_Colisiones,max10,total_Colisiones,primo_jr,redisp;
+
+    unsigned long tamFisico, tamLogico,max10,total_Colisiones,primo_jr,maxcolisiones,redisp;
+    unsigned int promedio_Colisiones;
     std::vector<Entrada> tablaHash;
 
     bool es_Primo(unsigned primo);
@@ -66222,10 +66221,11 @@ public:
     ~ThashMedicam();
 
     unsigned long getNumElem() const { return tamLogico; }
-    unsigned long get_promedio_colisiones() const;
-    unsigned long get_max10() const;
+    unsigned int get_promedio_colisiones();
+    unsigned int get_max10() const;
     unsigned long get_total_colisiones() const;
-    unsigned long get_carga() const;
+    float get_carga() const;
+    unsigned int maxColisiones() const;
 
     bool insertar(unsigned long clave, PaMedicamento &pa);
     PaMedicamento* buscar(unsigned long clave);
@@ -66272,12 +66272,12 @@ public:
     void mostrarEstado();
     void pruebaRend();
     unsigned long tamTabla() const { return idMedication.getNumElem(); }
-    unsigned long get_promedio_colisiones() const;
+    unsigned int get_promedio_colisiones() ;
     unsigned long get_max10() const;
     unsigned long get_total_colisiones() const;
-    unsigned long get_factor_carga() const;
+    float get_factor_carga() const;
 };
-# 6 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp" 2
+# 3 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp" 2
 
 # 1 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/algorithm" 1 3
 # 58 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/algorithm" 3
@@ -76917,10 +76917,10 @@ lexicographical_compare(_ExecutionPolicy&& __exec, _ForwardIterator1 __first1, _
 
 }
 # 86 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/algorithm" 2 3
-# 8 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp" 2
-# 16 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+# 5 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp" 2
+# 13 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
 
-# 16 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+# 13 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
 MediExpress::MediExpress():
 idMedication(3310,0.7),labs(),pharmacy(), vMedi(),nombMedication(), listaMeds() {
 }
@@ -76978,16 +76978,16 @@ nombMedication(), listaMeds()
 
                 fila="";
                 columnas.clear();
-# 81 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+# 78 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
             }
         }
 
         is.close();
 
         std::cout << "Tiempo de lectura de meds: " << ((clock() - t_ini) / (float) 
-# 86 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp" 3
+# 83 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp" 3
                                                                                   1000
-# 86 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+# 83 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
                                                                                                 ) << " segs." << std::endl;
     } else {
         std::cout << "Error de apertura en archivo" << std::endl;
@@ -77060,16 +77060,16 @@ nombMedication(), listaMeds()
                 }catch (std::out_of_range &e) {
                     std::cerr<<e.what()<<std::endl;
                 }
-# 167 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+# 164 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
             }
         }
 
         is.close();
 
         std::cout << "Tiempo de lectura de labs: " << ((clock() - t_ini) / (float) 
-# 172 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp" 3
+# 169 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp" 3
                                                                                   1000
-# 172 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+# 169 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
                                                                                                 ) << " segs." << std::endl;
     } else {
         std::cout << "Error de apertura en archivo" << std::endl;
@@ -77091,7 +77091,7 @@ nombMedication(), listaMeds()
         }
         itLaboratorio++;
     }
-# 204 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+# 201 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
     std::vector<Laboratorio*> labsMadrid = this->buscarLabCiudad("Madrid");
     std::vector<PaMedicamento*> medSin = this->getMedicamentoSinLab();
     std::cout << "Medicamentos sin asignar: " << medSin.size() << std::endl;
@@ -77099,7 +77099,7 @@ nombMedication(), listaMeds()
     for (int i = 0; i < medSin.size(); i++) {
         medSin[i]->servidoPor(labsMadrid[i]);
     }
-    std::cout<<" Comprobamos que ya no hay PAmedicamentos sin laboratorio asignado"<<std::endl;
+    std::cout<<"Comprobamos que ya no hay PAmedicamentos sin laboratorio asignado"<<std::endl;
     int cont2=0;
     for (int i=0; i < medSin.size(); i++) {
         if (!medSin[i]->getServe()) {
@@ -77107,7 +77107,7 @@ nombMedication(), listaMeds()
         }
     }
 
-    std::cout<<cont2<<std::endl;
+    std::cout<<cont2<<" laboratorios sin lab asignado"<<std::endl;
 
 
 
@@ -77155,17 +77155,17 @@ nombMedication(), listaMeds()
                 columnas.str(std::string());
                 columnas.clear();
                 columnas.str(fila);
-# 277 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+# 274 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
             }
         }
 
         is.close();
 
-        std::cout << "Tiempo de lectura: " << ((clock() - t_ini) / (float) 
-# 282 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp" 3
-                                                                          1000
-# 282 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
-                                                                                        ) << " segs." << std::endl;
+        std::cout << "Tiempo de lectura de farmacias: " << ((clock() - t_ini) / (float) 
+# 279 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp" 3
+                                                                                       1000
+# 279 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+                                                                                                     ) << " segs." << std::endl;
     } else {
         std::cout << "Error de apertura en archivo" << std::endl;
     }
@@ -77190,6 +77190,18 @@ nombMedication(), listaMeds()
             }
         }
     }
+
+
+    clock_t t_inicio = clock();
+    for (int i=0;i<vMedi.size();i++) {
+        if (buscaCompuestoMed(vMedi[i]) != 0) {
+        }
+    }
+        std::cout<<"Tiempo de busqueda de meds usando tabla hash: "<<((clock() - t_inicio) / (float) 
+# 311 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp" 3
+                                                                                                    1000
+# 311 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+                                                                                                                  )<<" segs"<<std::endl;
 }
 
 
@@ -77216,7 +77228,7 @@ MediExpress &MediExpress::operator=(const MediExpress &orig) {
     }
     return *this;
 }
-# 359 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+# 364 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
 MediExpress::~MediExpress() {}
 
 
@@ -77262,20 +77274,23 @@ std::vector<Laboratorio*> MediExpress::buscarLabCiudad(const std::string &nombre
     }
     return vector;
     }
-# 446 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+# 452 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
 std::vector<PaMedicamento*> MediExpress::getMedicamentoSinLab() {
     std::vector<PaMedicamento*> vector_meds_SinLab;
     PaMedicamento *med_Sin_Lab;
     std::vector<int>::iterator it_busca_SinLab = vMedi.begin();
     for (int i = 0; i< vMedi.size(); i++) {
         med_Sin_Lab = idMedication.buscar(vMedi[i]);
-        if (med_Sin_Lab->getServe() == 0) {
-            vector_meds_SinLab.push_back(med_Sin_Lab);
+        if(med_Sin_Lab != 0) {
+
+            if (med_Sin_Lab->getServe() == 0) {
+                vector_meds_SinLab.push_back(med_Sin_Lab);
+            }
         }
     }
     return vector_meds_SinLab;
 }
-# 491 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+# 500 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
 PaMedicamento *MediExpress::buscaCompuestoMed(const int &ID_) {
 
 
@@ -77283,7 +77298,7 @@ PaMedicamento *MediExpress::buscaCompuestoMed(const int &ID_) {
 
 
 
-    if(idMedication.buscar(ID_)!=0) {
+    if(idMedication.buscar(ID_) != 0) {
         return idMedication.buscar(ID_);
     }else {
         return 0;
@@ -77348,7 +77363,7 @@ std::list<Laboratorio*> MediExpress::buscarLabs(const std::string &nombrePA) {
     }
     return lista;
 }
-# 571 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+# 580 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
 std::vector<Farmacia*> MediExpress::buscar_Farmacia_Provincia(const std::string &nombreProvin) {
     std::vector<Farmacia*> farmacias_Nightwing;
 
@@ -77367,7 +77382,7 @@ std::vector<Farmacia*> MediExpress::buscar_Farmacia_Provincia(const std::string 
     }
     return farmacias_Nightwing;
 }
-# 597 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+# 606 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
 bool MediExpress::eliminarMedicamento(const unsigned int &id_num) {
 
     PaMedicamento *eliminado = idMedication.buscar(id_num);
@@ -77419,7 +77434,7 @@ bool MediExpress::eliminarMedicamento(const unsigned int &id_num) {
     return true;
 }
 
-unsigned long MediExpress::get_promedio_colisiones() const {
+unsigned int MediExpress::get_promedio_colisiones() {
     return idMedication.get_promedio_colisiones();
 }
 
@@ -77436,11 +77451,11 @@ void MediExpress::mostrarEstado() {
     std::cout<<"Tamaño logico: "<< tamTabla()<<std::endl;
     std::cout<<"Colisiones totales: "<< get_total_colisiones()<<std::endl;
     std::cout<<"Promedio de colisiones: "<< get_promedio_colisiones()<<std::endl;
-    std::cout<<"Numero de veces qwue se superan las 10 colisiones: "<< get_max10()<<std::endl;
+    std::cout<<"Numero de veces que se superan las 10 colisiones: "<< get_max10()<<std::endl;
     std::cout<<"Factor de carga empleado: "<<get_factor_carga()<<std::endl;
 }
 
 
-unsigned long MediExpress::get_factor_carga() const {
+float MediExpress::get_factor_carga() const {
     return idMedication.get_carga();
 }

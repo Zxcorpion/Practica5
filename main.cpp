@@ -33,10 +33,10 @@ void mostrarFarmacia(Farmacia &farma) {
  */
 int main() {
     //Prueba 1
-    MediExpress medBatman("../pa_medicamentos.csv","../lab2.csv","../farmacias.csv",3310,0.65);
-    medBatman.mostrarEstado();
+    //MediExpress medBatman("../pa_medicamentos.csv","../lab2.csv","../farmacias.csv",3310,0.65);
     //medBatman.mostrarEstado();
-   // MediExpress medBatman2("../pa_medicamentos.csv","../lab2.csv","../farmacias.csv",3310,0.68);
+    MediExpress medBatman2("../pa_medicamentos.csv","../lab2.csv","../farmacias.csv",3310,0.68);
+    //medBatman2.mostrarEstado();
    /* std::vector<Farmacia*> farmas_Sevilla = medBatman.buscar_Farmacia_Provincia("SEVILLA");
     std::cout<<"Farmacias encontradas situadas Sevilla: "<< farmas_Sevilla.size()<<std::endl;// esto lo tengo como comprobacion de cuantas de sevilla hay
     int id_Magnes = 3640, id_Carbonato = 3632, id_Cloruro = 3633;

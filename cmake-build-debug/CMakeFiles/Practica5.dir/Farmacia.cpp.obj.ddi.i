@@ -66203,7 +66203,9 @@ private:
         Entrada(): marca('-'), clave(0), dato(){}
         ~Entrada(){}
     };
-    unsigned long tamFisico, tamLogico,promedio_Colisiones,max10,total_Colisiones,primo_jr,redisp;
+
+    unsigned long tamFisico, tamLogico,max10,total_Colisiones,primo_jr,maxcolisiones,redisp;
+    unsigned int promedio_Colisiones;
     std::vector<Entrada> tablaHash;
 
     bool es_Primo(unsigned primo);
@@ -66219,10 +66221,11 @@ public:
     ~ThashMedicam();
 
     unsigned long getNumElem() const { return tamLogico; }
-    unsigned long get_promedio_colisiones() const;
-    unsigned long get_max10() const;
+    unsigned int get_promedio_colisiones();
+    unsigned int get_max10() const;
     unsigned long get_total_colisiones() const;
-    unsigned long get_carga() const;
+    float get_carga() const;
+    unsigned int maxColisiones() const;
 
     bool insertar(unsigned long clave, PaMedicamento &pa);
     PaMedicamento* buscar(unsigned long clave);
@@ -66269,10 +66272,10 @@ public:
     void mostrarEstado();
     void pruebaRend();
     unsigned long tamTabla() const { return idMedication.getNumElem(); }
-    unsigned long get_promedio_colisiones() const;
+    unsigned int get_promedio_colisiones() ;
     unsigned long get_max10() const;
     unsigned long get_total_colisiones() const;
-    unsigned long get_factor_carga() const;
+    float get_factor_carga() const;
 };
 # 3 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/Farmacia.cpp" 2
 # 15 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/Farmacia.cpp"

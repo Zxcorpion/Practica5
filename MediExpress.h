@@ -61,8 +61,4 @@ public:
     unsigned long get_total_colisiones() const;
     float get_factor_carga() const;
 };
-
-
-
-
 #endif //MEDIEXPRESS_H

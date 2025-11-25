@@ -93,7 +93,7 @@ unsigned int ThashMedicam::get_promedio_colisiones() {
     return promedio_Colisiones;
 }
 
-unsigned long ThashMedicam::get_max10() const {
+unsigned int ThashMedicam::get_max10() const {
     return max10;
 }
 
@@ -113,9 +113,9 @@ bool ThashMedicam::insertar(unsigned long clave, PaMedicamento &pa) {
     bool enc = false;
 
     while (!enc) {
+        //y = hash(clave, intento);
         // y = hash2(clave, intento);
-         y = hash(clave, intento);
-        // y = hash3(clave, intento);
+         y = hash3(clave, intento);
 
         if (tablaHash[y].marca == '-' || tablaHash[y].marca == '?') {
             tamLogico++;
@@ -139,12 +139,15 @@ bool ThashMedicam::insertar(unsigned long clave, PaMedicamento &pa) {
         max10 = intento;
     }
     //poner estadisticos
-    std::cout<<"La insercion del medicamento con id "<<clave<<" y nombre"<< pa.get_nombre()<<" conlleva:"<<std::endl;
+    std::cout<<"La insercion del medicamento con id "<<clave<<" y nombre "<< pa.get_nombre()<<" intenta"
+    " accedera la posicion "<<y<<" y conlleva:"<<std::endl;
     std::cout<<"Numero de intentos: "<<intento+1<<std::endl;
     std::cout<<"Numero de colisiones: "<<intento<<std::endl;
     return enc;
 }
-unsigned long ThashMedicam::maxColisiones() const {
+
+
+unsigned int ThashMedicam::maxColisiones() const {
     return maxcolisiones;
 }
 

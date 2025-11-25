@@ -20,7 +20,6 @@ private:
         ~Entrada(){}
     };
     //maxcolisiones para el metodo añadido
-    //Alomejor hay que cambiar unsigned long por int,pq complica alguna operacion como la de carga
     unsigned long tamFisico, tamLogico,max10,total_Colisiones,primo_jr,maxcolisiones,redisp;
     unsigned int promedio_Colisiones;
     std::vector<Entrada> tablaHash;
@@ -39,10 +38,10 @@ public:
 
     unsigned long getNumElem() const { return tamLogico; }
     unsigned int get_promedio_colisiones();//const borrado
-    unsigned long get_max10() const;
+    unsigned int get_max10() const;
     unsigned long get_total_colisiones() const;
     float get_carga() const;//Carga es que tan llena está la tabla
-    unsigned long maxColisiones() const;
+    unsigned int maxColisiones() const;
 
     bool insertar(unsigned long clave, PaMedicamento &pa);
     PaMedicamento* buscar(unsigned long clave);
