@@ -87,6 +87,7 @@ nombMedication(), listaMeds()
 
 
     //Asociacion
+    clock_t t_busqueda = clock();
     for (int i=0;i<vMedi.size();i++) {
         //Como no se puede iterar una tabla hash, buscamos el PAmed a gracias a vMedi
         PaMedicamento *aux = idMedication.buscar(vMedi[i]);
@@ -102,6 +103,8 @@ nombMedication(), listaMeds()
             }
         }
     }
+    std::cout << "Tiempo de lectura en asociacion de nombMedication: " << ((clock() - t_busqueda) / (float) CLOCKS_PER_SEC) << " segs." << std::endl;
+
 
     //Leemos el segundo fichero
 
@@ -304,23 +307,26 @@ nombMedication(), listaMeds()
 
     //Comparacion de tiempos tabla hash y lista
     clock_t t_inicio = clock();
-    int contadorsillo=0;
+    int busqueda_hash_cont=0;
     for (int i=0;i<vMedi.size();i++) {
-        if (buscaCompuestoMed(vMedi[i]) != 0) {
-            contadorsillo++;
+        if (idMedication.buscar(vMedi[i]) != 0) {
+            busqueda_hash_cont++;
         }
     }
-    std::cout<<"Tiempo de busqueda de meds usando tabla hash: "<<((clock() - t_inicio) / (float) CLOCKS_PER_SEC)<<" segs"<<std::endl;
+    std::cout<<"Tiempo de busqueda de meds usando tabla hash: "<<((clock() - t_inicio)*1000 / (float) CLOCKS_PER_SEC)<<" milisegs"<<std::endl;
 
-   /* clock_t t_inicio2 = clock();
-    std::list<PaMedicamento>::iterator comparaBusqueda = listaMeds.begin();
-    while (comparaBusqueda != listaMeds.end()){
-        if (*comparaBusqueda->get_id_num() == )
+    clock_t t_inicio2 = clock();
+    int busqueda_lista_cont=0;
+    for (int i=0; i < vMedi.size(); i++) {
+        std::list<PaMedicamento>::iterator comparaBusqueda = listaMeds.begin();
+        for (comparaBusqueda; comparaBusqueda != listaMeds.end(); comparaBusqueda++) {
+            if (comparaBusqueda->get_id_num() == vMedi[i]) {
+                busqueda_lista_cont++;
+                break;
+            }
+        }
     }
-    //hacer lo mismo con la lista
-
-        std::cout<<"Tiempo de busqueda de meds usando una lista: "<<((clock() - t_inicio) / (float) CLOCKS_PER_SEC)<<" segs"<<std::endl;
-        */
+    std::cout<<"Tiempo de busqueda de meds usando una lista: "<<((clock() - t_inicio2)*1000 / (float) CLOCKS_PER_SEC)<<" milisegs"<<std::endl;
 }
 
 /**
@@ -427,33 +433,35 @@ std::vector<Laboratorio*> MediExpress::buscarLabCiudad(const std::string &nombre
  * @post se crea un vector auxiliar y se inserta en el lo medicametnos convenientes
 **/
 //Cambiado, POSIBLE CAMBIO, porque no sabemos si busca nombre entero
-// std::vector<PaMedicamento*> MediExpress::buscaCompuesto(const std::string &nombrePA) {
-//     std::vector<PaMedicamento*> auxiliar;
-//     std::vector<std::set<PaMedicamento*>> vSet;
-//     std::stringstream ss;
-//     std::string batCadena;
-//     ss.str(batCadena);
-//     while (getline(ss, batCadena, ' ')) { //Aqui cortamos el nombre entero, para asi buscar luego todos
-//         //los meds que contengan esa subcadena
-//         nombMedication.insert(std::pair<std::string,PaMedicamento*>(batNombre,aux));
-//         std::set<PaMedicamento*> aux;
-//         vSet.push_back(aux);
-//         std::multimap<std::string,PaMedicamento*>::iterator it = nombMedication.find(batCadena);
-//         while (it != nombMedication.end() && it->first == batCadena) {
-//     int l = 0;
-//
-//             vSet[l].insert(it->second);
-//             it++;
-//         }
-//         it++;
-//     }
-//     std::set<PaMedicamento*> conjuntoI,otro;
-//     for (int i = 1 ; i < vSet.size(); i++) {
-//         std::ranges::set_intersection()
-//     }
-//     }
-// }
+std::vector<PaMedicamento*> MediExpress::buscaCompuesto(const std::string &nombrePA) {
+    std::vector<PaMedicamento*> arkham_resultados;
+    std::vector<std::set<PaMedicamento*>> arkham_set;
+    std::stringstream ss;
+    std::string arkham_separador;
+    ss.str(nombrePA);
+    int batwhile=0;
+    while (getline(ss, arkham_separador, ' ')){
+        std::set<PaMedicamento*> arkham_conjunto_med;
+        arkham_set.push_back(arkham_conjunto_med);
+        std::multimap<std::string,PaMedicamento*>::iterator iterador_insercion_conjunto= nombMedication.find(arkham_separador);
+        while (iterador_insercion_conjunto!=nombMedication.end() && iterador_insercion_conjunto->first==arkham_separador){
+            arkham_set[batwhile].insert(iterador_insercion_conjunto->second);
+            iterador_insercion_conjunto++;
+        }
+        batwhile++;
+    }
+    std::set<PaMedicamento*> arkham_origins,conjunto_interseccion;
+    arkham_origins=arkham_set[0];
+    for (int i = 1; i < arkham_set.size(); i++) {
+        set_intersection(arkham_set[i].begin(), arkham_set[i].end(), arkham_origins.begin(), arkham_origins.end(),
+                         inserter(conjunto_interseccion, conjunto_interseccion.begin()));
+        arkham_origins=conjunto_interseccion;
+        conjunto_interseccion.clear();
+    }
+    arkham_resultados.insert(arkham_resultados.begin(),arkham_origins.begin(),arkham_origins.end());
 
+    return arkham_resultados;
+}
 
 /**
  * @brief Funcion para leer un vector de medicamentos que no tienen asociados un laboratorio

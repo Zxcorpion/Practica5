@@ -67,7 +67,7 @@ max10(0), total_Colisiones(0),primo_jr(0),maxcolisiones(0),redisp(0)
     primo_jr = primo_previo(tamFisico);
 }
 ThashMedicam::ThashMedicam(const ThashMedicam &orig):tamFisico(orig.tamFisico),
-tablaHash(orig.tablaHash), tamLogico(orig.tamLogico),promedio_Colisiones(orig.total_Colisiones),
+tablaHash(orig.tablaHash), tamLogico(orig.tamLogico),promedio_Colisiones(orig.promedio_Colisiones),
 max10(orig.max10), total_Colisiones(orig.total_Colisiones),primo_jr(orig.primo_jr),maxcolisiones(orig.maxColisiones()),redisp(0)
 {
     primo_jr = orig.primo_jr;
@@ -84,12 +84,13 @@ ThashMedicam &ThashMedicam::operator=(const ThashMedicam &orig) {
         primo_jr = orig.primo_jr;
         maxcolisiones=orig.maxcolisiones;
         redisp = orig.redisp;
+        tablaHash = orig.tablaHash;
     }
     return *this;
 }
 //CAMBIADO
  float ThashMedicam::get_promedio_colisiones() {
-    promedio_Colisiones=(float)total_Colisiones/(float)tamLogico;
+    promedio_Colisiones = (float)total_Colisiones/(float)tamLogico;
     return promedio_Colisiones;
 }
 
@@ -113,8 +114,8 @@ bool ThashMedicam::insertar(unsigned long clave, PaMedicamento &pa) {
     bool enc = false;
 
     while (!enc) {
-        y = hash(clave, intento);
-        //y = hash2(clave, intento);
+        //y = hash(clave, intento);
+        y = hash2(clave, intento);
          //y = hash3(clave, intento);
 
         if (tablaHash[y].estado == '-' || tablaHash[y].estado == '?') {
@@ -157,8 +158,8 @@ PaMedicamento *ThashMedicam::buscar(unsigned long clave) {
     bool enc = false;
 
     while (!enc) {
-        y = hash2(clave, intento);
         // y = hash(clave, intento);
+        y = hash2(clave, intento);
         // y = hash3(clave, intento);
 
         if (tablaHash[y].estado == 'X' && tablaHash[y].clave == clave) {
@@ -182,7 +183,7 @@ bool ThashMedicam::borrar(unsigned long clave) {
 
     /*while (!fin) {
         y = hash2(clave, intento);
-        // y = hash(clave, intento);
+         y = hash(clave, intento);
         // y = hash3(clave, intento);
 
         if (tablaHash[y].estado == 'O' && tablaHash[y].clave == clave) {
@@ -199,8 +200,8 @@ bool ThashMedicam::borrar(unsigned long clave) {
     //poner estadisticos
     return false;*/
     while (!fin) {
-        y = hash2(clave, intento);
         // y = hash(clave, intento);
+        y = hash2(clave, intento);
         // y = hash3(clave, intento);
 
         if (tablaHash[y].estado == 'X' && tablaHash[y].clave == clave) {

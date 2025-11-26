@@ -27,18 +27,43 @@ void mostrarFarmacia(Farmacia &farma) {
     << std::endl;
 }
 
+
 /**
  * @author Pablo Rodriguez Gniadek prg00054@red.ujaen.es
  * @author Marco Diaz Vera mdv00011@red.ujaen.es
  */
 int main() {
     //Prueba 1
-    MediExpress medBatman("../pa_medicamentos.csv","../lab2.csv","../farmacias.csv",3310,0.65);
-    medBatman.get_promedio_colisiones();
-    //medBatman.mostrarEstado();
     //MediExpress medBatman2("../pa_medicamentos.csv","../lab2.csv","../farmacias.csv",3310,0.68);
     //medBatman2.mostrarEstado();
-   /* std::vector<Farmacia*> farmas_Sevilla = medBatman.buscar_Farmacia_Provincia("SEVILLA");
+    MediExpress medBatman("../pa_medicamentos.csv","../lab2.csv","../farmacias.csv",3310,0.65);
+    medBatman.mostrarEstado();
+
+    std::string medicamentos[6]={
+        {"MAGNESIO CLORURO HEXAHIDRATO"},
+        {"CLORURO"},
+        {"ANHIDRO CALCIO CLORURO"},
+        {"LIDOCAINA HIDROCLORURO"},
+        {"MENTA PIPERITA"},
+        {"VIRUS GRIPE"}
+    };
+    std::vector<std::vector<PaMedicamento*> > vector_Loco(6);
+    vector_Loco[0] = medBatman.buscaCompuesto(medicamentos[0]);
+    vector_Loco[1] = medBatman.buscaCompuesto(medicamentos[1]);
+    vector_Loco[2] = medBatman.buscaCompuesto(medicamentos[2]);
+    vector_Loco[3] = medBatman.buscaCompuesto(medicamentos[3]);
+    vector_Loco[4] = medBatman.buscaCompuesto(medicamentos[4]);
+    vector_Loco[5] = medBatman.buscaCompuesto(medicamentos[5]);
+
+    for (int k = 0; k < vector_Loco.size(); k++) {
+        std::cout<<"Buscando "<<medicamentos[k]<<"..."<<std::endl;
+        std::cout<<"Se han encontrado "<<vector_Loco[k].size()<<std::endl;
+        for (int l = 0; l < vector_Loco[k].size(); l++){
+            std::cout<<"Nombre del medicamento "<< l+1 <<" : "<< vector_Loco[k][l]->get_nombre()<<std::endl;
+        }
+    }
+
+    /* std::vector<Farmacia*> farmas_Sevilla = medBatman.buscar_Farmacia_Provincia("SEVILLA");
     std::cout<<"Farmacias encontradas situadas Sevilla: "<< farmas_Sevilla.size()<<std::endl;// esto lo tengo como comprobacion de cuantas de sevilla hay
     int id_Magnes = 3640, id_Carbonato = 3632, id_Cloruro = 3633;
     PaMedicamento *oxido = medBatman.buscaCompuestoMed(id_Magnes);
