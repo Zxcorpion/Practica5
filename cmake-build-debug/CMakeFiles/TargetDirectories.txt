@@ -1,3 +1,3 @@
-C:/Users/admin/Downloads/Practica5-main/Practica5-main/cmake-build-debug/CMakeFiles/Practica5.dir
-C:/Users/admin/Downloads/Practica5-main/Practica5-main/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/admin/Downloads/Practica5-main/Practica5-main/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/marco/OneDrive/Escritorio/Practica5-main/cmake-build-debug/CMakeFiles/Practica5.dir
+C:/Users/marco/OneDrive/Escritorio/Practica5-main/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/marco/OneDrive/Escritorio/Practica5-main/cmake-build-debug/CMakeFiles/rebuild_cache.dir

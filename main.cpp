@@ -63,19 +63,30 @@ int main() {
         }
     }
 
-    /* std::vector<Farmacia*> farmas_Sevilla = medBatman.buscar_Farmacia_Provincia("SEVILLA");
+     std::vector<Farmacia*> farmas_Sevilla = medBatman.buscar_Farmacia_Provincia("SEVILLA");
     std::cout<<"Farmacias encontradas situadas Sevilla: "<< farmas_Sevilla.size()<<std::endl;// esto lo tengo como comprobacion de cuantas de sevilla hay
+    /*
     int id_Magnes = 3640, id_Carbonato = 3632, id_Cloruro = 3633;
     PaMedicamento *oxido = medBatman.buscaCompuestoMed(id_Magnes);
     PaMedicamento *carbonato = medBatman.buscaCompuestoMed(id_Carbonato);
     PaMedicamento *cloruro = medBatman.buscaCompuestoMed(id_Cloruro);
-
+    */
+    PaMedicamento* nuevomag= medBatman.buscaCompuestoMed(3640);
     //Aqui empezamos a buscar los medicamentos
     //cambiar pq busca ahora es private
-
+    for (int i = 0; i < farmas_Sevilla.size(); i++) {
+        std::vector<PaMedicamento*> Magnesio = farmas_Sevilla[i]->buscaMedicamNombre("MAGNESIO");
+        std::cout<<"La farmacia "<<farmas_Sevilla[i]->get_nombre()<<" tiene "<<Magnesio.size()<<" tipos de magnesio"<<std::endl;
+    }
     for (int i = 0;i < farmas_Sevilla.size(); i++) {
         //Aqui sacamos los stock de cada PAmedicamento de cada farmacia
-        int stock_Magnesio = farmas_Sevilla[i]->buscaMedicamID(id_Magnes);
+        std::vector<PaMedicamento*> Magnesio = farmas_Sevilla[i]->buscaMedicamNombre("MAGNESIO");
+        std::cout<<"Comprando en la farmacia "<<farmas_Sevilla[i]->get_nombre()<<std::endl;
+        for (int k = 0; k < Magnesio.size(); k++) {
+            int stock1=farmas_Sevilla[i]->buscaMedicamID(Magnesio[k]->get_id_num());
+            std::cout<<Magnesio[k]->get_nombre()<<": "<<stock1<<std::endl;
+        }
+        /* int stock_Magnesio = farmas_Sevilla[i]->buscaMedicamID(id_Magnes);
         int stock_Carbonat = farmas_Sevilla[i]->buscaMedicamID(id_Carbonato);
         int stock_Clorur = farmas_Sevilla[i]->buscaMedicamID(id_Cloruro);
 
@@ -83,47 +94,72 @@ int main() {
         std::cout<<"Stock inicial de cada medicamento de la Farmacia "<<i+1<< ": "<<farmas_Sevilla[i]->get_nombre()<<std::endl;
         std::cout<<"Oxido: "<<stock_Magnesio<<", Carbonato: "<<stock_Carbonat<<", Cloruro: "<<stock_Clorur<<std::endl;
         std::cout<<"==============================="<<std::endl;
-
+    */
+        if(Magnesio.size()==0) {
+            std::cout<<"En la farmacia "<<farmas_Sevilla[i]->get_nombre() <<" no queda nada de magnesio, por tanto pedimos OXIDO DE MAGNESIO"<<std::endl;
+            farmas_Sevilla[i]->comprarMedicam(3640,10,nuevomag);
+            Magnesio = farmas_Sevilla[i]->buscaMedicamNombre("MAGNESIO");
+        }
         for (int j = 0; j < 12; j++) {
             std::cout<<"Persona "<<j+1<<": "<<std::endl;
-            int stock_Magnesio = farmas_Sevilla[i]->buscaMedicamID(id_Magnes);
-            int stock_Carbonat = farmas_Sevilla[i]->buscaMedicamID(id_Carbonato);
-            int stock_Clorur = farmas_Sevilla[i]->buscaMedicamID(id_Cloruro);
+            //int stock_Magnesio = farmas_Sevilla[i]->buscaMedicamID(id_Magnes);
+            //int stock_Carbonat = farmas_Sevilla[i]->buscaMedicamID(id_Carbonato);
+            //int stock_Clorur = farmas_Sevilla[i]->buscaMedicamID(id_Cloruro);
             //Hacemos las 12 compras, empezando por oxido
-            if (stock_Magnesio > 0) {
-                //hemos comprado sin problemas
-                farmas_Sevilla[i]->comprarMedicam(id_Magnes,1,oxido);
-
-                std::cout<<"Ha comprado oxido"<<std::endl;
-            }else {
-                std::cout<<"No hay oxido, pidiendo para la proxima..."<<std::endl;
-                farmas_Sevilla[i]->comprarMedicam(id_Magnes,10,oxido);//Compro 10 por si las moscas
-
-                if (stock_Carbonat > 0) {
-                    //compramos sin problemas
-                    farmas_Sevilla[i]->comprarMedicam(id_Carbonato,1,carbonato);
-                    std::cout<<"Ha comprado carbonato"<<std::endl;
-                }else {
-                    std::cout<<"No hay carbonato, pidiendo para la proxima..."<<std::endl;
-                    farmas_Sevilla[i]->comprarMedicam(id_Carbonato, 10,carbonato);
-                    if (stock_Clorur > 0) {
-                        std::cout<<"Ha comprado cloruro"<<std::endl;
-                        farmas_Sevilla[i]->comprarMedicam(id_Cloruro,1,cloruro);
-
-                    }else{
-                        std::cout<<"No hay cloruro, pidiendo para la proxima..."<<std::endl;
-                        farmas_Sevilla[i]->comprarMedicam(id_Cloruro, 10,cloruro);
-                    }
+            if (Magnesio.size() > 0) {
+                bool comprado=false;
+                for (int k = 0; k < Magnesio.size(); k++) {
+                    int stock = farmas_Sevilla[i]->buscaMedicamID(Magnesio[k]->get_id_num());
+                    if(stock>0) {
+                        farmas_Sevilla[i]->comprarMedicam(Magnesio[k]->get_id_num(),stock,Magnesio[k]);
+                        std::cout<<"Ha comprado "<<Magnesio[k]->get_nombre()<<" correctamente "<<Magnesio[k]->get_nombre() <<std::endl;
+                        comprado=true;
+                    }/*else {
+                        std::vector<PaMedicamento*> aux = farmas_Sevilla[i]->buscaMedicamNombre("MAGNESIO");
+                        if(aux.size()==0) {
+                            std::cout<<"Como no queda ningun magnesio, pedimos OXIDO DE MAGNESIO"<<std::endl;
+                            farmas_Sevilla[i]->comprarMedicam(3640,10,nuevomag);
+                        }*/
                 }
+                if(comprado==false){
+                    std::cout<<"No hay stock, por tanto pedimos OXIDO DE MAGNESIO"<<std::endl;
+                    farmas_Sevilla[i]->comprarMedicam(3640,10,nuevomag);
+            }
+                //std::cout<<"No hay oxido, pidiendo para la proxima..."<<std::endl;
+                //farmas_Sevilla[i]->comprarMedicam(id_Magnes,10,oxido);//Compro 10 por si las moscas
+                //if (stock_Carbonat > 0) {
+                    //compramos sin problemas
+                  //  farmas_Sevilla[i]->comprarMedicam(id_Carbonato,1,carbonato);
+                    //std::cout<<"Ha comprado carbonato"<<std::endl;
+                //}else {
+                  //  std::cout<<"No hay carbonato, pidiendo para la proxima..."<<std::endl;
+                    //farmas_Sevilla[i]->comprarMedicam(id_Carbonato, 10,carbonato);
+                    //if (stock_Clorur > 0) {
+                      //  std::cout<<"Ha comprado cloruro"<<std::endl;
+                        //farmas_Sevilla[i]->comprarMedicam(id_Cloruro,1,cloruro);
+
+                    //}else{
+                      //  std::cout<<"No hay cloruro, pidiendo para la proxima..."<<std::endl;
+                        //farmas_Sevilla[i]->comprarMedicam(id_Cloruro, 10,cloruro);
+                    //}
+                //}
             }
         }
+        std::cout<<"Nuevo estado: "<<std::endl;
+        std::vector<PaMedicamento*> Magnesioversion2 = farmas_Sevilla[i]->buscaMedicamNombre("MAGNESIO");
+        std::cout<<"Tipos de de Magnesio en la farmacia " << i+1 <<": "<<Magnesioversion2.size()<<std::endl;//No se si se refiere a esto con lo del estado pero bueno
+        for (int k = 0; k < Magnesioversion2.size(); k++) {
+            int stock1=farmas_Sevilla[i]->buscaMedicamID(Magnesioversion2[k]->get_id_num());
+            std::cout<<Magnesioversion2[k]->get_nombre()<<": "<<stock1<<std::endl;
+        }
+        /*
         std::cout<<"==============================="<<std::endl;
         std::cout<<"Stock final de cada medicamento de la Farmacia "<<i+1<< ": "<<farmas_Sevilla[i]->get_nombre()<<std::endl;
         std::cout<<"Oxido: "<<farmas_Sevilla[i]->buscaMedicamID(id_Magnes)<<", Carbonato: "<<farmas_Sevilla[i]->buscaMedicamID(id_Carbonato)<<", Cloruro: "<<farmas_Sevilla[i]->buscaMedicamID(id_Cloruro)<<std::endl;
         std::cout<<"==============================="<<std::endl;
-
+        */
     }
-
+/*
     //Prueba2
     std::vector<Farmacia*> farmas_Madrid = medBatman.buscar_Farmacia_Provincia("MADRID");
     std::vector<Farmacia*> farmas_Madrid_Virus;
