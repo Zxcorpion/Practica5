@@ -314,7 +314,23 @@ nombMedication(), listaMeds()
         }
     }
     std::cout<<"Tiempo de busqueda de meds usando tabla hash: "<<((clock() - t_inicio)*1000 / (float) CLOCKS_PER_SEC)<<" milisegs"<<std::endl;
-
+   /*
+   int contado=0;
+    clock_t t_inicio2 = clock();
+    std::list<PaMedicamento>::iterator comparaBusqueda = listaMeds.begin();
+    while (comparaBusqueda != listaMeds.end()){
+        bool enc=false;
+        while(enc==false) {
+            for (int i=0; i < vMedi.size(); i++) {
+                if (comparaBusqueda->get_id_num() == vMedi[i]) {
+                    enc=true;
+                    contado++;
+                }
+            }
+            comparaBusqueda++;
+        }
+    }
+   */
     clock_t t_inicio2 = clock();
     int busqueda_lista_cont=0;
     for (int i=0; i < vMedi.size(); i++) {
@@ -698,4 +714,5 @@ void MediExpress::mostrarEstado() {
 //AHORA ES FLOAT
 float MediExpress::get_factor_carga() const {
     return idMedication.get_carga();
+
 }
