@@ -66387,10 +66387,12 @@ int main() {
         }
     }
 
+
     std::vector<Farmacia*> farmas_Jaen = medBatman.buscar_Farmacia_Provincia("JAEN");
 
     std::vector<PaMedicamento*> antigenos= medBatman.buscaCompuesto("ANTIGENO OLIGOSACARIDO");
     std::cout<<"Stock inicial de la farmacia "<<farmas_Jaen[0]->get_nombre()<<" de cualquier tipo de ANTIGENO OLIGOSACARIDO : "<<std::endl;
+
     for (int i = 0 ; i < antigenos.size(); i++) {
         std::cout<< "Stock inicial de "<<antigenos[i]->get_nombre()<< " " <<farmas_Jaen[0]->buscaMedicamID(antigenos[i]->get_id_num())<<std::endl;
         std::cout<< "Pidiendo 10 unidades"<<std::endl;
@@ -66400,6 +66402,35 @@ int main() {
     for (int i = 0 ; i < antigenos.size(); i++) {
         std::cout<< "Stock final de "<<antigenos[i]->get_nombre()<< " " <<farmas_Jaen[0]->buscaMedicamID(antigenos[i]->get_id_num())<<std::endl;
     }
-# 201 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/main.cpp"
+
+
+    std::vector<PaMedicamento*> cianuro_borrar = medBatman.buscaCompuesto("CIANURO");
+    if (cianuro_borrar.size() == 0) {
+        std::cout<<"No existe stock de CIANURO"<<std::endl;
+    }else {
+
+        for (int i = 0 ; i < cianuro_borrar.size(); i++) {
+            if (medBatman.eliminarMedicamento(cianuro_borrar[i]->get_id_num()) == true) {
+                std::cout<<"Se ha eliminado con exito el medicamento "<<cianuro_borrar[i]->get_nombre()<<std::endl;
+            }else {
+                std::cout<<"No se ha eliminado con exito el medicamento "<<cianuro_borrar[i]->get_nombre()<<std::endl;
+            }
+        }
+    }
+    std::vector<PaMedicamento*> bismuto_borrar = medBatman.buscaCompuesto("BISMUTO");
+
+    if (bismuto_borrar.size() == 0) {
+        std::cout<<"No existe stock de BISMUTO"<<std::endl;
+    }else {
+
+        for (int i = 0 ; i < bismuto_borrar.size(); i++) {
+            if (medBatman.eliminarMedicamento(bismuto_borrar[i]->get_id_num()) == true) {
+                std::cout<<"Se ha eliminado con exito el medicamento "<<bismuto_borrar[i]->get_nombre()<<std::endl;
+            }else {
+                std::cout<<"No se ha eliminado con exito el medicamento "<<bismuto_borrar[i]->get_nombre()<<std::endl;
+            }
+        }
+    }
+
     return 0;
 }

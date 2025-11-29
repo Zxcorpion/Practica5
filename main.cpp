@@ -158,10 +158,12 @@ int main() {
         }
     }
     //Prueba 3
+    //Primero buscamos la unica farmacia que hay en jaen
     std::vector<Farmacia*> farmas_Jaen = medBatman.buscar_Farmacia_Provincia("JAEN");
-    // std::vector<PaMedicamento*> antigenos_jaen = farmas_Jaen[0]->buscaMedicamNombre("ANTIGENO OLIGOSACARIDO");
+    //Despues lo que hacemos es, buscar TODOS los antigenos que existan, para luego comprobar si la farmacia los tiene
     std::vector<PaMedicamento*> antigenos= medBatman.buscaCompuesto("ANTIGENO OLIGOSACARIDO");
     std::cout<<"Stock inicial de la farmacia "<<farmas_Jaen[0]->get_nombre()<<" de cualquier tipo de ANTIGENO OLIGOSACARIDO : "<<std::endl; //Hago esto porque sé que solo hay una farmacia
+    //Aqui comprobamos si los tiene, y en cualquier caso, pedimos 10 unidades
     for (int i = 0 ; i < antigenos.size(); i++) {
         std::cout<< "Stock inicial de "<<antigenos[i]->get_nombre()<< " " <<farmas_Jaen[0]->buscaMedicamID(antigenos[i]->get_id_num())<<std::endl;
         std::cout<< "Pidiendo 10 unidades"<<std::endl;
@@ -171,32 +173,37 @@ int main() {
     for (int i = 0 ; i < antigenos.size(); i++) {
         std::cout<< "Stock final de "<<antigenos[i]->get_nombre()<< " " <<farmas_Jaen[0]->buscaMedicamID(antigenos[i]->get_id_num())<<std::endl;
     }
-        // if ( antigenos_jaen.size() == 0) {
-        //     std::cout<<"La farmacia "<< farmas_Jaen[0]->get_nombre()<< " no posee antigenos, procediendo a pedirlos..."<<std::endl;
-        // }
-        //farmas_Jaen[0]->nuevoStock(10,)
-        /*
-        std::cout<<"==============================="<<std::endl;
-        std::cout<<"Stock final de cada medicamento de la Farmacia "<<i+1<< ": "<<farmas_Sevilla[i]->get_nombre()<<std::endl;
-        std::cout<<"Oxido: "<<farmas_Sevilla[i]->buscaMedicamID(id_Magnes)<<", Carbonato: "<<farmas_Sevilla[i]->buscaMedicamID(id_Carbonato)<<", Cloruro: "<<farmas_Sevilla[i]->buscaMedicamID(id_Cloruro)<<std::endl;
-        std::cout<<"==============================="<<std::endl;
-        */
-/*
 
-    std::vector<Farmacia*> farmas_Madrid = medBatman.buscar_Farmacia_Provincia("MADRID");
-    std::vector<Farmacia*> farmas_Madrid_Virus;
-    // int contadorMadridVirus = 0;
-    for (int i=0; i<farmas_Madrid.size(); i++) {
-        if (farmas_Madrid[i]->buscaMedicamNombre("VIRUS").size() != 0) {
-            farmas_Madrid_Virus.push_back(farmas_Madrid[i]);
-            // contadorMadridVirus++;
+    //Prueba 4
+    std::vector<PaMedicamento*> cianuro_borrar = medBatman.buscaCompuesto("CIANURO");
+    if (cianuro_borrar.size() == 0) {
+        std::cout<<"No existe stock de CIANURO"<<std::endl;
+    }else {
+        //Bucle para borrar todos los meds que contienen cianuro
+        for (int i = 0 ; i < cianuro_borrar.size(); i++) {
+            if (medBatman.eliminarMedicamento(cianuro_borrar[i]->get_id_num()) == true) {
+                std::cout<<"Se ha eliminado con exito el medicamento "<<cianuro_borrar[i]->get_nombre()<<std::endl;
+            }else {
+                std::cout<<"No se ha eliminado con exito el medicamento "<<cianuro_borrar[i]->get_nombre()<<std::endl;
+            }
         }
     }
-    std::cout<<"El numero de farmacias de Madrid que tienen algun medicamento que tiene virus es "<<farmas_Madrid_Virus.size()<<" y sus datos son: "<<std::endl;
-    for (int l = 0; l < farmas_Madrid_Virus.size(); l++) {
-         mostrarFarmacia(*farmas_Madrid_Virus[l]);
-     }
-    */
+    std::vector<PaMedicamento*> bismuto_borrar = medBatman.buscaCompuesto("BISMUTO");
+    //Bucle para borrar todos los meds que contienen bismuti
+    if (bismuto_borrar.size() == 0) {
+        std::cout<<"No existe stock de BISMUTO"<<std::endl;
+    }else {
+        //Bucle para borrar todos los meds que contienen cianuro
+        for (int i = 0 ; i < bismuto_borrar.size(); i++) {
+            if (medBatman.eliminarMedicamento(bismuto_borrar[i]->get_id_num()) == true) {
+                std::cout<<"Se ha eliminado con exito el medicamento "<<bismuto_borrar[i]->get_nombre()<<std::endl;
+            }else {
+                std::cout<<"No se ha eliminado con exito el medicamento "<<bismuto_borrar[i]->get_nombre()<<std::endl;
+            }
+        }
+    }
+
+    //Parejas
 
     return 0;
 }
