@@ -110,20 +110,23 @@ int main() {
             //int stock_Carbonat = farmas_Sevilla[i]->buscaMedicamID(id_Carbonato);
             //int stock_Clorur = farmas_Sevilla[i]->buscaMedicamID(id_Cloruro);
             //Hacemos las 12 compras, empezando por oxido
+            Magnesio = farmas_Sevilla[i]->buscaMedicamNombre("MAGNESIO"); //Actualizamos
             if (Magnesio.size() > 0) {
                 bool comprado=false;
                 for (int k = 0; k < Magnesio.size(); k++) {
                     int stock = farmas_Sevilla[i]->buscaMedicamID(Magnesio[k]->get_id_num());
-                    if(stock>0) {
-                        farmas_Sevilla[i]->comprarMedicam(Magnesio[k]->get_id_num(),stock,Magnesio[k]);
-                        std::cout<<"Ha comprado "<<Magnesio[k]->get_nombre()<<" correctamente "<<Magnesio[k]->get_nombre() <<std::endl;
-                        comprado=true;
-                    }/*else {
-                        std::vector<PaMedicamento*> aux = farmas_Sevilla[i]->buscaMedicamNombre("MAGNESIO");
-                        if(aux.size()==0) {
-                            std::cout<<"Como no queda ningun magnesio, pedimos OXIDO DE MAGNESIO"<<std::endl;
-                            farmas_Sevilla[i]->comprarMedicam(3640,10,nuevomag);
-                        }*/
+                    if(comprado==false){
+                        if(stock>0) {
+                            farmas_Sevilla[i]->comprarMedicam(Magnesio[k]->get_id_num(),stock,Magnesio[k]);
+                            std::cout<<"Ha comprado "<<Magnesio[k]->get_nombre()<<" correctamente " <<std::endl;
+                            comprado=true;
+                        }/*else {
+                            std::vector<PaMedicamento*> aux = farmas_Sevilla[i]->buscaMedicamNombre("MAGNESIO");
+                            if(aux.size()==0) {
+                                std::cout<<"Como no queda ningun magnesio, pedimos OXIDO DE MAGNESIO"<<std::endl;
+                                farmas_Sevilla[i]->comprarMedicam(3640,10,nuevomag);
+                            }*/
+                    }
                 }
                 if(comprado==false){
                     std::cout<<"No hay stock, por tanto pedimos OXIDO DE MAGNESIO"<<std::endl;
