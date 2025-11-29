@@ -21,7 +21,7 @@ private:
     };
     //maxcolisiones para el metodo añadido
     unsigned long tamFisico, tamLogico,max10,total_Colisiones,primo_jr,maxcolisiones,redisp;
-     float promedio_Colisiones;
+    float promedio_Colisiones;
     std::vector<Entrada> tablaHash;
 
     bool es_Primo(unsigned primo);//dice si primo es primo

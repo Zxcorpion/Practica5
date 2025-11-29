@@ -186,13 +186,12 @@ void Farmacia::pedidoMedicam(const int &id_num,const int &robin) {
 }
 
 //AÑADIDO. Hay que ver si robin siempre va aser 10 unidades o no
- void Farmacia::pedidoMedicam(std::string nombrelol, const int &robin) {
-     std::vector<PaMedicamento*> auxiliar = linkMedi->buscaCompuesto(nombrelol);
-     for(int i=0; i < auxiliar.size(); i++) {
-         std::cout<<"Pidiendo 10 medicamentos con id = "<<auxiliar[i]->get_id_num()<<" para la farmacia "<<this->get_nombre()<<std::endl;
-         linkMedi->suministrarFarmacia(this,auxiliar[i]->get_id_num(),robin);
-     }
- }
+// void Farmacia::pedidoMedicam(std::string nombrelol, const int &robin) {
+//     std::vector<PaMedicamento*> auxiliar = linkMedi->buscaCompuesto(nombrelol);
+//     for(int i=0; i < auxiliar.size(); i++) {
+//         linkMedi->suministrarFarmacia(this,auxiliar[i]->get_id_num(),robin);
+//     }
+// }
 
 /**
  * @brief Metodo que devuelve el stock que tiene una farmacia sobre un PAmedicamento
@@ -265,7 +264,7 @@ int Farmacia::comprarMedicam(const int &id_num,const int &robinunidades, PaMedic
         //Si no hay suificiente stock llamamos a pedidoMedicam y le pasamos el numero de unidades que necesitamos
        // int aux3 = buscaMedicamID(id_num);
         //aux3 = robinunidades-aux3;
-        pedidoMedicam(paMed->get_id_num(),robinunidades);
+        pedidoMedicam(id_num,robinunidades);
         return 0;
     }
     return stock_PaMed;
@@ -277,7 +276,7 @@ int Farmacia::comprarMedicam(const int &id_num,const int &robinunidades, PaMedic
  * @param robin numero de stock que vamos a asignar
  * @post Incrementamos el stock de un medicamento  o insertamos un objeto stock nuevo si no existe
  */
-void Farmacia::nuevoStock(PaMedicamento *batmelatonina, int &robin) {
+void Farmacia::nuevoStock(PaMedicamento *batmelatonina,const int &robin) {
     //Stock bat1(batmelatonina->get_id_num());
     //std::set<Stock>::iterator it1 = order.find(bat1);
     std::map<unsigned int, Stock>::iterator it1 = order.find(batmelatonina->get_id_num());

@@ -51254,14 +51254,12 @@ public:
 
     std::vector<PaMedicamento*> buscaMedicamNombre(const std::string &nombresito);
     int comprarMedicam(const int &id_num,const int &robin, PaMedicamento *&paMed);
-    void nuevoStock(PaMedicamento* batmelatonina,int &robin);
+    void nuevoStock(PaMedicamento* batmelatonina,const int &robin);
     bool eliminarStock(const int &id_num);
     int buscaMedicamID(const int &id_num);
 };
 # 2 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/Farmacia.cpp" 2
 # 1 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 1
-
-
 
 
 
@@ -53979,7 +53977,7 @@ namespace std
 
 }
 # 1361 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/fstream" 2 3
-# 8 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
+# 6 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
 
 # 1 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/sstream" 1 3
 # 36 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/sstream" 3
@@ -55161,7 +55159,7 @@ namespace std
 
 }
 # 1239 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/sstream" 2 3
-# 10 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
+# 8 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
 # 1 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ctime" 1 3
 # 39 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ctime" 3
        
@@ -55183,7 +55181,7 @@ namespace std
   using ::localtime;
   using ::strftime;
 }
-# 11 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
+# 9 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
 
 
 
@@ -56398,7 +56396,7 @@ namespace std
     }
 
 }
-# 15 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
+# 13 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
 
 # 1 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/list" 1 3
 # 58 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/list" 3
@@ -58472,7 +58470,7 @@ namespace std
     }
 
 }
-# 17 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
+# 15 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
 
 # 1 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/ThashMedicam.h" 1
 
@@ -66198,14 +66196,14 @@ private:
     class Entrada {
     public:
         unsigned long clave;
-        char marca;
+        char estado;
         PaMedicamento dato;
-        Entrada(): marca('-'), clave(0), dato(){}
+        Entrada(): estado('-'), clave(0), dato(){}
         ~Entrada(){}
     };
 
     unsigned long tamFisico, tamLogico,max10,total_Colisiones,primo_jr,maxcolisiones,redisp;
-    unsigned int promedio_Colisiones;
+    float promedio_Colisiones;
     std::vector<Entrada> tablaHash;
 
     bool es_Primo(unsigned primo);
@@ -66221,7 +66219,7 @@ public:
     ~ThashMedicam();
 
     unsigned long getNumElem() const { return tamLogico; }
-    unsigned int get_promedio_colisiones();
+    float get_promedio_colisiones();
     unsigned int get_max10() const;
     unsigned long get_total_colisiones() const;
     float get_carga() const;
@@ -66231,7 +66229,7 @@ public:
     PaMedicamento* buscar(unsigned long clave);
     bool borrar(unsigned long clave);
 };
-# 19 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
+# 17 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
 
 
 
@@ -66272,10 +66270,11 @@ public:
     void mostrarEstado();
     void pruebaRend();
     unsigned long tamTabla() const { return idMedication.getNumElem(); }
-    unsigned int get_promedio_colisiones() ;
+    float get_promedio_colisiones() ;
     unsigned long get_max10() const;
     unsigned long get_total_colisiones() const;
     float get_factor_carga() const;
+    int get_maxColisiones() const;
 };
 # 3 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/Farmacia.cpp" 2
 # 15 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/Farmacia.cpp"
@@ -66520,7 +66519,7 @@ int Farmacia::comprarMedicam(const int &id_num,const int &robinunidades, PaMedic
 
 
 
-void Farmacia::nuevoStock(PaMedicamento *batmelatonina, int &robin) {
+void Farmacia::nuevoStock(PaMedicamento *batmelatonina,const int &robin) {
 
 
     std::map<unsigned int, Stock>::iterator it1 = order.find(batmelatonina->get_id_num());

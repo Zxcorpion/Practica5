@@ -1,5 +1,3 @@
-
-
 #ifndef MEDIEXPRESS_H
 #define MEDIEXPRESS_H
 

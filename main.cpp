@@ -55,6 +55,7 @@ int main() {
     vector_Loco[4] = medBatman.buscaCompuesto(medicamentos[4]);
     vector_Loco[5] = medBatman.buscaCompuesto(medicamentos[5]);
 
+    std::cout<<"Comienzo de la prueba 1"<<std::endl;
     for (int k = 0; k < vector_Loco.size(); k++) {
         std::cout<<"Buscando "<<medicamentos[k]<<"..."<<std::endl;
         std::cout<<"Se han encontrado "<<vector_Loco[k].size()<<std::endl;
@@ -63,7 +64,8 @@ int main() {
         }
     }
 
-     std::vector<Farmacia*> farmas_Sevilla = medBatman.buscar_Farmacia_Provincia("SEVILLA");
+    //Prueba 2
+    std::vector<Farmacia*> farmas_Sevilla = medBatman.buscar_Farmacia_Provincia("SEVILLA");
     std::cout<<"Farmacias encontradas situadas Sevilla: "<< farmas_Sevilla.size()<<std::endl;// esto lo tengo como comprobacion de cuantas de sevilla hay
     /*
     int id_Magnes = 3640, id_Carbonato = 3632, id_Cloruro = 3633;
@@ -74,6 +76,8 @@ int main() {
     PaMedicamento* nuevomag= medBatman.buscaCompuestoMed(3640);
     //Aqui empezamos a buscar los medicamentos
     //cambiar pq busca ahora es private
+    std::cout<<"Stock inicial de las farmacias"<<std::endl;
+    std::cout<<"=============================================="<<std::endl;
     for (int i = 0; i < farmas_Sevilla.size(); i++) {
         std::vector<PaMedicamento*> Magnesio = farmas_Sevilla[i]->buscaMedicamNombre("MAGNESIO");
         std::cout<<"La farmacia "<<farmas_Sevilla[i]->get_nombre()<<" tiene "<<Magnesio.size()<<" tipos de magnesio"<<std::endl;
@@ -124,24 +128,24 @@ int main() {
                 if(comprado==false){
                     std::cout<<"No hay stock, por tanto pedimos OXIDO DE MAGNESIO"<<std::endl;
                     farmas_Sevilla[i]->comprarMedicam(3640,10,nuevomag);
-            }
+                }
                 //std::cout<<"No hay oxido, pidiendo para la proxima..."<<std::endl;
                 //farmas_Sevilla[i]->comprarMedicam(id_Magnes,10,oxido);//Compro 10 por si las moscas
                 //if (stock_Carbonat > 0) {
-                    //compramos sin problemas
-                  //  farmas_Sevilla[i]->comprarMedicam(id_Carbonato,1,carbonato);
-                    //std::cout<<"Ha comprado carbonato"<<std::endl;
+                //compramos sin problemas
+                //  farmas_Sevilla[i]->comprarMedicam(id_Carbonato,1,carbonato);
+                //std::cout<<"Ha comprado carbonato"<<std::endl;
                 //}else {
-                  //  std::cout<<"No hay carbonato, pidiendo para la proxima..."<<std::endl;
-                    //farmas_Sevilla[i]->comprarMedicam(id_Carbonato, 10,carbonato);
-                    //if (stock_Clorur > 0) {
-                      //  std::cout<<"Ha comprado cloruro"<<std::endl;
-                        //farmas_Sevilla[i]->comprarMedicam(id_Cloruro,1,cloruro);
+                //  std::cout<<"No hay carbonato, pidiendo para la proxima..."<<std::endl;
+                //farmas_Sevilla[i]->comprarMedicam(id_Carbonato, 10,carbonato);
+                //if (stock_Clorur > 0) {
+                //  std::cout<<"Ha comprado cloruro"<<std::endl;
+                //farmas_Sevilla[i]->comprarMedicam(id_Cloruro,1,cloruro);
 
-                    //}else{
-                      //  std::cout<<"No hay cloruro, pidiendo para la proxima..."<<std::endl;
-                        //farmas_Sevilla[i]->comprarMedicam(id_Cloruro, 10,cloruro);
-                    //}
+                //}else{
+                //  std::cout<<"No hay cloruro, pidiendo para la proxima..."<<std::endl;
+                //farmas_Sevilla[i]->comprarMedicam(id_Cloruro, 10,cloruro);
+                //}
                 //}
             }
         }
@@ -152,15 +156,33 @@ int main() {
             int stock1=farmas_Sevilla[i]->buscaMedicamID(Magnesioversion2[k]->get_id_num());
             std::cout<<Magnesioversion2[k]->get_nombre()<<": "<<stock1<<std::endl;
         }
+    }
+    //Prueba 3
+    std::vector<Farmacia*> farmas_Jaen = medBatman.buscar_Farmacia_Provincia("JAEN");
+    // std::vector<PaMedicamento*> antigenos_jaen = farmas_Jaen[0]->buscaMedicamNombre("ANTIGENO OLIGOSACARIDO");
+    std::vector<PaMedicamento*> antigenos= medBatman.buscaCompuesto("ANTIGENO OLIGOSACARIDO");
+    std::cout<<"Stock inicial de la farmacia "<<farmas_Jaen[0]->get_nombre()<<" de cualquier tipo de ANTIGENO OLIGOSACARIDO : "<<std::endl; //Hago esto porque sé que solo hay una farmacia
+    for (int i = 0 ; i < antigenos.size(); i++) {
+        std::cout<< "Stock inicial de "<<antigenos[i]->get_nombre()<< " " <<farmas_Jaen[0]->buscaMedicamID(antigenos[i]->get_id_num())<<std::endl;
+        std::cout<< "Pidiendo 10 unidades"<<std::endl;
+        farmas_Jaen[0]->nuevoStock(antigenos[i],10);
+    }
+    std::cout<<"Stock final de la farmacia "<<farmas_Jaen[0]->get_nombre()<<" de cualquier tipo de ANTIGENO OLIGOSACARIDO : "<<std::endl; //Hago esto porque sé que solo hay una farmacia
+    for (int i = 0 ; i < antigenos.size(); i++) {
+        std::cout<< "Stock final de "<<antigenos[i]->get_nombre()<< " " <<farmas_Jaen[0]->buscaMedicamID(antigenos[i]->get_id_num())<<std::endl;
+    }
+        // if ( antigenos_jaen.size() == 0) {
+        //     std::cout<<"La farmacia "<< farmas_Jaen[0]->get_nombre()<< " no posee antigenos, procediendo a pedirlos..."<<std::endl;
+        // }
+        //farmas_Jaen[0]->nuevoStock(10,)
         /*
         std::cout<<"==============================="<<std::endl;
         std::cout<<"Stock final de cada medicamento de la Farmacia "<<i+1<< ": "<<farmas_Sevilla[i]->get_nombre()<<std::endl;
         std::cout<<"Oxido: "<<farmas_Sevilla[i]->buscaMedicamID(id_Magnes)<<", Carbonato: "<<farmas_Sevilla[i]->buscaMedicamID(id_Carbonato)<<", Cloruro: "<<farmas_Sevilla[i]->buscaMedicamID(id_Cloruro)<<std::endl;
         std::cout<<"==============================="<<std::endl;
         */
-    }
 /*
-    //Prueba2
+
     std::vector<Farmacia*> farmas_Madrid = medBatman.buscar_Farmacia_Provincia("MADRID");
     std::vector<Farmacia*> farmas_Madrid_Virus;
     // int contadorMadridVirus = 0;

@@ -8,8 +8,6 @@
 
 
 
-
-
 # 1 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/iostream" 1 3
 # 36 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/iostream" 3
        
@@ -41629,7 +41627,7 @@ namespace std
 # 85 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/iostream" 3
 
 }
-# 7 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
+# 5 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
 # 1 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/fstream" 1 3
 # 36 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/fstream" 3
        
@@ -44341,7 +44339,7 @@ namespace std
 
 }
 # 1361 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/fstream" 2 3
-# 8 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
+# 6 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
 
 # 1 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/sstream" 1 3
 # 36 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/sstream" 3
@@ -45523,7 +45521,7 @@ namespace std
 
 }
 # 1239 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/sstream" 2 3
-# 10 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
+# 8 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
 # 1 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ctime" 1 3
 # 39 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ctime" 3
        
@@ -45545,7 +45543,7 @@ namespace std
   using ::localtime;
   using ::strftime;
 }
-# 11 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
+# 9 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
 # 1 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/PaMedicamento.h" 1
 
 
@@ -45618,7 +45616,7 @@ public:
     bool operator<(const PaMedicamento &orig) const;
     bool operator==(const PaMedicamento &orig) const;
 };
-# 12 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
+# 10 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
 
 # 1 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/map" 1 3
 # 58 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/map" 3
@@ -50188,7 +50186,7 @@ namespace std
     }
 
 }
-# 14 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
+# 12 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
 # 1 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/set" 1 3
 # 58 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/set" 3
        
@@ -51400,7 +51398,7 @@ namespace std
     }
 
 }
-# 15 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
+# 13 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
 # 1 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/vector" 1 3
 # 58 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/vector" 3
        
@@ -56309,7 +56307,7 @@ namespace std
     }
 
 }
-# 16 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
+# 14 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
 # 1 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/list" 1 3
 # 58 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/list" 3
        
@@ -58382,7 +58380,7 @@ namespace std
     }
 
 }
-# 17 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
+# 15 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
 # 1 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/Farmacia.h" 1
 
 
@@ -58467,11 +58465,11 @@ public:
 
     std::vector<PaMedicamento*> buscaMedicamNombre(const std::string &nombresito);
     int comprarMedicam(const int &id_num,const int &robin, PaMedicamento *&paMed);
-    void nuevoStock(PaMedicamento* batmelatonina,int &robin);
+    void nuevoStock(PaMedicamento* batmelatonina,const int &robin);
     bool eliminarStock(const int &id_num);
     int buscaMedicamID(const int &id_num);
 };
-# 18 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
+# 16 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
 # 1 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/ThashMedicam.h" 1
 
 
@@ -66198,14 +66196,14 @@ private:
     class Entrada {
     public:
         unsigned long clave;
-        char marca;
+        char estado;
         PaMedicamento dato;
-        Entrada(): marca('-'), clave(0), dato(){}
+        Entrada(): estado('-'), clave(0), dato(){}
         ~Entrada(){}
     };
 
     unsigned long tamFisico, tamLogico,max10,total_Colisiones,primo_jr,maxcolisiones,redisp;
-    unsigned int promedio_Colisiones;
+    float promedio_Colisiones;
     std::vector<Entrada> tablaHash;
 
     bool es_Primo(unsigned primo);
@@ -66221,7 +66219,7 @@ public:
     ~ThashMedicam();
 
     unsigned long getNumElem() const { return tamLogico; }
-    unsigned int get_promedio_colisiones();
+    float get_promedio_colisiones();
     unsigned int get_max10() const;
     unsigned long get_total_colisiones() const;
     float get_carga() const;
@@ -66231,7 +66229,7 @@ public:
     PaMedicamento* buscar(unsigned long clave);
     bool borrar(unsigned long clave);
 };
-# 19 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
+# 17 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
 
 
 
@@ -66272,13 +66270,13 @@ public:
     void mostrarEstado();
     void pruebaRend();
     unsigned long tamTabla() const { return idMedication.getNumElem(); }
-    unsigned int get_promedio_colisiones() ;
+    float get_promedio_colisiones() ;
     unsigned long get_max10() const;
     unsigned long get_total_colisiones() const;
     float get_factor_carga() const;
+    int get_maxColisiones() const;
 };
 # 3 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp" 2
-
 # 1 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/algorithm" 1 3
 # 58 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/algorithm" 3
        
@@ -76917,10 +76915,10 @@ lexicographical_compare(_ExecutionPolicy&& __exec, _ForwardIterator1 __first1, _
 
 }
 # 86 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/algorithm" 2 3
-# 5 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp" 2
-# 13 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+# 4 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp" 2
+# 12 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
 
-# 13 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+# 12 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
 MediExpress::MediExpress():
 idMedication(3310,0.7),labs(),pharmacy(), vMedi(),nombMedication(), listaMeds() {
 }
@@ -76978,16 +76976,16 @@ nombMedication(), listaMeds()
 
                 fila="";
                 columnas.clear();
-# 78 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+# 77 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
             }
         }
 
         is.close();
 
         std::cout << "Tiempo de lectura de meds: " << ((clock() - t_ini) / (float) 
-# 83 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp" 3
+# 82 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp" 3
                                                                                   1000
-# 83 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+# 82 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
                                                                                                 ) << " segs." << std::endl;
     } else {
         std::cout << "Error de apertura en archivo" << std::endl;
@@ -76995,6 +76993,7 @@ nombMedication(), listaMeds()
 
 
 
+    clock_t t_busqueda = clock();
     for (int i=0;i<vMedi.size();i++) {
 
         PaMedicamento *aux = idMedication.buscar(vMedi[i]);
@@ -77010,6 +77009,12 @@ nombMedication(), listaMeds()
             }
         }
     }
+    std::cout << "Tiempo de lectura en asociacion de nombMedication: " << ((clock() - t_busqueda) / (float) 
+# 105 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp" 3
+                                                                                                           1000
+# 105 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+                                                                                                                         ) << " segs." << std::endl;
+
 
 
 
@@ -77060,16 +77065,16 @@ nombMedication(), listaMeds()
                 }catch (std::out_of_range &e) {
                     std::cerr<<e.what()<<std::endl;
                 }
-# 164 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+# 166 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
             }
         }
 
         is.close();
 
         std::cout << "Tiempo de lectura de labs: " << ((clock() - t_ini) / (float) 
-# 169 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp" 3
+# 171 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp" 3
                                                                                   1000
-# 169 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+# 171 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
                                                                                                 ) << " segs." << std::endl;
     } else {
         std::cout << "Error de apertura en archivo" << std::endl;
@@ -77091,7 +77096,7 @@ nombMedication(), listaMeds()
         }
         itLaboratorio++;
     }
-# 201 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+# 203 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
     std::vector<Laboratorio*> labsMadrid = this->buscarLabCiudad("Madrid");
     std::vector<PaMedicamento*> medSin = this->getMedicamentoSinLab();
     std::cout << "Medicamentos sin asignar: " << medSin.size() << std::endl;
@@ -77155,16 +77160,16 @@ nombMedication(), listaMeds()
                 columnas.str(std::string());
                 columnas.clear();
                 columnas.str(fila);
-# 274 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+# 276 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
             }
         }
 
         is.close();
 
         std::cout << "Tiempo de lectura de farmacias: " << ((clock() - t_ini) / (float) 
-# 279 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp" 3
+# 281 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp" 3
                                                                                        1000
-# 279 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+# 281 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
                                                                                                      ) << " segs." << std::endl;
     } else {
         std::cout << "Error de apertura en archivo" << std::endl;
@@ -77193,15 +77198,34 @@ nombMedication(), listaMeds()
 
 
     clock_t t_inicio = clock();
+    int busqueda_hash_cont=0;
     for (int i=0;i<vMedi.size();i++) {
-        if (buscaCompuestoMed(vMedi[i]) != 0) {
+        if (idMedication.buscar(vMedi[i]) != 0) {
+            busqueda_hash_cont++;
         }
     }
-        std::cout<<"Tiempo de busqueda de meds usando tabla hash: "<<((clock() - t_inicio) / (float) 
-# 311 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp" 3
-                                                                                                    1000
-# 311 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
-                                                                                                                  )<<" segs"<<std::endl;
+    std::cout<<"Tiempo de busqueda de meds usando tabla hash: "<<((clock() - t_inicio)*1000 / (float) 
+# 315 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp" 3
+                                                                                                     1000
+# 315 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+                                                                                                                   )<<" milisegs"<<std::endl;
+# 335 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+    clock_t t_inicio2 = clock();
+    int busqueda_lista_cont=0;
+    for (int i=0; i < vMedi.size(); i++) {
+        std::list<PaMedicamento>::iterator comparaBusqueda = listaMeds.begin();
+        for (comparaBusqueda; comparaBusqueda != listaMeds.end(); comparaBusqueda++) {
+            if (comparaBusqueda->get_id_num() == vMedi[i]) {
+                busqueda_lista_cont++;
+                break;
+            }
+        }
+    }
+    std::cout<<"Tiempo de busqueda de meds usando una lista: "<<((clock() - t_inicio2)*1000 / (float) 
+# 346 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp" 3
+                                                                                                     1000
+# 346 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+                                                                                                                   )<<" milisegs"<<std::endl;
 }
 
 
@@ -77225,10 +77249,11 @@ MediExpress &MediExpress::operator=(const MediExpress &orig) {
         pharmacy = orig.pharmacy;
         vMedi = orig.vMedi;
         nombMedication = orig.nombMedication;
+        listaMeds = orig.listaMeds;
     }
     return *this;
 }
-# 364 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+# 400 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
 MediExpress::~MediExpress() {}
 
 
@@ -77274,7 +77299,43 @@ std::vector<Laboratorio*> MediExpress::buscarLabCiudad(const std::string &nombre
     }
     return vector;
     }
-# 452 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+# 453 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+std::vector<PaMedicamento*> MediExpress::buscaCompuesto(const std::string &nombrePA) {
+    std::vector<PaMedicamento*> arkham_resultados;
+    std::vector<std::set<PaMedicamento*>> arkham_set;
+    std::stringstream ss;
+    std::string arkham_separador;
+    ss.str(nombrePA);
+    int batwhile=0;
+    while (getline(ss, arkham_separador, ' ')){
+        std::set<PaMedicamento*> arkham_conjunto_med;
+        arkham_set.push_back(arkham_conjunto_med);
+        std::multimap<std::string,PaMedicamento*>::iterator iterador_insercion_conjunto= nombMedication.find(arkham_separador);
+        while (iterador_insercion_conjunto!=nombMedication.end() && iterador_insercion_conjunto->first==arkham_separador){
+            arkham_set[batwhile].insert(iterador_insercion_conjunto->second);
+            iterador_insercion_conjunto++;
+        }
+        batwhile++;
+    }
+    std::set<PaMedicamento*> arkham_origins,conjunto_interseccion;
+    arkham_origins=arkham_set[0];
+    for (int i = 1; i < arkham_set.size(); i++) {
+        set_intersection(arkham_set[i].begin(), arkham_set[i].end(), arkham_origins.begin(), arkham_origins.end(),
+                         inserter(conjunto_interseccion, conjunto_interseccion.begin()));
+        arkham_origins=conjunto_interseccion;
+        conjunto_interseccion.clear();
+    }
+    arkham_resultados.insert(arkham_resultados.begin(),arkham_origins.begin(),arkham_origins.end());
+
+    return arkham_resultados;
+}
+
+
+
+
+
+
+
 std::vector<PaMedicamento*> MediExpress::getMedicamentoSinLab() {
     std::vector<PaMedicamento*> vector_meds_SinLab;
     PaMedicamento *med_Sin_Lab;
@@ -77290,7 +77351,7 @@ std::vector<PaMedicamento*> MediExpress::getMedicamentoSinLab() {
     }
     return vector_meds_SinLab;
 }
-# 500 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+# 537 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
 PaMedicamento *MediExpress::buscaCompuestoMed(const int &ID_) {
 
 
@@ -77363,7 +77424,7 @@ std::list<Laboratorio*> MediExpress::buscarLabs(const std::string &nombrePA) {
     }
     return lista;
 }
-# 580 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+# 617 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
 std::vector<Farmacia*> MediExpress::buscar_Farmacia_Provincia(const std::string &nombreProvin) {
     std::vector<Farmacia*> farmacias_Nightwing;
 
@@ -77382,7 +77443,7 @@ std::vector<Farmacia*> MediExpress::buscar_Farmacia_Provincia(const std::string 
     }
     return farmacias_Nightwing;
 }
-# 606 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
+# 643 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.cpp"
 bool MediExpress::eliminarMedicamento(const unsigned int &id_num) {
 
     PaMedicamento *eliminado = idMedication.buscar(id_num);
@@ -77434,7 +77495,7 @@ bool MediExpress::eliminarMedicamento(const unsigned int &id_num) {
     return true;
 }
 
-unsigned int MediExpress::get_promedio_colisiones() {
+float MediExpress::get_promedio_colisiones() {
     return idMedication.get_promedio_colisiones();
 }
 

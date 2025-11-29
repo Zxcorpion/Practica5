@@ -58269,7 +58269,13 @@ namespace std
 }
 # 8 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/main.cpp" 2
 # 1 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 1
-# 10 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h"
+
+
+
+
+
+
+
 # 1 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ctime" 1 3
 # 39 "C:/Users/pablo/Downloads/Mingw/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ctime" 3
        
@@ -58291,7 +58297,7 @@ namespace std
   using ::localtime;
   using ::strftime;
 }
-# 11 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
+# 9 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
 # 1 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/PaMedicamento.h" 1
 
 
@@ -58364,7 +58370,7 @@ public:
     bool operator<(const PaMedicamento &orig) const;
     bool operator==(const PaMedicamento &orig) const;
 };
-# 12 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
+# 10 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
 
 
 
@@ -58452,11 +58458,11 @@ public:
 
     std::vector<PaMedicamento*> buscaMedicamNombre(const std::string &nombresito);
     int comprarMedicam(const int &id_num,const int &robin, PaMedicamento *&paMed);
-    void nuevoStock(PaMedicamento* batmelatonina,int &robin);
+    void nuevoStock(PaMedicamento* batmelatonina,const int &robin);
     bool eliminarStock(const int &id_num);
     int buscaMedicamID(const int &id_num);
 };
-# 18 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
+# 16 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
 # 1 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/ThashMedicam.h" 1
 
 
@@ -66183,14 +66189,14 @@ private:
     class Entrada {
     public:
         unsigned long clave;
-        char marca;
+        char estado;
         PaMedicamento dato;
-        Entrada(): marca('-'), clave(0), dato(){}
+        Entrada(): estado('-'), clave(0), dato(){}
         ~Entrada(){}
     };
 
     unsigned long tamFisico, tamLogico,max10,total_Colisiones,primo_jr,maxcolisiones,redisp;
-    unsigned int promedio_Colisiones;
+    float promedio_Colisiones;
     std::vector<Entrada> tablaHash;
 
     bool es_Primo(unsigned primo);
@@ -66206,7 +66212,7 @@ public:
     ~ThashMedicam();
 
     unsigned long getNumElem() const { return tamLogico; }
-    unsigned int get_promedio_colisiones();
+    float get_promedio_colisiones();
     unsigned int get_max10() const;
     unsigned long get_total_colisiones() const;
     float get_carga() const;
@@ -66216,7 +66222,7 @@ public:
     PaMedicamento* buscar(unsigned long clave);
     bool borrar(unsigned long clave);
 };
-# 19 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
+# 17 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
 
 
 
@@ -66257,10 +66263,11 @@ public:
     void mostrarEstado();
     void pruebaRend();
     unsigned long tamTabla() const { return idMedication.getNumElem(); }
-    unsigned int get_promedio_colisiones() ;
+    float get_promedio_colisiones() ;
     unsigned long get_max10() const;
     unsigned long get_total_colisiones() const;
     float get_factor_carga() const;
+    int get_maxColisiones() const;
 };
 # 9 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/main.cpp" 2
 # 20 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/main.cpp"
@@ -66278,11 +66285,121 @@ void mostrarFarmacia(Farmacia &farma) {
 
 
 
+
 int main() {
 
 
 
-    MediExpress medBatman2("../pa_medicamentos.csv","../lab2.csv","../farmacias.csv",3310,0.68);
-# 117 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/main.cpp"
+    MediExpress medBatman("../pa_medicamentos.csv","../lab2.csv","../farmacias.csv",3310,0.65);
+    medBatman.mostrarEstado();
+
+    std::string medicamentos[6]={
+        {"MAGNESIO CLORURO HEXAHIDRATO"},
+        {"CLORURO"},
+        {"ANHIDRO CALCIO CLORURO"},
+        {"LIDOCAINA HIDROCLORURO"},
+        {"MENTA PIPERITA"},
+        {"VIRUS GRIPE"}
+    };
+    std::vector<std::vector<PaMedicamento*> > vector_Loco(6);
+    vector_Loco[0] = medBatman.buscaCompuesto(medicamentos[0]);
+    vector_Loco[1] = medBatman.buscaCompuesto(medicamentos[1]);
+    vector_Loco[2] = medBatman.buscaCompuesto(medicamentos[2]);
+    vector_Loco[3] = medBatman.buscaCompuesto(medicamentos[3]);
+    vector_Loco[4] = medBatman.buscaCompuesto(medicamentos[4]);
+    vector_Loco[5] = medBatman.buscaCompuesto(medicamentos[5]);
+
+    std::cout<<"Comienzo de la prueba 1"<<std::endl;
+    for (int k = 0; k < vector_Loco.size(); k++) {
+        std::cout<<"Buscando "<<medicamentos[k]<<"..."<<std::endl;
+        std::cout<<"Se han encontrado "<<vector_Loco[k].size()<<std::endl;
+        for (int l = 0; l < vector_Loco[k].size(); l++){
+            std::cout<<"Nombre del medicamento "<< l+1 <<" : "<< vector_Loco[k][l]->get_nombre()<<std::endl;
+        }
+    }
+
+
+    std::vector<Farmacia*> farmas_Sevilla = medBatman.buscar_Farmacia_Provincia("SEVILLA");
+    std::cout<<"Farmacias encontradas situadas Sevilla: "<< farmas_Sevilla.size()<<std::endl;
+
+
+
+
+
+
+    PaMedicamento* nuevomag= medBatman.buscaCompuestoMed(3640);
+
+
+    std::cout<<"Stock inicial de las farmacias"<<std::endl;
+    std::cout<<"=============================================="<<std::endl;
+    for (int i = 0; i < farmas_Sevilla.size(); i++) {
+        std::vector<PaMedicamento*> Magnesio = farmas_Sevilla[i]->buscaMedicamNombre("MAGNESIO");
+        std::cout<<"La farmacia "<<farmas_Sevilla[i]->get_nombre()<<" tiene "<<Magnesio.size()<<" tipos de magnesio"<<std::endl;
+    }
+    for (int i = 0;i < farmas_Sevilla.size(); i++) {
+
+        std::vector<PaMedicamento*> Magnesio = farmas_Sevilla[i]->buscaMedicamNombre("MAGNESIO");
+        std::cout<<"Comprando en la farmacia "<<farmas_Sevilla[i]->get_nombre()<<std::endl;
+        for (int k = 0; k < Magnesio.size(); k++) {
+            int stock1=farmas_Sevilla[i]->buscaMedicamID(Magnesio[k]->get_id_num());
+            std::cout<<Magnesio[k]->get_nombre()<<": "<<stock1<<std::endl;
+        }
+# 102 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/main.cpp"
+        if(Magnesio.size()==0) {
+            std::cout<<"En la farmacia "<<farmas_Sevilla[i]->get_nombre() <<" no queda nada de magnesio, por tanto pedimos OXIDO DE MAGNESIO"<<std::endl;
+            farmas_Sevilla[i]->comprarMedicam(3640,10,nuevomag);
+            Magnesio = farmas_Sevilla[i]->buscaMedicamNombre("MAGNESIO");
+        }
+        for (int j = 0; j < 12; j++) {
+            std::cout<<"Persona "<<j+1<<": "<<std::endl;
+
+
+
+
+            if (Magnesio.size() > 0) {
+                bool comprado=false;
+                for (int k = 0; k < Magnesio.size(); k++) {
+                    int stock = farmas_Sevilla[i]->buscaMedicamID(Magnesio[k]->get_id_num());
+                    if(stock>0) {
+                        farmas_Sevilla[i]->comprarMedicam(Magnesio[k]->get_id_num(),stock,Magnesio[k]);
+                        std::cout<<"Ha comprado "<<Magnesio[k]->get_nombre()<<" correctamente "<<Magnesio[k]->get_nombre() <<std::endl;
+                        comprado=true;
+                    }
+
+
+
+
+
+                }
+                if(comprado==false){
+                    std::cout<<"No hay stock, por tanto pedimos OXIDO DE MAGNESIO"<<std::endl;
+                    farmas_Sevilla[i]->comprarMedicam(3640,10,nuevomag);
+                }
+# 150 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/main.cpp"
+            }
+        }
+        std::cout<<"Nuevo estado: "<<std::endl;
+        std::vector<PaMedicamento*> Magnesioversion2 = farmas_Sevilla[i]->buscaMedicamNombre("MAGNESIO");
+        std::cout<<"Tipos de de Magnesio en la farmacia " << i+1 <<": "<<Magnesioversion2.size()<<std::endl;
+        for (int k = 0; k < Magnesioversion2.size(); k++) {
+            int stock1=farmas_Sevilla[i]->buscaMedicamID(Magnesioversion2[k]->get_id_num());
+            std::cout<<Magnesioversion2[k]->get_nombre()<<": "<<stock1<<std::endl;
+        }
+    }
+
+    std::vector<Farmacia*> farmas_Jaen = medBatman.buscar_Farmacia_Provincia("JAEN");
+
+    std::vector<PaMedicamento*> antigenos= medBatman.buscaCompuesto("ANTIGENO OLIGOSACARIDO");
+    std::cout<<"Stock inicial de la farmacia "<<farmas_Jaen[0]->get_nombre()<<" de cualquier tipo de ANTIGENO OLIGOSACARIDO : "<<std::endl;
+    for (int i = 0 ; i < antigenos.size(); i++) {
+        std::cout<< "Stock inicial de "<<antigenos[i]->get_nombre()<< " " <<farmas_Jaen[0]->buscaMedicamID(antigenos[i]->get_id_num())<<std::endl;
+        std::cout<< "Pidiendo 10 unidades"<<std::endl;
+        farmas_Jaen[0]->nuevoStock(antigenos[i],10);
+    }
+    std::cout<<"Stock final de la farmacia "<<farmas_Jaen[0]->get_nombre()<<" de cualquier tipo de ANTIGENO OLIGOSACARIDO : "<<std::endl;
+    for (int i = 0 ; i < antigenos.size(); i++) {
+        std::cout<< "Stock final de "<<antigenos[i]->get_nombre()<< " " <<farmas_Jaen[0]->buscaMedicamID(antigenos[i]->get_id_num())<<std::endl;
+    }
+# 201 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/main.cpp"
     return 0;
 }

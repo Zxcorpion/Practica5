@@ -49,7 +49,7 @@ public:
 
     std::vector<PaMedicamento*> buscaMedicamNombre(const std::string &nombresito);
     int comprarMedicam(const int &id_num,const int &robin, PaMedicamento *&paMed);
-    void nuevoStock(PaMedicamento* batmelatonina,int &robin);
+    void nuevoStock(PaMedicamento* batmelatonina,const int &robin);
     bool eliminarStock(const int &id_num);
     int buscaMedicamID(const int &id_num);
 };

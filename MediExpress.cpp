@@ -1,6 +1,5 @@
 
 #include "MediExpress.h"
-
 #include <algorithm>
 #include <map>
 #include <set>
@@ -314,7 +313,8 @@ nombMedication(), listaMeds()
         }
     }
     std::cout<<"Tiempo de busqueda de meds usando tabla hash: "<<((clock() - t_inicio)*1000 / (float) CLOCKS_PER_SEC)<<" milisegs"<<std::endl;
-   /*
+
+    /*
    int contado=0;
     clock_t t_inicio2 = clock();
     std::list<PaMedicamento>::iterator comparaBusqueda = listaMeds.begin();
@@ -331,6 +331,7 @@ nombMedication(), listaMeds()
         }
     }
    */
+
     clock_t t_inicio2 = clock();
     int busqueda_lista_cont=0;
     for (int i=0; i < vMedi.size(); i++) {
@@ -366,6 +367,7 @@ MediExpress &MediExpress::operator=(const MediExpress &orig) {
         pharmacy = orig.pharmacy;
         vMedi = orig.vMedi;
         nombMedication = orig.nombMedication;
+        listaMeds = orig.listaMeds;
     }
     return *this;
 }
@@ -448,7 +450,6 @@ std::vector<Laboratorio*> MediExpress::buscarLabCiudad(const std::string &nombre
  * @return vector con los medicamentos que contienen el nombre pasado por referencia
  * @post se crea un vector auxiliar y se inserta en el lo medicametnos convenientes
 **/
-//Cambiado, POSIBLE CAMBIO, porque no sabemos si busca nombre entero
 std::vector<PaMedicamento*> MediExpress::buscaCompuesto(const std::string &nombrePA) {
     std::vector<PaMedicamento*> arkham_resultados;
     std::vector<std::set<PaMedicamento*>> arkham_set;
@@ -714,5 +715,4 @@ void MediExpress::mostrarEstado() {
 //AHORA ES FLOAT
 float MediExpress::get_factor_carga() const {
     return idMedication.get_carga();
-
 }
