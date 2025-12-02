@@ -59,5 +59,7 @@ public:
     unsigned long get_total_colisiones() const;
     float get_factor_carga() const;
     int get_maxColisiones() const;
+    int redispersiones() const;
+    //void redispersar(unsigned tam);
 };
 #endif //MEDIEXPRESS_H

@@ -60,6 +60,9 @@ nombMedication(), listaMeds()
                 }
 
                 PaMedicamento medicamento(id_num,id_alpha,nombre);
+                /*if (lambda > 0.6) {
+                    redispersar()
+                }*/
                 idMedication.insertar(id_num,medicamento);
                 listaMeds.push_back(medicamento);
                 vMedi.push_back(id_num);
@@ -710,9 +713,22 @@ void MediExpress::mostrarEstado() {
     std::cout<<"Promedio de colisiones: "<< get_promedio_colisiones()<<std::endl;
     std::cout<<"Numero de veces que se superan las 10 colisiones: "<< get_max10()<<std::endl;
     std::cout<<"Factor de carga empleado: "<<get_factor_carga()<<std::endl;
+    std::cout<<"Numero de redispersiones: "<<redispersiones()<<std::endl;
 }
 
 //AHORA ES FLOAT
 float MediExpress::get_factor_carga() const {
     return idMedication.get_carga();
 }
+
+int MediExpress::redispersiones() const {
+    return idMedication.get_redisp();
+}
+
+
+// void MediExpress::redispersar(unsigned tam) {
+//     ThashMedicam aux;
+//     for (int i=0; i<idMedication.getNumElem();i++) {
+//
+//     }
+// }

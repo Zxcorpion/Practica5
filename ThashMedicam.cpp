@@ -1,7 +1,6 @@
 
 #include "ThashMedicam.h"
 
-
 bool ThashMedicam::es_Primo(unsigned primo) {
     if (primo <= 1) return false;
     if (primo == 2) return true;
@@ -139,6 +138,9 @@ bool ThashMedicam::insertar(unsigned long clave, PaMedicamento &pa) {
     if ( intento >10) {
         max10 = intento;
     }
+    if (get_carga() > 0.7 ) {
+        redispersar(tamFisico*1.3);
+    }
     //poner estadisticos
     std::cout<<"La insercion del medicamento con id "<<clave<<" y nombre "<< pa.get_nombre()<<" intenta"
     " accedera la posicion "<<y<<" y conlleva:"<<std::endl;
@@ -150,6 +152,10 @@ bool ThashMedicam::insertar(unsigned long clave, PaMedicamento &pa) {
 
 unsigned int ThashMedicam::maxColisiones() const {
     return maxcolisiones;
+}
+
+unsigned long ThashMedicam::get_redisp() const {
+    return redisp;
 }
 
 //Libre = -, Disponible = ?, Ocupado = X
@@ -221,3 +227,37 @@ bool ThashMedicam::borrar(unsigned long clave) {
     return fin; //fin=true
 }
 ThashMedicam::~ThashMedicam() {}
+
+void ThashMedicam::redispersar(unsigned tam) {
+    unsigned nuevoTam = primo_sig(tam);
+    std::vector<Entrada> vieja = tablaHash; //Copiamos la tabla original
+    tamFisico = nuevoTam;
+    tamLogico = 0;
+    primo_jr = primo_previo(tamFisico);
+    redisp++;
+
+    std::vector<Entrada> nueva(nuevoTam);
+    for (int i=0; i < vieja.size(); i++ ) {
+        if (vieja[i].estado == 'X') {
+            unsigned long clave = vieja[i].clave;
+            PaMedicamento batDato = vieja[i].dato;
+
+            bool encontrado = false;
+            unsigned j = 0;
+           while (j < tamFisico && !encontrado) {
+               unsigned y = hash2(clave,j);
+
+               if (nueva[y].estado == '-' || nueva[y].estado == '?') {
+                   nueva[y].dato = batDato;
+                   nueva[y].clave = clave;
+                   nueva[y].estado = 'X';
+                   tamLogico++;
+                   encontrado = true;
+               }else {
+                   j++;
+               }
+           }
+        }
+    }
+    tablaHash = nueva;
+}

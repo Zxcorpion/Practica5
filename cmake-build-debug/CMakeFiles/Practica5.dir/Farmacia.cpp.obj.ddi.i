@@ -66225,9 +66225,12 @@ public:
     float get_carga() const;
     unsigned int maxColisiones() const;
 
+    unsigned long get_redisp() const;
+
     bool insertar(unsigned long clave, PaMedicamento &pa);
     PaMedicamento* buscar(unsigned long clave);
     bool borrar(unsigned long clave);
+    void redispersar(unsigned tam);
 };
 # 17 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/MediExpress.h" 2
 
@@ -66275,6 +66278,8 @@ public:
     unsigned long get_total_colisiones() const;
     float get_factor_carga() const;
     int get_maxColisiones() const;
+    int redispersiones() const;
+
 };
 # 3 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/Farmacia.cpp" 2
 # 15 "C:/Users/pablo/Downloads/Segundo Curso/Estructuras/Practicas/Practica5/Farmacia.cpp"

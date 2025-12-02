@@ -218,8 +218,9 @@ int main() {
             }
         }
     }
-
     //Parejas
-
+    std::cout<<"Redispersion"<<std::endl;
+    MediExpress medBatman2("../pa_medicamentos.csv","../lab2.csv","../farmacias.csv",3310,0.72);
+    medBatman2.mostrarEstado();
     return 0;
 }

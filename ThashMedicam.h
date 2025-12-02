@@ -43,9 +43,12 @@ public:
     float get_carga() const;//Carga es que tan llena está la tabla
     unsigned int maxColisiones() const;
 
+    unsigned long get_redisp() const;
+
     bool insertar(unsigned long clave, PaMedicamento &pa);
     PaMedicamento* buscar(unsigned long clave);
     bool borrar(unsigned long clave);
+    void redispersar(unsigned tam);
 };
 
 
