@@ -1,6 +1,12 @@
 
+
 #include "ThashMedicam.h"
 
+/**
+ * @biref Funcion para comprobar si es primo o no
+ * @param primo unsigned numero a comprobar
+ * @return true si lo es o false sino
+ */
 bool ThashMedicam::es_Primo(unsigned primo) {
     if (primo <= 1) return false;
     if (primo == 2) return true;
@@ -12,6 +18,11 @@ bool ThashMedicam::es_Primo(unsigned primo) {
     return true;
 }
 
+/**
+ * @brief Funcion para cacluar el primo anterior a num
+ * @param num unsigned
+ * @return menor que es el primo previo a num
+ */
 int ThashMedicam::primo_previo(unsigned num) {
     if (num == 0 || num == 1) {
         throw std::invalid_argument("0 y 1 no pueden ser primos");
@@ -23,7 +34,11 @@ int ThashMedicam::primo_previo(unsigned num) {
     return menor;
 }
 
-
+/**
+ * @brief Funcion para calcular el primo siguiente a num
+ * @param num
+ * @return num
+ */
 int ThashMedicam::primo_sig(unsigned num) {
     if (num == 0 || num == 1) {
         throw std::invalid_argument("0 y 1 no pueden ser primos");
@@ -35,13 +50,24 @@ int ThashMedicam::primo_sig(unsigned num) {
     return mayor;
 }
 
+/**
+ * @brief Funcion hash
+ * @param clave
+ * @param intento
+ * @return pos unsigned long posicion
+ */
 int ThashMedicam::hash(unsigned long clave, int intento) {
     unsigned long pos=0;
     pos = (clave + (intento*intento)) % tamFisico;
     return pos;
 }
 
-
+/**
+ * @brief Fuincon hash numero 2
+ * @param clave
+ * @param intento
+ * @return h3 unsigned long posicion
+ */
 int ThashMedicam::hash2(unsigned long clave, int intento) {
     unsigned long h1=0,h2=0,h3=0;
     h1 = clave % tamFisico;
@@ -50,6 +76,12 @@ int ThashMedicam::hash2(unsigned long clave, int intento) {
     return h3;
 }
 
+/**
+ * @brief Funcion hash3
+ * @param clave
+ * @param intento
+ * @return h3 unsigned long posicion
+ */
 int ThashMedicam::hash3(unsigned long clave, int intento) {
     unsigned long h1=0,h2=0,h3=0;
     h1 = clave % tamFisico;
@@ -58,21 +90,34 @@ int ThashMedicam::hash3(unsigned long clave, int intento) {
     return h3;
 }
 
-
+/**
+ * @brief Constructor parametrizado
+ * @param maxElementos
+ * @param lambda
+ */
 ThashMedicam::ThashMedicam(int maxElementos, float lambda): tamFisico(primo_sig(maxElementos/lambda)),
-tablaHash(tamFisico, Entrada()), tamLogico(0),promedio_Colisiones(0),
-max10(0), total_Colisiones(0),primo_jr(0),maxcolisiones(0),redisp(0)
+                                                            tablaHash(tamFisico, Entrada()), tamLogico(0),promedio_Colisiones(0),
+                                                            max10(0), total_Colisiones(0),primo_jr(0),maxcolisiones(0),redisp(0)
 {
     primo_jr = primo_previo(tamFisico);
 }
+
+/**
+ * @brief Constructor de copia
+ * @param orig objeto copia
+ */
 ThashMedicam::ThashMedicam(const ThashMedicam &orig):tamFisico(orig.tamFisico),
-tablaHash(orig.tablaHash), tamLogico(orig.tamLogico),promedio_Colisiones(orig.promedio_Colisiones),
-max10(orig.max10), total_Colisiones(orig.total_Colisiones),primo_jr(orig.primo_jr),maxcolisiones(orig.maxColisiones()),redisp(0)
+                                                     tablaHash(orig.tablaHash), tamLogico(orig.tamLogico),promedio_Colisiones(orig.promedio_Colisiones),
+                                                     max10(orig.max10), total_Colisiones(orig.total_Colisiones),primo_jr(orig.primo_jr),maxcolisiones(orig.maxColisiones()),redisp(0)
 {
     primo_jr = orig.primo_jr;
 }
 
-
+/**
+ * @brief Operador igual
+ * @param orig objeto copia
+ * @return this un puntero a nuestro objeto
+ */
 ThashMedicam &ThashMedicam::operator=(const ThashMedicam &orig) {
     if (this != &orig) {
         tamFisico = orig.tamFisico;
@@ -87,20 +132,36 @@ ThashMedicam &ThashMedicam::operator=(const ThashMedicam &orig) {
     }
     return *this;
 }
-//CAMBIADO
- float ThashMedicam::get_promedio_colisiones() {
+
+/**
+ * @brief Funcion para calcular el promedio de colisiones
+ * @return promedio_Colisiones float
+ */
+float ThashMedicam::get_promedio_colisiones() {
     promedio_Colisiones = (float)total_Colisiones/(float)tamLogico;
     return promedio_Colisiones;
 }
 
+/**
+ * @brief Funcion para leer el atributo max10
+ * @return max10 unsigned int
+ */
 unsigned int ThashMedicam::get_max10() const {
     return max10;
 }
 
+/**
+ * @biref Funcion para leer el total_Colisiones
+ * @return total_Colisiones unsigned long
+ */
 unsigned long ThashMedicam::get_total_colisiones() const {
     return total_Colisiones;
 }
 //CAMBIADO
+/**
+ * @brief Funcion para calcular y leer el factor de carga
+ * @return aux
+ */
 float ThashMedicam::get_carga()const{
     float aux=static_cast<float>(tamLogico)/static_cast<float>(tamFisico);
     return aux;
@@ -108,6 +169,12 @@ float ThashMedicam::get_carga()const{
 
 //Libre = -, Disponible = ?, Ocupado = X
 //CAMBIADO
+/**
+ * @brief Funcion para insertar un dato en la tabla
+ * @param clave unsigned long
+ * @param pa PaMedicamento
+ * @return enc bool para saber si lo hemos insertado o no
+ */
 bool ThashMedicam::insertar(unsigned long clave, PaMedicamento &pa) {
     unsigned intento=0,y;
     bool enc = false;
@@ -149,16 +216,28 @@ bool ThashMedicam::insertar(unsigned long clave, PaMedicamento &pa) {
     return enc;
 }
 
-
+/**
+ * @brief Funcion para leer el atributo maxcolisiones
+ * @return maxcolisiones unsigned int
+ */
 unsigned int ThashMedicam::maxColisiones() const {
     return maxcolisiones;
 }
 
+/**
+ * @brief Funcion para leer el atributo redisp
+ * @return redisp unsigned long
+ */
 unsigned long ThashMedicam::get_redisp() const {
     return redisp;
 }
 
 //Libre = -, Disponible = ?, Ocupado = X
+/**
+ * @brief Funcion para buscar un elemento de la tabla
+ * @param clave unsigned long
+ * @return PaMedicamento* o 0 si no se ha encontrado
+ */
 PaMedicamento *ThashMedicam::buscar(unsigned long clave) {
     unsigned intento=0,y;
     bool enc = false;
@@ -183,6 +262,11 @@ PaMedicamento *ThashMedicam::buscar(unsigned long clave) {
 }
 //Dos o tres lineas cambiadas.La linea 166 hace el bucle infinito creo
 //Libre = -, Disponible = ?, Ocupado = X
+/**
+ * @brief Funcion para borrar un elemento de la tabla
+ * @param clave unsigned long
+ * @return fin para saber si se ha conseguido borrar o no
+ */
 bool ThashMedicam::borrar(unsigned long clave) {
     unsigned intento=0,y;
     bool fin = false;
@@ -226,8 +310,16 @@ bool ThashMedicam::borrar(unsigned long clave) {
     //poner estadisticos
     return fin; //fin=true
 }
+
+/**
+ * @brief Destructo de ThashMedicam
+ */
 ThashMedicam::~ThashMedicam() {}
 
+/**
+ * @brief Funcion para aumentar de manera correcta el tamaño de una tabla
+ * @param tam unsigned
+ */
 void ThashMedicam::redispersar(unsigned tam) {
     unsigned nuevoTam = primo_sig(tam);
     std::vector<Entrada> vieja = tablaHash; //Copiamos la tabla original
@@ -261,3 +353,4 @@ void ThashMedicam::redispersar(unsigned tam) {
     }
     tablaHash = nueva;
 }
+
